@@ -10,8 +10,7 @@ public class GroundCheck : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Ground"))
         {
-            PM.dootykZeme = true;
-            PM.jumpCounter = 0;
+            PM.JumpRest();
         }
     }
 
@@ -19,7 +18,7 @@ public class GroundCheck : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Ground"))
         {
-            PM.dootykZeme = true;
+            PM.JumpRest();
         }
     }
 
@@ -27,7 +26,7 @@ public class GroundCheck : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Ground"))
         {
-            PM.dootykZeme = false;
+            PM.DisableJump();
         }
     }
 }
