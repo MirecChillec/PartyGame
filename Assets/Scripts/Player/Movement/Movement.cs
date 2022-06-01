@@ -22,7 +22,7 @@ public class Movement : MonoBehaviour
     private bool isFalling = false;
     private bool isLowJumping = false;
 
-    private bool facingRight = true;
+    public bool facingRight { get; private set; }
 
     public Collider2D playerCollider;
 
@@ -30,10 +30,13 @@ public class Movement : MonoBehaviour
 
     private bool jumped = false;
     private bool dJumped = false;
+    public GroundCheck gChecker;
+    public ContactFilter2D filter;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        facingRight = true;
     }
 
     void Update()
@@ -124,13 +127,15 @@ public class Movement : MonoBehaviour
         {
             if (context.ReadValue<float>() > 0)
             {
-                movingLeft = true;
+                movingLeft = false;
                 movingRight = true;
+                facingRight = true;
             }
             else
             {
                 movingLeft = true;
                 movingRight = false;
+                facingRight = false;
             }
         }
         else if (context.canceled)
@@ -152,18 +157,21 @@ public class Movement : MonoBehaviour
             {
                 Jump();
                 dJumped = true;
+            }else if(!dootykZeme && !jumped && !dJumped)
+            {
+                Jump();
+                jumped = true;
+                dJumped = true;
             }
         }
     }
     public void OnDrop(InputAction.CallbackContext context)
     {
-
+        if (context.performed)
+        {
+            StartCoroutine(DropTimer());
+        }
     }
-    public void OnAction(InputAction.CallbackContext context)
-    {
-
-    }
-
     public void JumpRest()
     {
         jumped = false;
@@ -174,5 +182,10 @@ public class Movement : MonoBehaviour
     {
         dootykZeme = false;
     }
-
+    IEnumerator DropTimer()
+    {
+        playerCollider.enabled = false;
+        yield return new WaitForSeconds(0.135f);
+        playerCollider.enabled = true;
+    }
 }
