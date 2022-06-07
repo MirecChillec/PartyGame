@@ -32,11 +32,14 @@ public class Movement : MonoBehaviour
     private bool dJumped = false;
     public GroundCheck gChecker;
     public ContactFilter2D filter;
+    private SpriteRenderer sr;
 
     void Start()
     {
+        sr = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
         facingRight = true;
+        screenBounds = GameData.scrennBounds;
     }
 
     void Update()
@@ -116,6 +119,7 @@ public class Movement : MonoBehaviour
 
     public void Jump()
     {
+        if (rb == null) return;
         rb.velocity = Vector2.zero;
         rb.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
         dootykZeme = false;
@@ -130,12 +134,14 @@ public class Movement : MonoBehaviour
                 movingLeft = false;
                 movingRight = true;
                 facingRight = true;
+                sr.flipX = true;
             }
             else
             {
                 movingLeft = true;
                 movingRight = false;
                 facingRight = false;
+                sr.flipX = false;
             }
         }
         else if (context.canceled)

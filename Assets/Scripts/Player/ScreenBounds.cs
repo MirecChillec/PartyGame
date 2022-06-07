@@ -18,6 +18,7 @@ public class ScreenBounds : MonoBehaviour
 
     public void Awake()
     {
+        GameData.scrennBounds = this;
         this.mainCamera.transform.localScale = Vector3.one;
         boxCollider = GetComponent<BoxCollider2D>();
         boxCollider.isTrigger = true;

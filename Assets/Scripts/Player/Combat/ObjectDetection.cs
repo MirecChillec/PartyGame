@@ -5,35 +5,65 @@ using UnityEngine;
 public class ObjectDetection : MonoBehaviour
 {
     public ObjectControl controler;
+    //objekt na hadzanie
     private ThrowableObject objekt;
-    private void OnTriggerEnter2D(Collider2D collision)
+    //player colider na urcenie priestoru na detekciu
+    public Collider2D playerColider;
+    //array ziskan7ch objektov pomocou fyziky
+    public Collider2D[] cols;
+    //layermaska objektov
+    public LayerMask mask;
+    //cas na reset na zobranie dalsieho objektu
+    public float pickTimer;
+    [SerializeField]private bool canPick;
+    private void Start()
     {
-        if (collision.gameObject.tag == "Throwable" && controler.state == Throwable.idle)
-        {
-            controler.canPickUp = true;
-            objekt = collision.GetComponent<ThrowableObject>();
-        }
+        canPick = true;
     }
-    private void OnTriggerExit2D(Collider2D collision)
+    private void FixedUpdate()
     {
-        if (collision.gameObject.tag == "Throwable" && controler.state == Throwable.idle)
+        //ak moze zobrat objekt
+        if (canPick)
         {
-            controler.canPickUp = false;
-            objekt = null;
+            //detekcia objectov
+            cols = Physics2D.OverlapBoxAll(playerColider.bounds.center, playerColider.bounds.size, 0, mask);
+            if (cols.Length != 0)
+            {
+                if (controler.state == Throwable.idle)
+                {
+                    //ziskanie thowable skriptu na volanie funkcie na hadzanie
+                    objekt = cols[0].gameObject.GetComponent<ThrowableObject>();
+                }
+            }
         }
     }
     public void Pick()
     {
-        if (objekt != null)
+        if (canPick)
         {
-            objekt.PickUp(this.transform);
+            if (objekt != null)
+            {
+                objekt.PickUp(this.transform);
+            }
         }
     }
     public void Throw(bool direction)
     {
-        if (objekt != null)
-        {
-            objekt.Throw(direction);
+            if (objekt != null)
+            {
+                canPick = false;
+                objekt.Throw(direction);
+                //nulovanie objekt premennej inak by hrac vedel chytit hodeny objekt pocas toho ako leti
+                objekt = null;
+                StartCoroutine(PickTimer());
         }
+    }
+    IEnumerator PickTimer()
+    {
+        //pauza po hode mozne vyuzit na nejaky debaf
+        //bez corontine bolo mozne chytit hodeny objekt pocas toho ako leti
+        canPick = false;
+        yield return new WaitForSeconds(pickTimer);
+        canPick = true;
     }
 }

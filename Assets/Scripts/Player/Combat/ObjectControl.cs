@@ -12,7 +12,7 @@ public class ObjectControl : MonoBehaviour
     private void Start()
     {
         state = Throwable.idle;
-        canPickUp = false;
+        canPickUp = true;
     }
     void PickUp()
     {

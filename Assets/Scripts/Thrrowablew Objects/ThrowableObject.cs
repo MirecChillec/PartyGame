@@ -12,11 +12,23 @@ public class ThrowableObject : MonoBehaviour
 
     Vector3 throwArc;
 
+    ObjectSpawnPosition spawnPos;
+    ObjectSpawner objectSpawner;
+    ScreenBounds screenBounds;
+
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         throwArc = new Vector3(baseThrowForce / objectWeight, baseThrowForce / objectWeight, 0);
+    }
+    private void Update()
+    {
+        //destoing outside of screen
+        if (screenBounds.AmIOutOfBounds(transform.localPosition))
+        {
+           Destroy(this.gameObject);
+        }
     }
 
     public void Throw(bool right)
@@ -37,7 +49,17 @@ public class ThrowableObject : MonoBehaviour
         transform.position = player.position;
         transform.position += Vector3.up * 0.2f;
         transform.parent = player;
-
+        spawnPos.Release();
         rb.simulated = false;
+    }
+    public void Init(ObjectSpawnPosition spawnPosition,ScreenBounds bounds,ObjectSpawner spawner)
+    {
+        spawnPos = spawnPosition;
+        screenBounds = bounds;
+        objectSpawner = spawner;
+    }
+    private void OnDestroy()
+    {
+        objectSpawner.DestroiedObject();
     }
 }
