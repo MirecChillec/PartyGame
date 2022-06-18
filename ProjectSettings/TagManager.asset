@@ -6,7 +6,6 @@ TagManager:
   tags:
   - Ground
   - Throwable
-  - Altar
   layers:
   - Default
   - TransparentFX

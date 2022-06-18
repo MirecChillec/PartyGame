@@ -6,14 +6,9 @@ public class ThrowableObject : MonoBehaviour
 {
     Rigidbody2D rb;
 
-    public Movement PM;
-
     public float objectWeight;
     public int baseThrowForce;
     public int baseGravityScale;
-    private bool isThrown = false;
-
-    GameObject owner;
 
     Vector3 throwArc;
 
@@ -42,8 +37,6 @@ public class ThrowableObject : MonoBehaviour
 
     public void Throw(bool right)
     {
-        isThrown = true;
-        owner = transform.parent.gameObject;
         rb.simulated = true;
         transform.parent = null;
         if (right)
@@ -72,26 +65,5 @@ public class ThrowableObject : MonoBehaviour
     private void OnDestroy()
     {
         objectSpawner.DestroiedObject();
-    }
-    public void ThrowDown()
-    {
-        isThrown = true;
-        owner = transform.parent.gameObject;
-        rb.simulated = true;
-        transform.parent = null;
-        rb.AddForce(Vector3.down * 3f);
-        rb.gravityScale = baseGravityScale * objectWeight * 3;
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.tag == "Player" && isThrown)
-        {
-            PM = collision.GetComponent<Movement>();
-            if(owner != PM.gameObject)
-            {
-                PM.StunPlayer();
-            }
-        }
     }
 }

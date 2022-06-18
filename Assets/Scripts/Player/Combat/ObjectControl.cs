@@ -26,20 +26,20 @@ public class ObjectControl : MonoBehaviour
         state = Throwable.idle;
         detector.Throw(movement.facingRight);
     }
-    public void OnAction(InputAction.CallbackContext ctx) {
-        if (ctx.started)
+    public void OnAction()
+    {
+        if (state == Throwable.idle && canPickUp)
         {
-            if(state == Throwable.idle && canPickUp)
-            {
-                PickUp();
-            }else if(state == Throwable.holding && !canPickUp)
-            {
-                Throw();
-            }
+            PickUp();
+        }
+        else if (state == Throwable.holding && !canPickUp)
+        {
+            Throw();
         }
     }
 }
-public enum Throwable { 
+public enum Throwable
+{
     idle,
     holding
 }

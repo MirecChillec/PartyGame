@@ -66,11 +66,4 @@ public class ObjectDetection : MonoBehaviour
         yield return new WaitForSeconds(pickTimer);
         canPick = true;
     }
-    public void ThrowDown()
-    {
-        if (objekt != null)
-        {
-            objekt.ThrowDown();
-        }
-    }
 }
