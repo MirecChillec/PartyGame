@@ -15,7 +15,7 @@ public class ObjectDetection : MonoBehaviour
     public LayerMask mask;
     //cas na reset na zobranie dalsieho objektu
     public float pickTimer;
-    [SerializeField]private bool canPick;
+    [SerializeField] private bool canPick;
     private void Start()
     {
         canPick = true;
@@ -49,13 +49,13 @@ public class ObjectDetection : MonoBehaviour
     }
     public void Throw(bool direction)
     {
-            if (objekt != null)
-            {
-                canPick = false;
-                objekt.Throw(direction);
-                //nulovanie objekt premennej inak by hrac vedel chytit hodeny objekt pocas toho ako leti
-                objekt = null;
-                StartCoroutine(PickTimer());
+        if (objekt != null)
+        {
+            canPick = false;
+            objekt.Throw(direction);
+            //nulovanie objekt premennej inak by hrac vedel chytit hodeny objekt pocas toho ako leti
+            objekt = null;
+            StartCoroutine(PickTimer());
         }
     }
     IEnumerator PickTimer()
@@ -66,4 +66,12 @@ public class ObjectDetection : MonoBehaviour
         yield return new WaitForSeconds(pickTimer);
         canPick = true;
     }
+    public void ThrowDown()
+    {
+        if (objekt != null)
+        {
+            objekt.ThrowDown();
+        }
+    }
+
 }
