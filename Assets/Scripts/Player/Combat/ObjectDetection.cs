@@ -42,12 +42,5 @@ public class ObjectDetection : MonoBehaviour
         {
             objekt.ThrowDown();
         }
-    IEnumerator PickTimer()
-    {
-        //pauza po hode mozne vyuzit na nejaky debaf
-        //bez corontine bolo mozne chytit hodeny objekt pocas toho ako leti
-        canPick = false;
-        yield return new WaitForSeconds(pickTimer);
-        canPick = true;
     }
 }

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ThrowableObject : MonoBehaviour
+public class ThrowablePlayer : MonoBehaviour
 {
     Rigidbody2D rb;
 
@@ -22,6 +22,8 @@ public class ThrowableObject : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         throwArc = new Vector3(baseThrowForce / objectWeight, baseThrowForce / objectWeight, 0);
+    
+    
     }
 
     public void Throw(bool right)
@@ -33,9 +35,10 @@ public class ThrowableObject : MonoBehaviour
         if (right)
         {
             rb.AddForce(throwArc);
-        }else
+        }
+        else
         {
-            rb.AddForce(new Vector3(-throwArc.x,throwArc.y,throwArc.z));
+            rb.AddForce(new Vector3(-throwArc.x, throwArc.y, throwArc.z));
         }
         rb.gravityScale = baseGravityScale * objectWeight;
     }
@@ -62,7 +65,7 @@ public class ThrowableObject : MonoBehaviour
         if (collision.gameObject.tag == "Player" && isThrown)
         {
             PM = collision.GetComponent<Movement>();
-            if(owner != PM.gameObject)
+            if (owner != PM.gameObject)
             {
                 PM.StunPlayer();
             }

@@ -9,6 +9,8 @@ public class ObjectControl : MonoBehaviour
     public bool canPickUp { get; set; }
     public Movement movement;
     public ObjectDetection detector;
+    private bool downKeybindPressed = false;
+
     private void Start()
     {
         state = Throwable.idle;
@@ -44,7 +46,8 @@ public class ObjectControl : MonoBehaviour
             downKeybindPressed = false;
         }
     }
-    public void OnAction()
+    public void OnAction(InputAction.CallbackContext ctx) {
+        if (ctx.started)
         {
                 if (state == Throwable.idle && canPickUp)
                 {
@@ -66,6 +69,7 @@ public class ObjectControl : MonoBehaviour
 }
 public enum Throwable { 
     idle,
-    holding
+    holding,
+    thrown
 }
 
