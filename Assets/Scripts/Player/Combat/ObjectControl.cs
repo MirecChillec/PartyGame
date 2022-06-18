@@ -26,9 +26,7 @@ public class ObjectControl : MonoBehaviour
         state = Throwable.idle;
         detector.Throw(movement.facingRight);
     }
-    public void OnAction(InputAction.CallbackContext ctx) {
-        if (ctx.started)
-        {
+    public void OnAction() {
             if(state == Throwable.idle && canPickUp)
             {
                 PickUp();
@@ -36,6 +34,20 @@ public class ObjectControl : MonoBehaviour
             {
                 Throw();
             }
+                if (state == Throwable.idle && canPickUp)
+                {
+                    PickUp();
+                }
+                else if (state == Throwable.holding && !canPickUp)
+                {
+                    //if (downKeybindPressed)
+                    //{
+                    //    ThrowDown();
+                    //}
+                    //else
+                    //{
+                    //    Throw();
+                    //}
         }
     }
 }

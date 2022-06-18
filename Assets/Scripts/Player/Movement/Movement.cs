@@ -39,7 +39,6 @@ public class Movement : MonoBehaviour
     public float baseStunTime = 1f;
     public int stunCounter = 0;
 
-    ThrowableObject throwableObjectScript;
 
     void Awake()
     {
@@ -47,8 +46,6 @@ public class Movement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         facingRight = true;
         screenBounds = GameData.scrennBounds;
-        throwableObjectScript = this.gameObject.GetComponent<ThrowableObject>();
-        throwableObjectScript.enabled = false;  //disables the throwableObject script at start as player isn't stunned at spawn
     }
 
     void Update()
@@ -132,7 +129,6 @@ public class Movement : MonoBehaviour
 
         }
     }
-    //jump method
     public void Jump()
     {
         if (rb == null) return;
@@ -219,7 +215,7 @@ public class Movement : MonoBehaviour
     IEnumerator StunTimer(float timeForStun)
     {
         isStunned = true;
-        throwableObjectScript.enabled = true;
+        //throwableObjectScript.enabled = true;
         StartCoroutine(StunBlicker(timeForStun));
         yield return new WaitForSeconds(timeForStun);
         throwableObjectScript.enabled = false;
