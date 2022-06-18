@@ -38,13 +38,20 @@ public class Movement : MonoBehaviour
     public int stunCounter = 0;
     public float baseStunTime = 1f;
 
+    public GameObject altar;
+    public float altarPullSpeed;
+
+
     ThrowableObject throwableObjectScript;
 
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
+        altar = GameObject.Find("Altar");
+
         facingRight = true;
+
         throwableObjectScript = this.gameObject.GetComponent<ThrowableObject>();
         //throwableObjectScript.enabled = false;  //disables the throwableObject script at start as player isn't stunned at spawn
     }
@@ -62,7 +69,7 @@ public class Movement : MonoBehaviour
     {
         //screen wrap script called here
         Vector3 tempPosition = transform.localPosition;
-        if (screenBounds.AmIOutOfBounds(tempPosition))
+        /*if (screenBounds.AmIOutOfBounds(tempPosition))
         {
             Vector2 newPosition = screenBounds.CalculateWrappedPosition(tempPosition);
             transform.position = newPosition;
@@ -70,7 +77,7 @@ public class Movement : MonoBehaviour
         else
         {
             transform.position = tempPosition;
-        }
+        }*/
 
         //checking for vertical velocity and multiplying it
         if (rb.velocity.y < 13)
@@ -124,15 +131,25 @@ public class Movement : MonoBehaviour
                 newVelocity.x = 0;
                 rb.velocity = newVelocity;
             }
+        
+            if (isFalling)
+            {
+                rb.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.fixedDeltaTime;
+            }
+            else if (isLowJumping)
+            {
+                rb.velocity += Vector2.up * Physics2D.gravity.y * (lowerJumpMultiplier - 1) * Time.fixedDeltaTime;
+            }
         }
-        if (isFalling)
+        else
         {
-            rb.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.fixedDeltaTime;
+            Vector3 altarDirection = altar.transform.position - transform.position;
+            altarDirection = altarDirection.normalized;
+            rb.velocity = altarDirection * altarPullSpeed;
+            altarPullSpeed += 0.06f;
         }
-        else if (isLowJumping)
-        {
-            rb.velocity += Vector2.up * Physics2D.gravity.y * (lowerJumpMultiplier - 1) * Time.fixedDeltaTime;
-        }
+
+
     }
     //jump method
     void Jump()
@@ -213,6 +230,7 @@ public class Movement : MonoBehaviour
     public void StunPlayer()
     {
         stunCounter++;
+        altarPullSpeed = 0.3f;
         StartCoroutine(StunTimer(baseStunTime + (stunCounter / 2)));
     }
     public void PlayerSacrifice()
