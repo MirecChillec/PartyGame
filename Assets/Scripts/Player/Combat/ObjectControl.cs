@@ -49,21 +49,21 @@ public class ObjectControl : MonoBehaviour
     public void OnAction(InputAction.CallbackContext ctx) {
         if (ctx.started)
         {
-            if (state == Throwable.idle && canPickUp)
-            {
-                PickUp();
-            }
-            else if (state == Throwable.holding && !canPickUp)
-            {
-                if (downKeybindPressed)
+                if (state == Throwable.idle && canPickUp)
                 {
-                    ThrowDown();
+                    PickUp();
                 }
-                else
+                else if (state == Throwable.holding && !canPickUp)
                 {
-                    Throw();
+                    if (downKeybindPressed)
+                    {
+                        ThrowDown();
+                    }
+                    else
+                    {
+                        Throw();
+                    }
                 }
-            }
         }
     }
 }
