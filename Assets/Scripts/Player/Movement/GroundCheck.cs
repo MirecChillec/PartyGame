@@ -12,6 +12,18 @@ public class GroundCheck : MonoBehaviour
         {
             PM.JumpRest();
         }
+        if (collision.gameObject.CompareTag("Altar"))
+        {
+            if (PM.isStunned)
+            {
+                //player sacrificed
+                PM.PlayerSacrifice();
+            }
+            else
+            {
+                PM.JumpRest();
+            }
+        }
     }
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -20,11 +32,27 @@ public class GroundCheck : MonoBehaviour
         {
             PM.JumpRest();
         }
+        if (collision.gameObject.CompareTag("Altar"))
+        {
+            if (PM.isStunned)
+            {
+                //player sacrificed
+                PM.PlayerSacrifice();
+            }
+            else
+            {
+                PM.JumpRest();
+            }
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Ground"))
+        {
+            PM.DisableJump();
+        }
+        if (collision.gameObject.CompareTag("Altar"))
         {
             PM.DisableJump();
         }

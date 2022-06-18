@@ -36,4 +36,11 @@ public class ObjectDetection : MonoBehaviour
             objekt.Throw(direction);
         }
     }
+    public void ThrowDown()
+    {
+        if (objekt != null)
+        {
+            objekt.ThrowDown();
+        }
+    }
 }
