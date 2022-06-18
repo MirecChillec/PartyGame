@@ -39,14 +39,14 @@ public class Movement : MonoBehaviour
     public float baseStunTime = 1f;
     public int stunCounter = 0;
 
-    ThrowablePlayer throwableObjectScript;
+    ThrowableObject throwableObjectScript;
 
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
         facingRight = true;
-        throwableObjectScript = this.gameObject.GetComponent<ThrowablePlayer>();
+        throwableObjectScript = this.gameObject.GetComponent<ThrowableObject>();
         //throwableObjectScript.enabled = false;  //disables the throwableObject script at start as player isn't stunned at spawn
     }
 
