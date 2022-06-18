@@ -116,7 +116,7 @@ public class Movement : MonoBehaviour
                 newVelocity.x = 0;
                 rb.velocity = newVelocity;
             }
-
+        }
             if (isFalling)
             {
                 rb.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.fixedDeltaTime;
@@ -125,11 +125,7 @@ public class Movement : MonoBehaviour
             {
                 rb.velocity += Vector2.up * Physics2D.gravity.y * (lowerJumpMultiplier - 1) * Time.fixedDeltaTime;
             }
-        }else if (isStunned)
-        {
-            //player blicking or smth
-
-        }
+        
     }
 
     
@@ -222,9 +218,13 @@ public class Movement : MonoBehaviour
     {
         isStunned = true;
         //throwableObjectScript.enabled = true;
+        rb.gravityScale = 0f;
+
         StartCoroutine(StunBlicker(timeForStun));
         yield return new WaitForSeconds(timeForStun);
-        throwableObjectScript.enabled = false;
+
+        rb.gravityScale = 1f;
+        //throwableObjectScript.enabled = false;
         isStunned = false;
     }
     IEnumerator StunBlicker(float timeForStun)

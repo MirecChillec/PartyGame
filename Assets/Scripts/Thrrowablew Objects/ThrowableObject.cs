@@ -41,7 +41,6 @@ public class ThrowableObject : MonoBehaviour
     }
     public void PickUp(Transform player)
     {
-        rb.bodyType = RigidbodyType2D.Dynamic;
         transform.position = player.position;
         transform.position += Vector3.up * 0.2f;
         transform.parent = player;
