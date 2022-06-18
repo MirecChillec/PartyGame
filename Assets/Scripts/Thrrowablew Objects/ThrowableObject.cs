@@ -6,14 +6,9 @@ public class ThrowableObject : MonoBehaviour
 {
     Rigidbody2D rb;
 
-    public Movement PM;
-
     public float objectWeight;
     public int baseThrowForce;
     public int baseGravityScale;
-    private bool isThrown = false;
-
-    GameObject owner;
 
     Vector3 throwArc;
 
@@ -26,8 +21,6 @@ public class ThrowableObject : MonoBehaviour
 
     public void Throw(bool right)
     {
-        isThrown = true;
-        owner = transform.parent.gameObject;
         rb.simulated = true;
         transform.parent = null;
         if (right)
@@ -67,5 +60,14 @@ public class ThrowableObject : MonoBehaviour
                 PM.StunPlayer();
             }
         }
+    public void Init(ObjectSpawnPosition spawnPosition,ScreenBounds bounds,ObjectSpawner spawner)
+    {
+        spawnPos = spawnPosition;
+        screenBounds = bounds;
+        objectSpawner = spawner;
+    }
+    private void OnDestroy()
+    {
+        objectSpawner.DestroiedObject();
     }
 }

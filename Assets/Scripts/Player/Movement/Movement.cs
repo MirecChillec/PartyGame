@@ -8,8 +8,6 @@ using UnityEngine.InputSystem;
 public class Movement : MonoBehaviour
 {
     private Rigidbody2D rb;
-    private SpriteRenderer sr;
-
     public float jumpPower = 3f;
     public float movementSpeed = 2f;
 
@@ -35,19 +33,13 @@ public class Movement : MonoBehaviour
     public GroundCheck gChecker;
     public ContactFilter2D filter;
 
-    public bool isStunned = false;
-    public float baseStunTime = 1f;
-    public int stunCounter = 0;
-
-    ThrowablePlayer throwableObjectScript;
-
-    void Awake()
+    void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        sr = GetComponent<SpriteRenderer>();
         facingRight = true;
         throwableObjectScript = this.gameObject.GetComponent<ThrowablePlayer>();
         //throwableObjectScript.enabled = false;  //disables the throwableObject script at start as player isn't stunned at spawn
+        screenBounds = GameData.scrennBounds;
     }
 
     void Update()
@@ -80,62 +72,60 @@ public class Movement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!isStunned)
+        if (movingRight)
         {
-            if (movingRight)
+            Vector2 newVelocity = rb.velocity;
+            if (dootykZeme)
             {
-                Vector2 newVelocity = rb.velocity;
-                if (dootykZeme)
-                {
-                    newVelocity.x = movementSpeed;
-                }
-                else
-                {
-                    newVelocity.x = movementSpeed * 0.75f;
-                }
-                rb.velocity = newVelocity;
-                //transform.localScale = new Vector3(0.3f, 0.3f, 1);
-            }
-            else if (movingLeft)
-            {
-                Vector2 newVelocity = rb.velocity;
-                if (dootykZeme)
-                {
-                    newVelocity.x = -movementSpeed;
-                }
-                else
-                {
-                    newVelocity.x = -movementSpeed * 0.75f;
-                }
-                rb.velocity = newVelocity;
-                //transform.localScale = new Vector3(-0.3f, 0.3f, 1);
+                newVelocity.x = movementSpeed;
             }
             else
             {
-                Vector2 newVelocity = rb.velocity;
-                newVelocity.x = 0;
-                rb.velocity = newVelocity;
+                newVelocity.x = movementSpeed * 0.75f;
             }
+            rb.velocity = newVelocity;
+            //transform.localScale = new Vector3(0.3f, 0.3f, 1);
         }
-            if (isFalling)
+        else if (movingLeft)
+        {
+            Vector2 newVelocity = rb.velocity;
+            if (dootykZeme)
             {
-                rb.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.fixedDeltaTime;
+                newVelocity.x = -movementSpeed;
             }
-            else if (isLowJumping)
+            else
             {
-                rb.velocity += Vector2.up * Physics2D.gravity.y * (lowerJumpMultiplier - 1) * Time.fixedDeltaTime;
+                newVelocity.x = -movementSpeed * 0.75f;
             }
-        
-    }
+            rb.velocity = newVelocity;
+            //transform.localScale = new Vector3(-0.3f, 0.3f, 1);
+        }
+        else
+        {
+            Vector2 newVelocity = rb.velocity;
+            newVelocity.x = 0;
+            rb.velocity = newVelocity;
+        }
 
-    
-    public void Jump()
+        if (isFalling)
+        {
+            rb.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.fixedDeltaTime;
+        }
+        else if (isLowJumping)
+        {
+            rb.velocity += Vector2.up * Physics2D.gravity.y * (lowerJumpMultiplier - 1) * Time.fixedDeltaTime;
+        }
+    }
+    //jump method
+    void Jump()
     {
         rb.velocity = Vector2.zero;
         rb.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
         dootykZeme = false;
     }
-    public void OnMovement(InputAction.CallbackContext context)
+
+    //move methods
+    public void OnMove(float direction)
     {
         if (context.performed)
         {
@@ -195,18 +185,6 @@ public class Movement : MonoBehaviour
     public void DisableJump()
     {
         dootykZeme = false;
-    }
-    public void StunPlayer()
-    {
-        stunCounter++;
-        StartCoroutine(StunTimer(baseStunTime + (stunCounter/2)));
-    }
-    public void PlayerSacrifice()
-    {
-        //finish player death 
-        this.gameObject.SetActive(false);
-
-
     }
     IEnumerator DropTimer()
     {
