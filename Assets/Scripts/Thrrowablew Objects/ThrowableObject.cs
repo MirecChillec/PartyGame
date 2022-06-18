@@ -19,15 +19,19 @@ public class ThrowableObject : MonoBehaviour
 
     private void Awake()
     {
+        screenBounds = GameData.scrennBounds;
         rb = GetComponent<Rigidbody2D>();
         throwArc = new Vector3(baseThrowForce / objectWeight, baseThrowForce / objectWeight, 0);
     }
     private void Update()
     {
-        //destoing outside of screen
-        if (screenBounds.AmIOutOfBounds(transform.localPosition))
+        if (screenBounds != null)
         {
-           Destroy(this.gameObject);
+            //destoing outside of screen
+            if (screenBounds.AmIOutOfBounds(transform.localPosition))
+            {
+                Destroy(this.gameObject);
+            }
         }
     }
 

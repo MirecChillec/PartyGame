@@ -96,10 +96,10 @@ GameObject:
   - component: {fileID: 6298515434478717214}
   - component: {fileID: 6298515434478717212}
   - component: {fileID: 6298515434478717215}
-  - component: {fileID: 6298515434478717210}
   - component: {fileID: 5846327233961202213}
-  m_Layer: 0
-  m_Name: Player1
+  - component: {fileID: 8100915949643691114}
+  m_Layer: 8
+  m_Name: Bro
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -161,8 +161,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 5
-  m_Sprite: {fileID: 21300000, guid: 9c877ecaecfddf946837bf94a68517a4, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Sprite: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
+  m_Color: {r: 0.26138747, g: 1, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -242,6 +242,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controler: {fileID: 6298515434478717215}
   playerColider: {fileID: 5846327233961202213}
+  cols: []
+  mask:
+    serializedVersion: 2
+    m_Bits: 128
+  pickTimer: 0.4
+  canPick: 1
 --- !u!114 &6298515434478717215
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -256,108 +262,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movement: {fileID: 6298515434478717214}
   detector: {fileID: 6298515434478717212}
---- !u!114 &6298515434478717210
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6298515434478717204}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: b69feab21f6ff3b4da35c0623ed6e5e5, type: 3}
-  m_NotificationBehavior: 2
-  m_UIInputModule: {fileID: 0}
-  m_DeviceLostEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_DeviceRegainedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ControlsChangedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ActionEvents:
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6298515434478717214}
-        m_TargetAssemblyTypeName: Movement, Assembly-CSharp
-        m_MethodName: OnMovement
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: ed017c28-23a8-43f5-97bb-eb32ddc1811d
-    m_ActionName: Player/Movement[/Keyboard/a,/Keyboard/d]
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6298515434478717214}
-        m_TargetAssemblyTypeName: Movement, Assembly-CSharp
-        m_MethodName: OnJump
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 86516040-2b3d-4c25-bd1f-9ac9a3ac1d63
-    m_ActionName: Player/Jump[/Keyboard/w]
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6298515434478717214}
-        m_TargetAssemblyTypeName: Movement, Assembly-CSharp
-        m_MethodName: OnDrop
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: e10f2b0f-de28-4073-bb55-f29764220c7b
-    m_ActionName: Player/Drop[/Keyboard/s]
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6298515434478717215}
-        m_TargetAssemblyTypeName: ObjectControl, Assembly-CSharp
-        m_MethodName: OnAction
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 3e5ca27f-cd19-4db5-bb2c-6a1a5f649e72
-    m_ActionName: Player/Action[/Keyboard/space]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: e9b7507f-c0f1-4839-a73c-ff6df69df37b
-    m_ActionName: UI/Selecting[/Keyboard/a,/Keyboard/d]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 1d54e651-b5dc-413a-8fbe-e5a5bcca638e
-    m_ActionName: UI/Ready[/Keyboard/enter]
-  m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
-  m_DefaultActionMap: Player
-  m_SplitScreenIndex: -1
-  m_Camera: {fileID: 0}
 --- !u!61 &5846327233961202213
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -375,7 +279,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 8, y: 8}
+    oldSize: {x: 1, y: 1}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -384,6 +288,20 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 4.3, y: 6.7}
   m_EdgeRadius: 0
+--- !u!114 &8100915949643691114
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6298515434478717204}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 863521f4c29a4744281d88ef84caad60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  move: {fileID: 6298515434478717214}
+  OC: {fileID: 6298515434478717215}
 --- !u!1 &6298515435878700309
 GameObject:
   m_ObjectHideFlags: 0

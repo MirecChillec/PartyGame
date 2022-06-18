@@ -14,7 +14,7 @@ public class Movement : MonoBehaviour
     public float fallMultiplier = 2.5f;
     public float lowerJumpMultiplier = 2f;
 
-    [SerializeField]private bool dootykZeme = false;
+    [SerializeField] private bool dootykZeme = false;
     public GameObject GroundCheck;
 
     private bool movingRight = false;
@@ -116,8 +116,8 @@ public class Movement : MonoBehaviour
             rb.velocity += Vector2.up * Physics2D.gravity.y * (lowerJumpMultiplier - 1) * Time.fixedDeltaTime;
         }
     }
-
-    public void Jump()
+    //jump method
+    void Jump()
     {
         if (rb == null) return;
         rb.velocity = Vector2.zero;
@@ -125,58 +125,53 @@ public class Movement : MonoBehaviour
         dootykZeme = false;
     }
 
-    public void OnMovement(InputAction.CallbackContext context)
+    //move methods
+    public void OnMove(float direction)
     {
-        if (context.performed)
-        {
-            if (context.ReadValue<float>() > 0)
-            {
-                movingLeft = false;
-                movingRight = true;
-                facingRight = true;
-                sr.flipX = true;
-            }
-            else
-            {
-                movingLeft = true;
-                movingRight = false;
-                facingRight = false;
-                sr.flipX = false;
-            }
-        }
-        else if (context.canceled)
+        if (direction > 0)
         {
             movingLeft = false;
+            movingRight = true;
+            facingRight = true;
+            sr.flipX = true;
+        }
+        else
+        {
+            movingLeft = true;
             movingRight = false;
+            facingRight = false;
+            sr.flipX = false;
         }
     }
-    public void OnJump(InputAction.CallbackContext context)
+    public void Stop()
     {
-        if (context.started)
+        movingLeft = false;
+        movingRight = false;
+    }
+    //jump call
+    public void OnJump()
+    {
+        if (dootykZeme && !jumped && !dJumped)
         {
-            if (dootykZeme && !jumped && !dJumped)
-            {
-                Jump();
-                jumped = true;
-            }
-            else if (!dootykZeme && jumped && !dJumped)
-            {
-                Jump();
-                dJumped = true;
-            }else if(!dootykZeme && !jumped && !dJumped)
-            {
-                Jump();
-                jumped = true;
-                dJumped = true;
-            }
+            Jump();
+            jumped = true;
+        }
+        else if (!dootykZeme && jumped && !dJumped)
+        {
+            Jump();
+            dJumped = true;
+        }
+        else if (!dootykZeme && !jumped && !dJumped)
+        {
+            Jump();
+            jumped = true;
+            dJumped = true;
         }
     }
-    public void OnDrop(InputAction.CallbackContext context)
+    //drop function
+    public void OnDrop()
     {
-        if (context.performed)
-        {
-            StartCoroutine(DropTimer());
-        }
+        StartCoroutine(DropTimer());
     }
     public void JumpRest()
     {

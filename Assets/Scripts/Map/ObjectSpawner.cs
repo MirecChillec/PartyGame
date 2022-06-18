@@ -27,6 +27,7 @@ public class ObjectSpawner : MonoBehaviour
 
     private void Start()
     {
+        bounds = GameData.scrennBounds;
         _timeInterval = timeInterval;
         positions = parentOfPositions.GetComponentsInChildren<ObjectSpawnPosition>(true);
         foreach (ObjectSpawnPosition x in positions)
