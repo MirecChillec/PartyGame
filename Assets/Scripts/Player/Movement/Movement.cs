@@ -69,7 +69,7 @@ public class Movement : MonoBehaviour
     {
         //screen wrap script called here
         Vector3 tempPosition = transform.localPosition;
-        /*if (screenBounds.AmIOutOfBounds(tempPosition))
+        if (screenBounds.AmIOutOfBounds(tempPosition))
         {
             Vector2 newPosition = screenBounds.CalculateWrappedPosition(tempPosition);
             transform.position = newPosition;
@@ -77,7 +77,7 @@ public class Movement : MonoBehaviour
         else
         {
             transform.position = tempPosition;
-        }*/
+        }
 
         //checking for vertical velocity and multiplying it
         if (rb.velocity.y < 13)

@@ -10,7 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a6fbeeb141e7a1a48b78a7f474127bda, type: 3}
-  m_Name: Cop
+  m_Name: Butcher
   m_EditorClassIdentifier: 
-  name: Cop
-  playerPrefab: {fileID: 3947356397004001238, guid: c3dbadfc278996243826cb56e7f57389, type: 3}
+  name: Butcher
+  playerPrefab: {fileID: 4593666130232384873, guid: 0b9d9a219c321e845a11116e72080026, type: 3}
+  picture: {fileID: 21300000, guid: 46e0c7325109d8e429d3432f51aceadc, type: 3}

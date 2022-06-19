@@ -10,7 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a6fbeeb141e7a1a48b78a7f474127bda, type: 3}
-  m_Name: Killer
+  m_Name: Ocultist
   m_EditorClassIdentifier: 
-  name: Killer
-  playerPrefab: {fileID: 96834805543076713, guid: c75522fd8a6f3874190a328d973ff8db, type: 3}
+  name: Ocultist
+  playerPrefab: {fileID: 8100915949643691114, guid: 2fbe4a46c1aa9eb4894fff5b4dea427e, type: 3}
+  picture: {fileID: 21300000, guid: 490178c771cf7df47919c8846eb7446d, type: 3}

@@ -99,7 +99,7 @@ GameObject:
   - component: {fileID: 5846327233961202213}
   - component: {fileID: 96834805543076713}
   m_Layer: 8
-  m_Name: Killer
+  m_Name: Nobleman
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -161,8 +161,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 5
-  m_Sprite: {fileID: 7482667652216324306, guid: db750325989564987a34393247d883b4, type: 3}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 5824366ae743bd14898d2f16e8063eca, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -228,6 +228,11 @@ MonoBehaviour:
     maxDepth: 0
     minNormalAngle: 0
     maxNormalAngle: 0
+  isStunned: 0
+  stunCounter: 0
+  baseStunTime: 1
+  altar: {fileID: 0}
+  altarPullSpeed: 0
 --- !u!114 &6298515434478717212
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -279,7 +284,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.34, y: 0.34}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
