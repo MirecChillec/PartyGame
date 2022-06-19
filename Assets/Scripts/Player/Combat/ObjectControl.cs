@@ -9,6 +9,7 @@ public class ObjectControl : MonoBehaviour
     public bool canPickUp { get; set; }
     public Movement movement;
     public ObjectDetection detector;
+    bool downKeybindPressed;
     private void Start()
     {
         state = Throwable.idle;
@@ -37,6 +38,26 @@ public class ObjectControl : MonoBehaviour
             Throw();
         }
     }
+    //only throw straight down / release object
+    void ThrowDown()
+    {
+        canPickUp = true;
+        state = Throwable.idle;
+        detector.ThrowDown();
+    }
+    //bool for checking if key down / S (or equivalent) is pressed
+    public void OnDown(InputAction.CallbackContext ctx)
+    {
+        if (ctx.performed)
+        {
+            downKeybindPressed = true;
+        }
+        else if (ctx.canceled)
+        {
+            downKeybindPressed = false;
+        }
+    }
+
 }
 public enum Throwable
 {

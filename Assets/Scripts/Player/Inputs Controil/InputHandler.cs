@@ -8,7 +8,7 @@ public class InputHandler : MonoBehaviour
     PlayerInput inputMap;
     SelectionMenuElement selection;
     PlayerControl playerPrefab;
-    PlayerControl InGamePlayer;
+    public PlayerControl InGamePlayer;
     private void Awake()
     {
         inputMap = GetComponent<PlayerInput>();

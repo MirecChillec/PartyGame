@@ -1715,7 +1715,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   counDownText: {fileID: 1487258860}
-  CountDownTime: 5
+  CountDownTime: 1
   selctions:
   - {fileID: 1250321731}
   - {fileID: 178625244}

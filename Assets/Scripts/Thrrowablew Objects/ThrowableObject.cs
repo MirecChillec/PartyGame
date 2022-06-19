@@ -10,12 +10,17 @@ public class ThrowableObject : MonoBehaviour
     public int baseThrowForce;
     public int baseGravityScale;
 
+    bool isThrown;
+    public Movement PM;
+    GameObject owner;
+
     Vector3 throwArc;
 
     ObjectSpawnPosition spawnPos;
     ObjectSpawner objectSpawner;
     ScreenBounds screenBounds;
 
+    public bool player;
 
     private void Awake()
     {
@@ -25,18 +30,23 @@ public class ThrowableObject : MonoBehaviour
     }
     private void Update()
     {
-        if (screenBounds != null)
+        if (!player)
         {
-            //destoing outside of screen
-            if (screenBounds.AmIOutOfBounds(transform.localPosition))
+            if (screenBounds != null)
             {
-                Destroy(this.gameObject);
+                //destoing outside of screen
+                if (screenBounds.AmIOutOfBounds(transform.localPosition))
+                {
+                    Destroy(this.gameObject);
+                }
             }
         }
     }
 
     public void Throw(bool right)
     {
+        isThrown = true;
+        owner = transform.parent.gameObject;
         rb.simulated = true;
         transform.parent = null;
         if (right)
@@ -66,4 +76,29 @@ public class ThrowableObject : MonoBehaviour
     {
         objectSpawner.DestroiedObject();
     }
+    public void ThrowDown()
+    {
+        isThrown = true;
+        owner = transform.parent.gameObject;
+        rb.simulated = true;
+        transform.parent = null;
+        rb.AddForce(Vector3.down * 3f);
+        rb.gravityScale = baseGravityScale * objectWeight * 3;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Debug.Log("colision");
+        if (collision.gameObject.tag == "Player" && isThrown)
+        {
+            Debug.Log("object is thrown and touching player");
+            PM = collision.GetComponent<Movement>();
+            if (owner != PM.gameObject)
+            {
+                Debug.Log("stuning player");
+                PM.StunPlayer();
+            }
+        }
+    }
+
 }

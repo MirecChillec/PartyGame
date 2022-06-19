@@ -34,6 +34,29 @@ public class Movement : MonoBehaviour
     public ContactFilter2D filter;
     private SpriteRenderer sr;
 
+    public bool isStunned;
+    public int stunCounter = 0;
+    public float baseStunTime = 1f;
+
+    public GameObject altar;
+    public float altarPullSpeed;
+
+
+    ThrowableObject throwableObjectScript;
+
+    void Awake()
+    {
+        rb = GetComponent<Rigidbody2D>();
+        sr = GetComponent<SpriteRenderer>();
+        altar = GameObject.Find("Altar");
+
+        facingRight = true;
+
+        throwableObjectScript = this.gameObject.GetComponent<ThrowableObject>();
+        //throwableObjectScript.enabled = false;  //disables the throwableObject script at start as player isn't stunned at spawn
+    }
+
+
     void Start()
     {
         sr = GetComponent<SpriteRenderer>();
@@ -46,7 +69,7 @@ public class Movement : MonoBehaviour
     {
         //screen wrap script called here
         Vector3 tempPosition = transform.localPosition;
-        if (screenBounds.AmIOutOfBounds(tempPosition))
+        /*if (screenBounds.AmIOutOfBounds(tempPosition))
         {
             Vector2 newPosition = screenBounds.CalculateWrappedPosition(tempPosition);
             transform.position = newPosition;
@@ -54,7 +77,7 @@ public class Movement : MonoBehaviour
         else
         {
             transform.position = tempPosition;
-        }
+        }*/
 
         //checking for vertical velocity and multiplying it
         if (rb.velocity.y < 13)
@@ -72,49 +95,61 @@ public class Movement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (movingRight)
+        if (!isStunned)
         {
-            Vector2 newVelocity = rb.velocity;
-            if (dootykZeme)
+            if (movingRight)
             {
-                newVelocity.x = movementSpeed;
+                Vector2 newVelocity = rb.velocity;
+                if (dootykZeme)
+                {
+                    newVelocity.x = movementSpeed;
+                }
+                else
+                {
+                    newVelocity.x = movementSpeed * 0.75f;
+                }
+                rb.velocity = newVelocity;
+                //transform.localScale = new Vector3(0.3f, 0.3f, 1);
+            }
+            else if (movingLeft)
+            {
+                Vector2 newVelocity = rb.velocity;
+                if (dootykZeme)
+                {
+                    newVelocity.x = -movementSpeed;
+                }
+                else
+                {
+                    newVelocity.x = -movementSpeed * 0.75f;
+                }
+                rb.velocity = newVelocity;
+                //transform.localScale = new Vector3(-0.3f, 0.3f, 1);
             }
             else
             {
-                newVelocity.x = movementSpeed * 0.75f;
+                Vector2 newVelocity = rb.velocity;
+                newVelocity.x = 0;
+                rb.velocity = newVelocity;
             }
-            rb.velocity = newVelocity;
-            //transform.localScale = new Vector3(0.3f, 0.3f, 1);
-        }
-        else if (movingLeft)
-        {
-            Vector2 newVelocity = rb.velocity;
-            if (dootykZeme)
+        
+            if (isFalling)
             {
-                newVelocity.x = -movementSpeed;
+                rb.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.fixedDeltaTime;
             }
-            else
+            else if (isLowJumping)
             {
-                newVelocity.x = -movementSpeed * 0.75f;
+                rb.velocity += Vector2.up * Physics2D.gravity.y * (lowerJumpMultiplier - 1) * Time.fixedDeltaTime;
             }
-            rb.velocity = newVelocity;
-            //transform.localScale = new Vector3(-0.3f, 0.3f, 1);
         }
         else
         {
-            Vector2 newVelocity = rb.velocity;
-            newVelocity.x = 0;
-            rb.velocity = newVelocity;
+            Vector3 altarDirection = altar.transform.position - transform.position;
+            altarDirection = altarDirection.normalized;
+            rb.velocity = altarDirection * altarPullSpeed;
+            altarPullSpeed += 0.06f;
         }
 
-        if (isFalling)
-        {
-            rb.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.fixedDeltaTime;
-        }
-        else if (isLowJumping)
-        {
-            rb.velocity += Vector2.up * Physics2D.gravity.y * (lowerJumpMultiplier - 1) * Time.fixedDeltaTime;
-        }
+
     }
     //jump method
     void Jump()
@@ -128,19 +163,22 @@ public class Movement : MonoBehaviour
     //move methods
     public void OnMove(float direction)
     {
-        if (direction > 0)
+        if (!isStunned)
         {
-            movingLeft = false;
-            movingRight = true;
-            facingRight = true;
-            sr.flipX = true;
-        }
-        else
-        {
-            movingLeft = true;
-            movingRight = false;
-            facingRight = false;
-            sr.flipX = false;
+            if (direction > 0)
+            {
+                movingLeft = false;
+                movingRight = true;
+                facingRight = true;
+                sr.flipX = true;
+            }
+            else
+            {
+                movingLeft = true;
+                movingRight = false;
+                facingRight = false;
+                sr.flipX = false;
+            }
         }
     }
     public void Stop()
@@ -189,4 +227,48 @@ public class Movement : MonoBehaviour
         yield return new WaitForSeconds(0.135f);
         playerCollider.enabled = true;
     }
+    public void StunPlayer()
+    {
+        stunCounter++;
+        altarPullSpeed = 0.3f;
+        StartCoroutine(StunTimer(baseStunTime + (stunCounter / 2)));
+    }
+    public void PlayerSacrifice()
+    {
+        //finish player death 
+        this.gameObject.SetActive(false);
+
+
+    }
+    IEnumerator StunTimer(float timeForStun)
+    {
+        isStunned = true;
+        //throwableObjectScript.enabled = true;
+        rb.gravityScale = 0f;
+
+        StartCoroutine(StunBlicker(timeForStun));
+        yield return new WaitForSeconds(timeForStun);
+
+        rb.gravityScale = 1f;
+        //throwableObjectScript.enabled = false;
+        isStunned = false;
+    }
+    IEnumerator StunBlicker(float timeForStun)
+    {
+        Color color;
+        for (int i = 0; i < 5; i++)
+        {
+            color = sr.color;
+            color.a = 0;
+            sr.color = color;
+            yield return new WaitForSeconds(timeForStun / 10);
+            color = sr.color;
+            color.a = 1;
+            sr.color = color;
+            yield return new WaitForSeconds(timeForStun / 10);
+        }
+
+    }
+
+
 }
