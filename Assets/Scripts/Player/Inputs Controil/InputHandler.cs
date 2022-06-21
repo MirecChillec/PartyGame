@@ -9,10 +9,13 @@ public class InputHandler : MonoBehaviour
     SelectionMenuElement selection;
     PlayerControl playerPrefab;
     public PlayerControl InGamePlayer;
+    PlayerManager playerMan;
     bool alive;
+    public int playerId { get; internal set; } 
     private void Awake()
     {
         inputMap = GetComponent<PlayerInput>();
+        playerMan = transform.parent.GetComponent<PlayerManager>();
     }
 
     public void Init(SelectionMenuElement selControl)
@@ -20,7 +23,10 @@ public class InputHandler : MonoBehaviour
         selection = selControl;
         selection.Activate();
     }
-
+    public void SetId(int id)
+    {
+        this.playerId = id;
+    }
     //Selecting UI Controls
     public void SelectingChange(InputAction.CallbackContext ctx)
     {
@@ -60,19 +66,19 @@ public class InputHandler : MonoBehaviour
         InGamePlayer.gameObject.GetComponent<SpriteRenderer>().material = mat;
     }
     //Despawning players
-    public void DestroyPlayer()
+    public void DestroyPlayer(int id)
     {
         if (InGamePlayer == null) return;
         Destroy(InGamePlayer.gameObject);
-        Debug.Log("destroyed");
         alive = false;
-        transform.parent.GetComponent<PlayerManager>().PlayerDeath();
+        playerMan.PlayerDeath(id);
     }
     public void PlayerDespawn()
     {
         if (alive)
         {
             Destroy(InGamePlayer.gameObject);
+            playerMan.WinGame(this.playerId);
         }
     }
     //switching control maps

@@ -41,6 +41,8 @@ public class Movement : MonoBehaviour
     public GameObject altar;
     public float altarPullSpeed;
 
+    int lastHitId;
+
 
     ThrowableObject throwableObjectScript;
 
@@ -236,17 +238,21 @@ public class Movement : MonoBehaviour
         yield return new WaitForSeconds(0.135f);
         playerCollider.enabled = true;
     }
-    public void StunPlayer()
+    public void StunPlayer(int killerId)
     {
-        stunCounter++;
-        altarPullSpeed = 0.3f;
-        StartCoroutine(StunTimer(baseStunTime + (stunCounter / 2)));
+        if (!isStunned)
+        {
+            lastHitId = killerId;
+            stunCounter++;
+            altarPullSpeed = 0.3f;
+            StartCoroutine(StunTimer(baseStunTime + (stunCounter / 2)));
+        }
     }
     public void PlayerSacrifice()
     {
         //finish player death 
         InputHandler handler = transform.parent.gameObject.GetComponent<InputHandler>();
-        handler.DestroyPlayer();
+        handler.DestroyPlayer(lastHitId);
     }
     IEnumerator StunTimer(float timeForStun)
     {

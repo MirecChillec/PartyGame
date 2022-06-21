@@ -21,7 +21,6 @@ public class GameControl : MonoBehaviour
         map = Instantiate(maps[Random.Range(0,maps.Length)]);
         map.transform.position = new Vector3(0, 0, 0);
         map.gameObject.transform.SetParent(this.transform);
-        print(map.freePositions.Count + " control free");
         int max = players.GetNumberOfPlayers();
         List<Transform> positions = new List<Transform>();
         for (int i = 0; i < max; i++)

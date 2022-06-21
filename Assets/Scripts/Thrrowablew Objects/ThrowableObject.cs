@@ -90,15 +90,16 @@ public class ThrowableObject : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("colision");
+        //Debug.Log("colision");
         if (collision.gameObject.tag == "Player" && isThrown)
         {
-            Debug.Log("object is thrown and touching player");
+            //Debug.Log("object is thrown and touching player");
             PM = collision.GetComponent<Movement>();
             if (owner != PM.gameObject)
             {
-                Debug.Log("stuning player");
-                PM.StunPlayer();
+                int id = owner.transform.parent.GetComponent<InputHandler>().playerId;
+                //Debug.Log("stuning player");
+                PM.StunPlayer(id);
             }
         }
     }

@@ -19,9 +19,7 @@ public class PlayerSpawnPosition : MonoBehaviour
             Debug.LogError("Missing spawning positions");
             return;
         }
-        print(positions.Count + " positions");
         freePositions = positions;
-        print(freePositions.Count + " free");
     }
     //asigning random position
     public Transform GetRandomPlayerPosition()
