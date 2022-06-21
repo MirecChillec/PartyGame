@@ -110,6 +110,10 @@ public class InputHandler : MonoBehaviour
         if (CheckInGamePlayer() && ctx.performed)
         {
             InGamePlayer.move.OnDrop();
+            InGamePlayer.OC.OnDown();
+        }else if(CheckInGamePlayer() && ctx.canceled)
+        {
+            InGamePlayer.OC.CancelDown();
         }
     }
     public void Action(InputAction.CallbackContext ctx)
