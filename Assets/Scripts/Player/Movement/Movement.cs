@@ -48,7 +48,6 @@ public class Movement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
-        altar = GameObject.Find("Altar");
 
         facingRight = true;
 
@@ -147,10 +146,20 @@ public class Movement : MonoBehaviour
             altarDirection = altarDirection.normalized;
             rb.velocity = altarDirection * altarPullSpeed;
             altarPullSpeed += 0.06f;
+            CheckAltarPosition();
+            if (CheckAltarPosition())
+            {
+                PlayerSacrifice();
+            }
         }
 
 
     }
+    bool CheckAltarPosition()
+    {
+        return (Vector2.Distance(new Vector2(transform.position.x,transform.position.y),new Vector2(altar.transform.position.x,altar.transform.position.y)) < 0.4) ? true : false;
+    }
+
     //jump method
     void Jump()
     {
@@ -236,9 +245,8 @@ public class Movement : MonoBehaviour
     public void PlayerSacrifice()
     {
         //finish player death 
-        this.gameObject.SetActive(false);
-
-
+        InputHandler handler = transform.parent.gameObject.GetComponent<InputHandler>();
+        handler.DestroyPlayer();
     }
     IEnumerator StunTimer(float timeForStun)
     {

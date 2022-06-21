@@ -22,6 +22,8 @@ public class ThrowableObject : MonoBehaviour
 
     public bool player;
 
+    public Transform spawnerPos;
+
     private void Awake()
     {
         screenBounds = GameData.scrennBounds;
@@ -48,7 +50,7 @@ public class ThrowableObject : MonoBehaviour
         isThrown = true;
         owner = transform.parent.gameObject;
         rb.simulated = true;
-        transform.parent = null;
+        transform.parent = spawnerPos;
         if (right)
         {
             rb.AddForce(throwArc);
@@ -81,7 +83,7 @@ public class ThrowableObject : MonoBehaviour
         isThrown = true;
         owner = transform.parent.gameObject;
         rb.simulated = true;
-        transform.parent = null;
+        transform.parent = spawnerPos;
         rb.AddForce(Vector3.down * 3f);
         rb.gravityScale = baseGravityScale * objectWeight * 3;
     }

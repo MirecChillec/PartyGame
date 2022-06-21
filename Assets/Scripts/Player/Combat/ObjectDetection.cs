@@ -19,6 +19,7 @@ public class ObjectDetection : MonoBehaviour
     private void Start()
     {
         canPick = true;
+        objekt = null;
     }
     private void FixedUpdate()
     {

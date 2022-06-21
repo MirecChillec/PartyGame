@@ -261,6 +261,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maps:
   - {fileID: 3655477795777862505, guid: 014bb92d9d10d7b4bba76284bcc43935, type: 3}
+  - {fileID: 3655477795777862505, guid: 6a1cf9298f459cc4fb2b730ea35ab7da, type: 3}
   players: {fileID: 1157862533}
 --- !u!224 &354252937 stripped
 RectTransform:
@@ -830,6 +831,7 @@ MonoBehaviour:
   - {fileID: 1936534136}
   - {fileID: 867847052}
   - {fileID: 1304669775}
+  altar: {fileID: 0}
 --- !u!1 &867847051
 GameObject:
   m_ObjectHideFlags: 0
@@ -1190,6 +1192,8 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 2f3dfafa020f76443a1274337d2cd6f0, type: 2}
   - {fileID: 0}
   - {fileID: 0}
+  gameMan: {fileID: 227910143}
+  winPause: 2
 --- !u!1 &1161474914
 GameObject:
   m_ObjectHideFlags: 0
