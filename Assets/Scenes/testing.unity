@@ -262,6 +262,7 @@ MonoBehaviour:
   maps:
   - {fileID: 3655477795777862505, guid: 014bb92d9d10d7b4bba76284bcc43935, type: 3}
   - {fileID: 3655477795777862505, guid: 6a1cf9298f459cc4fb2b730ea35ab7da, type: 3}
+  - {fileID: 3655477795777862505, guid: ada60a54f59a85040a80c5b70bab6fae, type: 3}
   players: {fileID: 1157862533}
 --- !u!224 &354252937 stripped
 RectTransform:
