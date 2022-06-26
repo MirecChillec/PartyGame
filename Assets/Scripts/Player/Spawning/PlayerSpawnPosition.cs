@@ -8,7 +8,7 @@ public class PlayerSpawnPosition : MonoBehaviour
     [Header("Spawning positions")]
     public List<Transform> positions;
     public List<Transform> freePositions { get; private set; }
-    //public Material[] playerMaterials;
+    public GameObject altar;
     int index;
     private void Awake()
     {
@@ -19,9 +19,7 @@ public class PlayerSpawnPosition : MonoBehaviour
             Debug.LogError("Missing spawning positions");
             return;
         }
-        print(positions.Count + " positions");
         freePositions = positions;
-        print(freePositions.Count + " free");
     }
     //asigning random position
     public Transform GetRandomPlayerPosition()

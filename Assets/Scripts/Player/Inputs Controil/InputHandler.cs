@@ -8,10 +8,14 @@ public class InputHandler : MonoBehaviour
     PlayerInput inputMap;
     SelectionMenuElement selection;
     PlayerControl playerPrefab;
-    PlayerControl InGamePlayer;
+    public PlayerControl InGamePlayer;
+    PlayerManager playerMan;
+    bool alive;
+    public int playerId { get; internal set; } 
     private void Awake()
     {
         inputMap = GetComponent<PlayerInput>();
+        playerMan = transform.parent.GetComponent<PlayerManager>();
     }
 
     public void Init(SelectionMenuElement selControl)
@@ -19,7 +23,10 @@ public class InputHandler : MonoBehaviour
         selection = selControl;
         selection.Activate();
     }
-
+    public void SetId(int id)
+    {
+        this.playerId = id;
+    }
     //Selecting UI Controls
     public void SelectingChange(InputAction.CallbackContext ctx)
     {
@@ -49,17 +56,30 @@ public class InputHandler : MonoBehaviour
     }
 
     //Spawning players
-    public void SpawnPlayer(Transform position,Material mat)
+    public void SpawnPlayer(Transform position,Material mat,GameObject altar)
     {
+        alive = true;
         InGamePlayer = Instantiate(playerPrefab);
+        InGamePlayer.move.altar = altar;
         InGamePlayer.transform.SetParent(this.transform);
         InGamePlayer.transform.position = position.position;
         InGamePlayer.gameObject.GetComponent<SpriteRenderer>().material = mat;
     }
-    public void DestroyPlayer()
+    //Despawning players
+    public void DestroyPlayer(int id)
     {
         if (InGamePlayer == null) return;
-        Destroy(InGamePlayer);
+        Destroy(InGamePlayer.gameObject);
+        alive = false;
+        playerMan.PlayerDeath(id);
+    }
+    public void PlayerDespawn()
+    {
+        if (alive)
+        {
+            Destroy(InGamePlayer.gameObject);
+            playerMan.WinGame(this.playerId);
+        }
     }
     //switching control maps
     public void SwitchControlsToGame()
@@ -96,6 +116,10 @@ public class InputHandler : MonoBehaviour
         if (CheckInGamePlayer() && ctx.performed)
         {
             InGamePlayer.move.OnDrop();
+            InGamePlayer.OC.OnDown();
+        }else if(CheckInGamePlayer() && ctx.canceled)
+        {
+            InGamePlayer.OC.CancelDown();
         }
     }
     public void Action(InputAction.CallbackContext ctx)

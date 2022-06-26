@@ -22,6 +22,7 @@ public class ObjectSpawner : MonoBehaviour
     [Header("Reference objects")]
     public GameObject parentOfPositions;
     public ScreenBounds bounds;
+    public Transform objectParent;
 
     bool canSpawn = false;
 

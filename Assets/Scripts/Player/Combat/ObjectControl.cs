@@ -35,7 +35,13 @@ public class ObjectControl : MonoBehaviour
         }
         else if (state == Throwable.holding && !canPickUp)
         {
-            Throw();
+            if (downKeybindPressed)
+            {
+                ThrowDown();
+            }else
+            {
+                Throw();
+            }
         }
     }
     //only throw straight down / release object
@@ -46,16 +52,13 @@ public class ObjectControl : MonoBehaviour
         detector.ThrowDown();
     }
     //bool for checking if key down / S (or equivalent) is pressed
-    public void OnDown(InputAction.CallbackContext ctx)
+    public void OnDown()
     {
-        if (ctx.performed)
-        {
-            downKeybindPressed = true;
-        }
-        else if (ctx.canceled)
-        {
-            downKeybindPressed = false;
-        }
+        downKeybindPressed = true;
+    }
+    public void CancelDown()
+    {
+    downKeybindPressed = false;
     }
 
 }

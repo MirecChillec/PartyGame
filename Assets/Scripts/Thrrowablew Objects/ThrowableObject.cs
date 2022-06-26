@@ -22,6 +22,8 @@ public class ThrowableObject : MonoBehaviour
 
     public bool player;
 
+    public Transform spawnerPos;
+
     private void Awake()
     {
         screenBounds = GameData.scrennBounds;
@@ -48,7 +50,7 @@ public class ThrowableObject : MonoBehaviour
         isThrown = true;
         owner = transform.parent.gameObject;
         rb.simulated = true;
-        transform.parent = null;
+        transform.parent = spawnerPos;
         if (right)
         {
             rb.AddForce(throwArc);
@@ -81,22 +83,23 @@ public class ThrowableObject : MonoBehaviour
         isThrown = true;
         owner = transform.parent.gameObject;
         rb.simulated = true;
-        transform.parent = null;
+        transform.parent = spawnerPos;
         rb.AddForce(Vector3.down * 3f);
         rb.gravityScale = baseGravityScale * objectWeight * 3;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("colision");
+        //Debug.Log("colision");
         if (collision.gameObject.tag == "Player" && isThrown)
         {
-            Debug.Log("object is thrown and touching player");
+            //Debug.Log("object is thrown and touching player");
             PM = collision.GetComponent<Movement>();
             if (owner != PM.gameObject)
             {
-                Debug.Log("stuning player");
-                PM.StunPlayer();
+                int id = owner.transform.parent.GetComponent<InputHandler>().playerId;
+                //Debug.Log("stuning player");
+                PM.StunPlayer(id);
             }
         }
     }

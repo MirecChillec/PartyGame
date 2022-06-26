@@ -38,13 +38,21 @@ public class Movement : MonoBehaviour
     public int stunCounter = 0;
     public float baseStunTime = 1f;
 
+    public GameObject altar;
+    public float altarPullSpeed;
+
+    int lastHitId;
+
+
     ThrowableObject throwableObjectScript;
 
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
+
         facingRight = true;
+
         throwableObjectScript = this.gameObject.GetComponent<ThrowableObject>();
         //throwableObjectScript.enabled = false;  //disables the throwableObject script at start as player isn't stunned at spawn
     }
@@ -124,16 +132,36 @@ public class Movement : MonoBehaviour
                 newVelocity.x = 0;
                 rb.velocity = newVelocity;
             }
+        
+            if (isFalling)
+            {
+                rb.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.fixedDeltaTime;
+            }
+            else if (isLowJumping)
+            {
+                rb.velocity += Vector2.up * Physics2D.gravity.y * (lowerJumpMultiplier - 1) * Time.fixedDeltaTime;
+            }
         }
-        if (isFalling)
+        else
         {
-            rb.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.fixedDeltaTime;
+            Vector3 altarDirection = altar.transform.position - transform.position;
+            altarDirection = altarDirection.normalized;
+            rb.velocity = altarDirection * altarPullSpeed;
+            altarPullSpeed += 0.06f;
+            CheckAltarPosition();
+            if (CheckAltarPosition())
+            {
+                PlayerSacrifice();
+            }
         }
-        else if (isLowJumping)
-        {
-            rb.velocity += Vector2.up * Physics2D.gravity.y * (lowerJumpMultiplier - 1) * Time.fixedDeltaTime;
-        }
+
+
     }
+    bool CheckAltarPosition()
+    {
+        return (Vector2.Distance(new Vector2(transform.position.x,transform.position.y),new Vector2(altar.transform.position.x,altar.transform.position.y)) < 0.4) ? true : false;
+    }
+
     //jump method
     void Jump()
     {
@@ -210,17 +238,21 @@ public class Movement : MonoBehaviour
         yield return new WaitForSeconds(0.135f);
         playerCollider.enabled = true;
     }
-    public void StunPlayer()
+    public void StunPlayer(int killerId)
     {
-        stunCounter++;
-        StartCoroutine(StunTimer(baseStunTime + (stunCounter / 2)));
+        if (!isStunned)
+        {
+            lastHitId = killerId;
+            stunCounter++;
+            altarPullSpeed = 0.3f;
+            StartCoroutine(StunTimer(baseStunTime + (stunCounter / 2)));
+        }
     }
     public void PlayerSacrifice()
     {
         //finish player death 
-        this.gameObject.SetActive(false);
-
-
+        InputHandler handler = transform.parent.gameObject.GetComponent<InputHandler>();
+        handler.DestroyPlayer(lastHitId);
     }
     IEnumerator StunTimer(float timeForStun)
     {

@@ -15,6 +15,8 @@ public class ObjectSpawnPosition : MonoBehaviour
     {
         free = false;
         ThrowableObject spawned =  Instantiate(objekt);
+        spawned.spawnerPos = spawner.objectParent;
+        spawned.transform.SetParent(spawner.objectParent);
         spawned.transform.position = transform.position;
         spawned.Init(this,screenBounds,spawner);
     }

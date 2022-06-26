@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class SelectionMenuElement : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class SelectionMenuElement : MonoBehaviour
     public bool ready { get; private set; }
     int index = 0;
     public bool active { get; private set; }
+    public Image image;
     private void Start()
     {
         active = false;
@@ -25,7 +27,9 @@ public class SelectionMenuElement : MonoBehaviour
         {
             active = true;
             readyText.SetText("Unready");
-            text.SetText(types[index].name);
+            text.enabled = false;
+            image.enabled = true;
+            image.sprite = types[0].picture;
         }
     }
     public void ChangeRight()
@@ -35,11 +39,12 @@ public class SelectionMenuElement : MonoBehaviour
             if(index < types.Length - 1)
             {
                 index += 1;
-                text.SetText(types[index].name);
-            }else if(index + 1 > types.Length - 1)
+                image.sprite = types[index].picture;
+            }
+            else if(index + 1 > types.Length - 1)
             {
                 index = 0;
-                text.SetText(types[index].name);
+                image.sprite = types[index].picture;
             }
         }
     }
@@ -50,12 +55,12 @@ public class SelectionMenuElement : MonoBehaviour
             if (index -1 < 0)
             {
                 index = types.Length-1;
-                text.SetText(types[index].name);
+                image.sprite = types[index].picture;
             }
             else
             {
                 index -= 1;
-                text.SetText(types[index].name);
+                image.sprite = types[index].picture;
             }
         }
     }

@@ -14,10 +14,13 @@ public class GameControl : MonoBehaviour
     }
     public void ChangeMap()
     {
-        map = Instantiate(maps[0]);
+        if(map != null)
+        {
+            Destroy(map.gameObject);
+        }
+        map = Instantiate(maps[Random.Range(0,maps.Length)]);
         map.transform.position = new Vector3(0, 0, 0);
         map.gameObject.transform.SetParent(this.transform);
-        print(map.freePositions.Count + " control free");
         int max = players.GetNumberOfPlayers();
         List<Transform> positions = new List<Transform>();
         for (int i = 0; i < max; i++)
@@ -25,6 +28,6 @@ public class GameControl : MonoBehaviour
             positions.Add(map.GetRandomPlayerPosition());
         }
         print(positions.Count);
-        players.SpawnPlayers(positions);
+        players.SpawnPlayers(positions,map.altar);
     }
 }
