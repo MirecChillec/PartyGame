@@ -74,7 +74,7 @@ public class ThrowableObject : MonoBehaviour
     }
     private void OnDestroy()
     {
-        objectSpawner.DestroiedObject();
+        //objectSpawner.DestroiedObject();
     }
     public void ThrowDown()
     {

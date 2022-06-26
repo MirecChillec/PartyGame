@@ -10,6 +10,12 @@ public class ObjectControl : MonoBehaviour
     public Movement movement;
     public ObjectDetection detector;
     bool downKeybindPressed;
+    PlayerStunnedPickup playerStunnedPickupScript;
+    private void Awake()
+    {
+        playerStunnedPickupScript = GetComponentInChildren<PlayerStunnedPickup>();
+
+    }
     private void Start()
     {
         state = Throwable.idle;
@@ -21,11 +27,25 @@ public class ObjectControl : MonoBehaviour
         state = Throwable.holding;
         detector.Pick();
     }
+    //called from PlayerStunnedPickup
+    public void PickPlayer()
+    {
+        canPickUp = false;
+        state = Throwable.holdingPlayer;
+        //*******************
+    }
     void Throw()
     {
         canPickUp = true;
         state = Throwable.idle;
         detector.Throw(movement.facingRight);
+    }
+    void ThrowPlayer( )
+    {
+        canPickUp = true;
+        state = Throwable.idle;
+        playerStunnedPickupScript.ThrowPlayer();
+        //*******************
     }
     public void OnAction()
     {
@@ -36,6 +56,9 @@ public class ObjectControl : MonoBehaviour
         else if (state == Throwable.holding && !canPickUp)
         {
             Throw();
+        }else if(state == Throwable.holdingPlayer && !canPickUp)
+        {
+            ThrowPlayer();
         }
     }
     //only throw straight down / release object
@@ -58,10 +81,18 @@ public class ObjectControl : MonoBehaviour
         }
     }
 
+    public void SetIdle()
+    {
+        state = Throwable.idle;
+    }
+
 }
+
+
 public enum Throwable
 {
     idle,
-    holding
+    holding,
+    holdingPlayer
 }
 

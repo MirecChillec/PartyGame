@@ -39,7 +39,9 @@ public class Movement : MonoBehaviour
     public float baseStunTime = 1f;
 
     public GameObject altar;
-    public float altarPullSpeed;
+    //public float altarPullSpeed;
+
+    PlayerStun playerStunScript;
 
 
     ThrowableObject throwableObjectScript;
@@ -49,6 +51,7 @@ public class Movement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
         altar = GameObject.Find("Altar");
+        playerStunScript = GetComponent<PlayerStun>();
 
         facingRight = true;
 
@@ -143,10 +146,10 @@ public class Movement : MonoBehaviour
         }
         else
         {
-            Vector3 altarDirection = altar.transform.position - transform.position;
+            /*Vector3 altarDirection = altar.transform.position - transform.position;
             altarDirection = altarDirection.normalized;
             rb.velocity = altarDirection * altarPullSpeed;
-            altarPullSpeed += 0.06f;
+            altarPullSpeed += 0.06f;*/
         }
 
 
@@ -230,8 +233,8 @@ public class Movement : MonoBehaviour
     public void StunPlayer()
     {
         stunCounter++;
-        altarPullSpeed = 0.3f;
-        StartCoroutine(StunTimer(baseStunTime + (stunCounter / 2)));
+        playerStunScript.StunPlayer();
+        //StartCoroutine(StunTimer(baseStunTime + (stunCounter / 2)));
     }
     public void PlayerSacrifice()
     {
@@ -240,35 +243,8 @@ public class Movement : MonoBehaviour
 
 
     }
-    IEnumerator StunTimer(float timeForStun)
-    {
-        isStunned = true;
-        //throwableObjectScript.enabled = true;
-        rb.gravityScale = 0f;
 
-        StartCoroutine(StunBlicker(timeForStun));
-        yield return new WaitForSeconds(timeForStun);
 
-        rb.gravityScale = 1f;
-        //throwableObjectScript.enabled = false;
-        isStunned = false;
-    }
-    IEnumerator StunBlicker(float timeForStun)
-    {
-        Color color;
-        for (int i = 0; i < 5; i++)
-        {
-            color = sr.color;
-            color.a = 0;
-            sr.color = color;
-            yield return new WaitForSeconds(timeForStun / 10);
-            color = sr.color;
-            color.a = 1;
-            sr.color = color;
-            yield return new WaitForSeconds(timeForStun / 10);
-        }
-
-    }
-
+   
 
 }
