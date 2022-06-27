@@ -213,7 +213,7 @@ MonoBehaviour:
   lowerJumpMultiplier: 17
   dootykZeme: 0
   GroundCheck: {fileID: 6298515435878700309}
-  playerCollider: {fileID: 0}
+  playerCollider: {fileID: 8710139706722398037}
   screenBounds: {fileID: 0}
   gChecker: {fileID: 6298515435878700314}
   filter:
@@ -255,6 +255,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   pickTimer: 0.4
+  character: 0
   canPick: 1
 --- !u!114 &6298515434478717215
 MonoBehaviour:

@@ -15,6 +15,7 @@ public class ObjectDetection : MonoBehaviour
     public LayerMask mask;
     //cas na reset na zobranie dalsieho objektu
     public float pickTimer;
+    public Character character;
     [SerializeField] private bool canPick;
     private void Start()
     {
@@ -44,7 +45,7 @@ public class ObjectDetection : MonoBehaviour
         {
             if (objekt != null)
             {
-                objekt.PickUp(this.transform);
+                objekt.PickUp(this.transform,character);
                 controler.holding = true;
                 controler.animControl.ChangeAnimation(Animations.idleNoHand);
                 controler.animControl.HandBool(true);
@@ -80,5 +81,11 @@ public class ObjectDetection : MonoBehaviour
             objekt.ThrowDown();
         }
     }
-
+}
+public enum Character
+{
+    butcher,
+    detective,
+    nobleman,
+    ocultist
 }

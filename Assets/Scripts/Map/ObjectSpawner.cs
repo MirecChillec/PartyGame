@@ -52,7 +52,7 @@ public class ObjectSpawner : MonoBehaviour
             return false;
         }
         numOfObjects += 1;
-        positions[positionIndex].Spawn(objekt[0]);
+        positions[positionIndex].Spawn(objekt[Random.Range(0,objekt.Length)]);
         return true;
     }
     public void DestroiedObject()

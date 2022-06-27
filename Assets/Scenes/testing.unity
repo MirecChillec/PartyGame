@@ -831,6 +831,7 @@ MonoBehaviour:
   - {fileID: 867847052}
   - {fileID: 1304669775}
   altar: {fileID: 0}
+  altarMan: {fileID: 0}
 --- !u!1 &867847051
 GameObject:
   m_ObjectHideFlags: 0
