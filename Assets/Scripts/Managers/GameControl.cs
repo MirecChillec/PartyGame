@@ -6,7 +6,7 @@ public class GameControl : MonoBehaviour
 {
     public PlayerSpawnPosition[] maps;
     public PlayerManager players;
-    PlayerSpawnPosition map;
+    public PlayerSpawnPosition map { get; private set; }
     void Start()
     {
         players.SwitchControlToGame();

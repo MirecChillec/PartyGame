@@ -202,14 +202,14 @@ public class Movement : MonoBehaviour
                 movingLeft = false;
                 movingRight = true;
                 facingRight = true;
-                sr.flipX = true;
+                this.transform.rotation = Quaternion.Euler(0, 180, 0);
             }
             else
             {
                 movingLeft = true;
                 movingRight = false;
                 facingRight = false;
-                sr.flipX = false;
+                this.transform.rotation = Quaternion.Euler(0,0,0);
             }
         }
     }
@@ -354,7 +354,6 @@ public class Movement : MonoBehaviour
     }
     void TopJumpAnimation()
     {
-        print(OC.holding+ " top");
         if (OC.holding)
         {
             animControl.ChangeAnimation(Animations.fallingNoHand);
@@ -366,7 +365,6 @@ public class Movement : MonoBehaviour
     }
     void LandingAnimation()
     {
-        print(OC.holding + " landing");
         if (OC.holding)
         {
             animControl.ChangeAnimation(Animations.landingNoHand);

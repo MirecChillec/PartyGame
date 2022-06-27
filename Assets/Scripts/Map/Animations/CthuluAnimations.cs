@@ -16,9 +16,7 @@ public class CthuluAnimations : MonoBehaviour
         while (true)
         {
             float wait = Random.Range(min, max);
-            print(wait);
             yield return new WaitForSeconds(wait);
-            print(anim.GetCurrentAnimatorStateInfo(0).IsName("Watching"));
             if (anim.GetCurrentAnimatorStateInfo(0).IsName("Watching"))
             {
                 Blink();

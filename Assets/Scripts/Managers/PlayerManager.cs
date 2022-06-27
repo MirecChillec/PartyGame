@@ -63,6 +63,7 @@ public class PlayerManager : MonoBehaviour
     {
         activePlayers -= 1;
         KilledPlayer(id);
+        gameMan.map.altarMan.Sacrifice();
         if (activePlayers <= 1)
         {
             StartCoroutine(WinTimer());

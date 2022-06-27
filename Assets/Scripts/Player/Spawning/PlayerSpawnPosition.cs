@@ -9,6 +9,7 @@ public class PlayerSpawnPosition : MonoBehaviour
     public List<Transform> positions;
     public List<Transform> freePositions { get; private set; }
     public GameObject altar;
+    public AltarManger altarMan;
     int index;
     private void Awake()
     {
