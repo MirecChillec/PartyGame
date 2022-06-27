@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Ocultist
   playerPrefab: {fileID: 8100915949643691114, guid: 2fbe4a46c1aa9eb4894fff5b4dea427e, type: 3}
-  picture: {fileID: 21300000, guid: 490178c771cf7df47919c8846eb7446d, type: 3}
+  picture: {fileID: 21300000, guid: 45b3f0bb9b54279449b8cbbea9ec2f21, type: 3}

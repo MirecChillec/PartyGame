@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Nobleman
   playerPrefab: {fileID: 96834805543076713, guid: c75522fd8a6f3874190a328d973ff8db, type: 3}
-  picture: {fileID: 21300000, guid: 5824366ae743bd14898d2f16e8063eca, type: 3}
+  picture: {fileID: 21300000, guid: 2de5aec4ddf75ad4dadcd3f74565f1c0, type: 3}

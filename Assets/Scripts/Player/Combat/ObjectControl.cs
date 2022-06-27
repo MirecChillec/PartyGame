@@ -10,8 +10,12 @@ public class ObjectControl : MonoBehaviour
     public Movement movement;
     public ObjectDetection detector;
     bool downKeybindPressed;
+    public AnimationsControler animControl;
+    public bool holding { get; set; }
     private void Start()
     {
+        animControl = GetComponent<AnimationsControler>();
+        holding = false;
         state = Throwable.idle;
         canPickUp = true;
     }
@@ -29,18 +33,22 @@ public class ObjectControl : MonoBehaviour
     }
     public void OnAction()
     {
-        if (state == Throwable.idle && canPickUp)
+        if (!movement.isStunned)
         {
-            PickUp();
-        }
-        else if (state == Throwable.holding && !canPickUp)
-        {
-            if (downKeybindPressed)
+            if (state == Throwable.idle && canPickUp)
             {
-                ThrowDown();
-            }else
+                PickUp();
+            }
+            else if (state == Throwable.holding && !canPickUp)
             {
-                Throw();
+                if (downKeybindPressed)
+                {
+                    ThrowDown();
+                }
+                else
+                {
+                    Throw();
+                }
             }
         }
     }
@@ -60,7 +68,6 @@ public class ObjectControl : MonoBehaviour
     {
     downKeybindPressed = false;
     }
-
 }
 public enum Throwable
 {

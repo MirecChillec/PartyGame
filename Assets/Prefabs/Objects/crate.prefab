@@ -124,8 +124,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectWeight: 1
-  baseThrowForce: 1500
-  baseGravityScale: 4
+  baseThrowForce: 2700
+  baseGravityScale: 5
+  PM: {fileID: 0}
+  player: 0
+  spawnerPos: {fileID: 0}
 --- !u!50 &-8267023065870629849
 Rigidbody2D:
   serializedVersion: 4

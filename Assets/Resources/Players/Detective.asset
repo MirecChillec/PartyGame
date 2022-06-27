@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Detective
   playerPrefab: {fileID: 3947356397004001238, guid: c3dbadfc278996243826cb56e7f57389, type: 3}
-  picture: {fileID: 21300000, guid: d8ac399cb224deb4e83cf9bec47b5007, type: 3}
+  picture: {fileID: 21300000, guid: 41fe136b765cb56458ba77b809a996e9, type: 3}

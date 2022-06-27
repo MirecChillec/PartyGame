@@ -45,6 +45,9 @@ public class ObjectDetection : MonoBehaviour
             if (objekt != null)
             {
                 objekt.PickUp(this.transform);
+                controler.holding = true;
+                controler.animControl.ChangeAnimation(Animations.idleNoHand);
+                controler.animControl.HandBool(true);
             }
         }
     }
@@ -52,11 +55,14 @@ public class ObjectDetection : MonoBehaviour
     {
         if (objekt != null)
         {
+            controler.holding = false;
             canPick = false;
             objekt.Throw(direction);
             //nulovanie objekt premennej inak by hrac vedel chytit hodeny objekt pocas toho ako leti
             objekt = null;
             StartCoroutine(PickTimer());
+            controler.animControl.ChangeAnimation(Animations.idleHand);
+            controler.animControl.HandBool(false);
         }
     }
     IEnumerator PickTimer()

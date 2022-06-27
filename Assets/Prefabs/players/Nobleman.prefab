@@ -98,6 +98,8 @@ GameObject:
   - component: {fileID: 6298515434478717215}
   - component: {fileID: 5846327233961202213}
   - component: {fileID: 96834805543076713}
+  - component: {fileID: 906724355}
+  - component: {fileID: 906724354}
   m_Layer: 8
   m_Name: Nobleman
   m_TagString: Player
@@ -161,12 +163,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 5
-  m_Sprite: {fileID: 21300000, guid: 5824366ae743bd14898d2f16e8063eca, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2de5aec4ddf75ad4dadcd3f74565f1c0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 8.5, y: 8.5}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -205,10 +207,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f2f5b415aa8c2744be267e2c70a0cdd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpPower: 60
-  movementSpeed: 30
-  fallMultiplier: 18
-  lowerJumpMultiplier: 10
+  jumpPower: 110
+  movementSpeed: 50
+  fallMultiplier: 30
+  lowerJumpMultiplier: 17
   dootykZeme: 0
   GroundCheck: {fileID: 6298515435878700309}
   playerCollider: {fileID: 5846327233961202213}
@@ -233,6 +235,7 @@ MonoBehaviour:
   baseStunTime: 1
   altar: {fileID: 0}
   altarPullSpeed: 0
+  animControl: {fileID: 906724355}
 --- !u!114 &6298515434478717212
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -267,6 +270,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movement: {fileID: 6298515434478717214}
   detector: {fileID: 6298515434478717212}
+  animControl: {fileID: 0}
 --- !u!61 &5846327233961202213
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -284,8 +288,8 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.34, y: 0.34}
-    newSize: {x: 1, y: 1}
+    oldSize: {x: 8.5, y: 8.5}
+    newSize: {x: 8.5, y: 8.5}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -307,6 +311,38 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   move: {fileID: 6298515434478717214}
   OC: {fileID: 6298515434478717215}
+--- !u!114 &906724355
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6298515434478717204}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f626811d2b3ac684b9b3819d3d003fed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anim: {fileID: 906724354}
+--- !u!95 &906724354
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6298515434478717204}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 14f2225d29802b940baa7056a034fccd, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &6298515435878700309
 GameObject:
   m_ObjectHideFlags: 0
