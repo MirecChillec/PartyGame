@@ -17,6 +17,9 @@ public class SelectionMenuElement : MonoBehaviour
     public Image image;
     public GameObject selection;
     public TextMeshProUGUI characterName;
+    public Transform rightArrow;
+    public Transform leftArrow;
+    public float pressTime;
     private void Start()
     {
         active = false;
@@ -39,6 +42,7 @@ public class SelectionMenuElement : MonoBehaviour
     {
         if (active && !ready)
         {
+            StartCoroutine(Right());
             if(index < types.Length - 1)
             {
                 index += 1;
@@ -58,6 +62,7 @@ public class SelectionMenuElement : MonoBehaviour
     {
         if (active && !ready)
         {
+            StartCoroutine(Left());
             if (index -1 < 0)
             {
                 index = types.Length-1;
@@ -92,4 +97,17 @@ public class SelectionMenuElement : MonoBehaviour
         selectionMan = selMan;
         types = selectionMan.playerTypes;
     }
+    IEnumerator Right()
+    {
+        rightArrow.localScale = new Vector3(0.5f, 0.5f, 1);
+        yield return new WaitForSeconds(pressTime);
+        rightArrow.localScale = new Vector3(1f, 1f, 1);
+    }
+    IEnumerator Left()
+    {
+        leftArrow.localScale = new Vector3(0.5f, 0.5f, 1);
+        yield return new WaitForSeconds(pressTime);
+        leftArrow.localScale = new Vector3(1f, 1f, 1);
+    }
+
 }

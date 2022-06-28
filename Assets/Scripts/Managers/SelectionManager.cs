@@ -61,8 +61,11 @@ public class SelectionManager : MonoBehaviour
         while (x > 0)
         {
             yield return new WaitForSeconds(1f);
+            counDownText.enabled = false;
+            yield return new WaitForSeconds(0.25f);
             x -= 1;
             counDownText.SetText(x.ToString());
+            counDownText.enabled = true;
         }
         gameManager.StartGame();
     }
