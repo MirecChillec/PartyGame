@@ -32,7 +32,7 @@ public class ThrowableObject : MonoBehaviour
         screenBounds = GameData.scrennBounds;
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
-        throwArc = new Vector3(baseThrowForce / objectWeight, baseThrowForce / objectWeight, 0);
+        //throwArc = new Vector3(baseThrowForce / objectWeight, baseThrowForce / objectWeight, 0);
     }
     private void Update()
     {
@@ -55,6 +55,7 @@ public class ThrowableObject : MonoBehaviour
         owner = transform.parent.gameObject;
         rb.simulated = true;
         transform.parent = spawnerPos;
+        throwArc = new Vector3(baseThrowForce / objectWeight, baseThrowForce / objectWeight, 0);
         if (right)
         {
             rb.AddForce(throwArc);

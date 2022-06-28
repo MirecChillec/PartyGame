@@ -208,7 +208,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jumpPower: 110
-  movementSpeed: 50
+  movementSpeed: 30
   fallMultiplier: 30
   lowerJumpMultiplier: 17
   dootykZeme: 0

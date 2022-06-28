@@ -123,9 +123,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e833f896bad3ac743ba2b745e81f0a78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectWeight: 3
-  baseThrowForce: 2000
-  baseGravityScale: 8
+  objectWeight: 4
+  baseThrowForce: 10000
+  baseGravityScale: 6
   PM: {fileID: 0}
   player: 0
   spawnerPos: {fileID: 0}
