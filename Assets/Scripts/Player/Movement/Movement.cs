@@ -273,7 +273,8 @@ public class Movement : MonoBehaviour
             lastHitId = killerId;
             stunCounter++;
             altarPullSpeed = 0.3f;
-            StartCoroutine(StunTimer(stunTime));
+            baseStunTime += stunTime;
+            StartCoroutine(StunTimer(baseStunTime));
         }
     }
     public void PlayerSacrifice()

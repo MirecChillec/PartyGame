@@ -263,7 +263,7 @@ MonoBehaviour:
     maxNormalAngle: 0
   isStunned: 0
   stunCounter: 0
-  baseStunTime: 1
+  baseStunTime: 0
   altar: {fileID: 0}
   altarPullSpeed: 0
   animControl: {fileID: 955025397659573679}
