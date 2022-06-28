@@ -17,6 +17,7 @@ public class ObjectDetection : MonoBehaviour
     public float pickTimer;
     public Character character;
     [SerializeField] private bool canPick;
+    public Transform holder;
     private void Start()
     {
         canPick = false;
@@ -46,7 +47,7 @@ public class ObjectDetection : MonoBehaviour
         {
             if (objekt != null)
             {
-                objekt.PickUp(this.transform,character);
+                objekt.PickUp(holder,character);
                 controler.holding = true;
                 controler.animControl.ChangeAnimation(Animations.idleNoHand);
                 controler.animControl.HandBool(true);
@@ -59,7 +60,7 @@ public class ObjectDetection : MonoBehaviour
         {
             controler.holding = false;
             canPick = false;
-            objekt.Throw(direction);
+            objekt.Throw(direction,this.gameObject);
             //nulovanie objekt premennej inak by hrac vedel chytit hodeny objekt pocas toho ako leti
             objekt = null;
             StartCoroutine(PickTimer());

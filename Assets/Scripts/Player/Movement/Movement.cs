@@ -266,14 +266,14 @@ public class Movement : MonoBehaviour
         yield return new WaitForSeconds(0.135f);
         playerCollider.enabled = true;
     }
-    public void StunPlayer(int killerId)
+    public void StunPlayer(int killerId,float stunTime)
     {
         if (!isStunned)
         {
             lastHitId = killerId;
             stunCounter++;
             altarPullSpeed = 0.3f;
-            StartCoroutine(StunTimer(baseStunTime + (stunCounter / 2)));
+            StartCoroutine(StunTimer(stunTime));
         }
     }
     public void PlayerSacrifice()

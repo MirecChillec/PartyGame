@@ -27,6 +27,8 @@ public class ThrowableObject : MonoBehaviour
     public Sprite[] sprites;
     public Sprite baseSprite;
 
+    public float stunTime;
+
     private void Awake()
     {
         screenBounds = GameData.scrennBounds;
@@ -49,13 +51,13 @@ public class ThrowableObject : MonoBehaviour
         }
     }
 
-    public void Throw(bool right)
+    public void Throw(bool right, GameObject parent)
     {
         isThrown = true;
-        owner = transform.parent.gameObject;
+        owner = parent;
         rb.simulated = true;
         transform.parent = spawnerPos;
-        throwArc = new Vector3(baseThrowForce / objectWeight, baseThrowForce / objectWeight, 0);
+        throwArc = new Vector3(baseThrowForce / objectWeight, (baseThrowForce / objectWeight/2), 0);
         if (right)
         {
             rb.AddForce(throwArc);
@@ -107,7 +109,7 @@ public class ThrowableObject : MonoBehaviour
             {
                 int id = owner.transform.parent.GetComponent<InputHandler>().playerId;
                 //Debug.Log("stuning player");
-                PM.StunPlayer(id);
+                PM.StunPlayer(id, stunTime);
             }
         }
     }

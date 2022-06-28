@@ -475,6 +475,14 @@ PrefabInstance:
       propertyPath: m_Tiles.Array.data[159].second.m_TileSpriteIndex
       value: 45
       objectReference: {fileID: 0}
+    - target: {fileID: 2901884323091989316, guid: c0bf8ce13ccf91b4989e09216ea2bb2c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -40.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2901884323091989316, guid: c0bf8ce13ccf91b4989e09216ea2bb2c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 22.1
+      objectReference: {fileID: 0}
     - target: {fileID: 3655477795777862504, guid: c0bf8ce13ccf91b4989e09216ea2bb2c, type: 3}
       propertyPath: m_RootOrder
       value: 1

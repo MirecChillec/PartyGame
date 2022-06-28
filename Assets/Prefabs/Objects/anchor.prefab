@@ -136,6 +136,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 75a428ca05d95474c8dde337a609584b, type: 3}
   - {fileID: 21300000, guid: 01bc7bf68d943684096d4af8f3da00cb, type: 3}
   baseSprite: {fileID: 21300000, guid: 7999fefdb83590a47a0a7c5ccbfc540e, type: 3}
+  stunTime: 1.75
 --- !u!50 &4652754571322640789
 Rigidbody2D:
   serializedVersion: 4

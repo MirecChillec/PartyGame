@@ -123,8 +123,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e833f896bad3ac743ba2b745e81f0a78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectWeight: 2.5
-  baseThrowForce: 6000
+  objectWeight: 3
+  baseThrowForce: 10000
   baseGravityScale: 4
   PM: {fileID: 0}
   player: 0
@@ -136,6 +136,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 4e822937c90d12e418547f651376312b, type: 3}
   - {fileID: 21300000, guid: ff8c5181bf85fb343970254929f52315, type: 3}
   baseSprite: {fileID: 21300000, guid: 222ca23598a536f48beee2d18eed9d33, type: 3}
+  stunTime: 1.25
 --- !u!50 &-8267023065870629849
 Rigidbody2D:
   serializedVersion: 4
