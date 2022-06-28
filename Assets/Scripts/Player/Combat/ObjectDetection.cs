@@ -19,8 +19,9 @@ public class ObjectDetection : MonoBehaviour
     [SerializeField] private bool canPick;
     private void Start()
     {
-        canPick = true;
+        canPick = false;
         objekt = null;
+        StartCoroutine(StartWait());
     }
     private void FixedUpdate()
     {
@@ -80,6 +81,13 @@ public class ObjectDetection : MonoBehaviour
         {
             objekt.ThrowDown();
         }
+    }
+    IEnumerator StartWait()
+    {
+        objekt = null;
+        yield return new WaitForSeconds(0.1f);
+        objekt = null;
+        canPick = true;
     }
 }
 public enum Character
