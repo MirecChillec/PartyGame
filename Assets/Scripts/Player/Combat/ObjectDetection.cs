@@ -18,10 +18,12 @@ public class ObjectDetection : MonoBehaviour
     public Character character;
     [SerializeField] private bool canPick;
     public Transform holder;
+    PlayerStun stunedPlayer;
     private void Start()
     {
         canPick = false;
         objekt = null;
+        stunedPlayer = null;
         StartCoroutine(StartWait());
     }
     private void FixedUpdate()
@@ -36,7 +38,13 @@ public class ObjectDetection : MonoBehaviour
                 if (controler.state == Throwable.idle)
                 {
                     //ziskanie thowable skriptu na volanie funkcie na hadzanie
-                    objekt = cols[0].gameObject.GetComponent<ThrowableObject>();
+                    if (cols[0].gameObject.tag == "Throwable")
+                    {
+                        objekt = cols[0].gameObject.GetComponent<ThrowableObject>();
+                    }else if(cols[0].gameObject.tag == "Player")
+                    {
+                        stunedPlayer = cols[0].gameObject.GetComponent<PlayerStun>();
+                    }
                 }
             }
         }
@@ -49,6 +57,13 @@ public class ObjectDetection : MonoBehaviour
             {
                 objekt.PickUp(holder,character);
                 controler.holding = true;
+                controler.animControl.ChangeAnimation(Animations.idleNoHand);
+                controler.animControl.HandBool(true);
+            }else if (stunedPlayer!= null)
+            {
+                Debug.Log("got player");
+                controler.holding = true;
+                stunedPlayer.PickUp(holder);
                 controler.animControl.ChangeAnimation(Animations.idleNoHand);
                 controler.animControl.HandBool(true);
             }
@@ -66,6 +81,16 @@ public class ObjectDetection : MonoBehaviour
             StartCoroutine(PickTimer());
             controler.animControl.ChangeAnimation(Animations.idleHand);
             controler.animControl.HandBool(false);
+        }else if(stunedPlayer != null)
+        {
+            controler.holding = false;
+            canPick = false;
+            stunedPlayer.Throw(direction);
+            stunedPlayer = null;
+            StartCoroutine(PickTimer());
+            controler.animControl.ChangeAnimation(Animations.idleHand);
+            controler.animControl.HandBool(false);
+
         }
     }
     IEnumerator PickTimer()
@@ -81,6 +106,12 @@ public class ObjectDetection : MonoBehaviour
         if (objekt != null)
         {
             objekt.ThrowDown();
+            StartCoroutine(PickTimer());
+        }
+        else if(stunedPlayer != null)
+        {
+            stunedPlayer.ThrownDown();
+            StartCoroutine(PickTimer());
         }
     }
     IEnumerator StartWait()
@@ -88,6 +119,7 @@ public class ObjectDetection : MonoBehaviour
         objekt = null;
         yield return new WaitForSeconds(0.1f);
         objekt = null;
+        stunedPlayer = null;
         canPick = true;
     }
 }

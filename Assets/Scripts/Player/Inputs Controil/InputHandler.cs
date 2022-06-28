@@ -61,6 +61,7 @@ public class InputHandler : MonoBehaviour
         alive = true;
         InGamePlayer = Instantiate(playerPrefab);
         InGamePlayer.stun.altar = altar;
+        InGamePlayer.stun.inputParent = this.transform;
         InGamePlayer.transform.SetParent(this.transform);
         InGamePlayer.transform.position = position.position;
         InGamePlayer.gameObject.GetComponent<SpriteRenderer>().material = mat;

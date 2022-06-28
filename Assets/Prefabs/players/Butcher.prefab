@@ -283,7 +283,7 @@ MonoBehaviour:
   cols: []
   mask:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 640
   pickTimer: 0.4
   character: 0
   canPick: 1
@@ -379,7 +379,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isStunned: 0
+  rb: {fileID: 6298515434478717209}
   altar: {fileID: 0}
+  col: {fileID: 8710139706722398037}
 --- !u!1 &6298515435878700309
 GameObject:
   m_ObjectHideFlags: 0

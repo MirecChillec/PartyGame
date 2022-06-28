@@ -9,18 +9,23 @@ public class PlayerStun : MonoBehaviour
     float baseStunTime = 0;
     int lastHitId;
     float altarPullSpeed;
-    Rigidbody2D rb;
+    public Rigidbody2D rb;
     Movement move;
     public GameObject altar;
+    public Collider2D col;
+    bool thrown;
+    public Transform inputParent { get; set; }
     private void Awake()
     {
+        thrown = false;
         sr = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
         move = GetComponent<Movement>();
     }
     private void FixedUpdate()
     {
-        if (isStunned)
+        //puling to altar
+       /* if (isStunned)
         {
             Vector3 altarDirection = altar.transform.position - transform.position;
             altarDirection = altarDirection.normalized;
@@ -31,8 +36,9 @@ public class PlayerStun : MonoBehaviour
             {
                 PlayerSacrifice();
             }
-        }
+        }*/
     }
+    //stun timers
     public void StunPlayer(int killerId, float stunTime)
     {
         if (!isStunned)
@@ -45,6 +51,7 @@ public class PlayerStun : MonoBehaviour
     }
     IEnumerator StunTimer(float timeForStun)
     {
+        this.gameObject.layer = 9;
         isStunned = true;
         move.StunAnimation();
         //throwableObjectScript.enabled = true;
@@ -57,6 +64,11 @@ public class PlayerStun : MonoBehaviour
         //throwableObjectScript.enabled = false;
         isStunned = false;
         move.animControl.ChangeAnimation(Animations.idleHand);
+        if (!thrown)
+        {
+            this.gameObject.layer = 8;
+            Release();
+        }
     }
     IEnumerator StunBlicker(float timeForStun)
     {
@@ -83,5 +95,60 @@ public class PlayerStun : MonoBehaviour
     {
         return (Vector2.Distance(new Vector2(transform.position.x, transform.position.y), new Vector2(altar.transform.position.x, altar.transform.position.y)) < 0.4) ? true : false;
     }
-
+    //throwing
+    public void Release()
+    {
+        rb.simulated = true;
+        rb.gravityScale = 1;
+        col.enabled = true;
+        transform.SetParent(inputParent);
+        move.enabled = true;
+    }
+    public void PickUp(Transform parent)
+    {
+        rb.simulated = false;
+        rb.gravityScale = 0;
+        rb.velocity = Vector2.zero;
+        move.enabled = false;
+        col.enabled = false;
+        transform.SetParent(parent);
+        transform.position = parent.position;
+    }
+    public void Throw(bool right)
+    {
+        thrown = true;
+        this.gameObject.layer = 10;
+        rb.simulated = true;
+        rb.gravityScale = 1;
+        col.enabled = true;
+        transform.SetParent(inputParent);
+        if (right)
+        {
+            rb.AddForce(new Vector3(500, 500, 0));
+        }
+        else
+        {
+            rb.AddForce(new Vector3(-500, -500, 0));
+        }
+    }
+    public void ThrownDown()
+    {
+        thrown = true;
+        this.gameObject.layer = 10;
+        rb.simulated = true;
+        rb.gravityScale = 1;
+        col.enabled = true;
+        transform.SetParent(inputParent);
+        rb.AddForce(Vector3.down * 10);
+    }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (thrown)
+        {
+            if(collision.gameObject.tag == "Altar")
+            {
+                PlayerSacrifice();
+            }
+        }
+    }
 }
