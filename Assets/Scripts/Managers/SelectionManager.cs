@@ -12,6 +12,9 @@ public class SelectionManager : MonoBehaviour
     int players = 0;
     public PlayerTypes[] playerTypes;
     public GameManager gameManager;
+
+    //pre mira
+    public GameObject UI;
     private void Awake()
     {
         foreach (SelectionMenuElement x in selctions)
@@ -65,5 +68,6 @@ public class SelectionManager : MonoBehaviour
             counDownText.SetText(x.ToString());
         }
         gameManager.StartGame();
+        UI.SetActive(true);
     }
 }
