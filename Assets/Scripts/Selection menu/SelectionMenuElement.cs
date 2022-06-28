@@ -15,6 +15,8 @@ public class SelectionMenuElement : MonoBehaviour
     int index = 0;
     public bool active { get; private set; }
     public Image image;
+    public GameObject selection;
+    public TextMeshProUGUI characterName;
     private void Start()
     {
         active = false;
@@ -26,10 +28,11 @@ public class SelectionMenuElement : MonoBehaviour
         if (!active)
         {
             active = true;
-            readyText.SetText("Unready");
+            readyText.SetText("Press space / A to ready");
             text.enabled = false;
-            image.enabled = true;
+            selection.SetActive(true);
             image.sprite = types[0].picture;
+            characterName.text = types[0].name;
         }
     }
     public void ChangeRight()
@@ -40,11 +43,14 @@ public class SelectionMenuElement : MonoBehaviour
             {
                 index += 1;
                 image.sprite = types[index].picture;
+                characterName.text = types[index].name;
+
             }
             else if(index + 1 > types.Length - 1)
             {
                 index = 0;
                 image.sprite = types[index].picture;
+                characterName.text = types[index].name;
             }
         }
     }
@@ -56,11 +62,13 @@ public class SelectionMenuElement : MonoBehaviour
             {
                 index = types.Length-1;
                 image.sprite = types[index].picture;
+                characterName.text = types[index].name;
             }
             else
             {
                 index -= 1;
                 image.sprite = types[index].picture;
+                characterName.text = types[index].name;
             }
         }
     }
@@ -68,7 +76,7 @@ public class SelectionMenuElement : MonoBehaviour
     {
         if (ready)
         {
-            readyText.SetText("Unready");
+            readyText.SetText("Press space / A to ready");
             ready = false;
         }
         else
