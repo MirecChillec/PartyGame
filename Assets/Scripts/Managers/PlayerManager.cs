@@ -36,6 +36,11 @@ public class PlayerManager : MonoBehaviour
                 playerStats.Add(new PlayerStats(activePlayers));
             }
         }
+        foreach (PlayerStats stat in playerStats)
+        {
+            stat.Spawn();
+            Debug.Log(stat.id + " " + stat.kils + " " + stat.wins + " " + stat.alive);
+        }
         start = true;
     }
     // geting numbers of players, all players even death
@@ -59,10 +64,10 @@ public class PlayerManager : MonoBehaviour
         }
     }
     //killing , despawning players
-    public void PlayerDeath(int id)
+    public void PlayerDeath(int id,int killID)
     {
         activePlayers -= 1;
-        KilledPlayer(id);
+        KilledPlayer(id,killID);
         gameMan.map.altarMan.Sacrifice();
         if (activePlayers <= 1)
         {
@@ -95,7 +100,7 @@ public class PlayerManager : MonoBehaviour
             //Debug.Log(stat.id + " "+ stat.kils +" "+ stat.wins);
         }
     }
-    public void KilledPlayer(int killerId)
+    public void KilledPlayer(int killerId,int deathID)
     {
         foreach (PlayerStats stat in playerStats)
         {
@@ -103,7 +108,11 @@ public class PlayerManager : MonoBehaviour
             {
                 stat.GetKill();
             }
-            //Debug.Log(stat.id + " " + stat.kils + " " + stat.wins);
+            if(stat.id == deathID)
+            {
+                stat.Killed();
+            }
+            Debug.Log(stat.id + " " + stat.kils + " " + stat.wins+" "+stat.alive);
         }
 
     }

@@ -71,7 +71,7 @@ public class InputHandler : MonoBehaviour
         if (InGamePlayer == null) return;
         Destroy(InGamePlayer.gameObject);
         alive = false;
-        playerMan.PlayerDeath(id);
+        playerMan.PlayerDeath(id,this.playerId);
     }
     public void PlayerDespawn()
     {

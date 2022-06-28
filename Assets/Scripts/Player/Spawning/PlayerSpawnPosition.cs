@@ -25,7 +25,6 @@ public class PlayerSpawnPosition : MonoBehaviour
     //asigning random position
     public Transform GetRandomPlayerPosition()
     {
-        print(freePositions.Count + " free");
         //checking for free positions
         if(freePositions.Count != 0)
         {

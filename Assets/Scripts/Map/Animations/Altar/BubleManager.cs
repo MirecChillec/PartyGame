@@ -10,7 +10,6 @@ public class BubleManager : MonoBehaviour
     {
         bubles = GetComponentsInChildren<Buble>(true);
         playing = true;
-        print(bubles.Length + " bubles lenght");
         StartCoroutine(PlayingBubles());
     }
     IEnumerator PlayingBubles()

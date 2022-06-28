@@ -27,7 +27,6 @@ public class GameControl : MonoBehaviour
         {
             positions.Add(map.GetRandomPlayerPosition());
         }
-        print(positions.Count);
         players.SpawnPlayers(positions,map.altar);
     }
 }
