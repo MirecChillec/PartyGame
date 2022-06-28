@@ -42,12 +42,16 @@ public class Movement : MonoBehaviour
     public float altarPullSpeed;
 
     int lastHitId;
+    public AnimationsControler animControl;
+    ObjectControl OC;
 
+    bool jumping = false;
 
     ThrowableObject throwableObjectScript;
 
     void Awake()
     {
+        OC = GetComponent<ObjectControl>();
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
 
@@ -68,6 +72,19 @@ public class Movement : MonoBehaviour
 
     void Update()
     {
+        if (jumping && dootykZeme && !isStunned)
+        {
+            LandingAnimation();
+        }
+
+        if (dootykZeme && jumping)
+        {
+            jumping = false;
+        }
+        if(jumping && rb.velocity.y <= 0.1 && !isStunned)
+        {
+            TopJumpAnimation();
+        }
         //screen wrap script called here
         Vector3 tempPosition = transform.localPosition;
         if (screenBounds.AmIOutOfBounds(tempPosition))
@@ -111,6 +128,7 @@ public class Movement : MonoBehaviour
                 }
                 rb.velocity = newVelocity;
                 //transform.localScale = new Vector3(0.3f, 0.3f, 1);
+                MoveAnimation();
             }
             else if (movingLeft)
             {
@@ -125,6 +143,7 @@ public class Movement : MonoBehaviour
                 }
                 rb.velocity = newVelocity;
                 //transform.localScale = new Vector3(-0.3f, 0.3f, 1);
+                MoveAnimation();
             }
             else
             {
@@ -166,9 +185,11 @@ public class Movement : MonoBehaviour
     void Jump()
     {
         if (rb == null) return;
+        jumping = true;
         rb.velocity = Vector2.zero;
         rb.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
         dootykZeme = false;
+        JumpAnimation();
     }
 
     //move methods
@@ -181,14 +202,14 @@ public class Movement : MonoBehaviour
                 movingLeft = false;
                 movingRight = true;
                 facingRight = true;
-                sr.flipX = true;
+                this.transform.rotation = Quaternion.Euler(0, 180, 0);
             }
             else
             {
                 movingLeft = true;
                 movingRight = false;
                 facingRight = false;
-                sr.flipX = false;
+                this.transform.rotation = Quaternion.Euler(0,0,0);
             }
         }
     }
@@ -196,25 +217,32 @@ public class Movement : MonoBehaviour
     {
         movingLeft = false;
         movingRight = false;
+        if (!isStunned)
+        {
+            StopAnimation();
+        }
     }
     //jump call
     public void OnJump()
     {
-        if (dootykZeme && !jumped && !dJumped)
+        if (!isStunned)
         {
-            Jump();
-            jumped = true;
-        }
-        else if (!dootykZeme && jumped && !dJumped)
-        {
-            Jump();
-            dJumped = true;
-        }
-        else if (!dootykZeme && !jumped && !dJumped)
-        {
-            Jump();
-            jumped = true;
-            dJumped = true;
+            if (dootykZeme && !jumped && !dJumped)
+            {
+                Jump();
+                jumped = true;
+            }
+            else if (!dootykZeme && jumped && !dJumped)
+            {
+                Jump();
+                dJumped = true;
+            }
+            else if (!dootykZeme && !jumped && !dJumped)
+            {
+                Jump();
+                jumped = true;
+                dJumped = true;
+            }
         }
     }
     //drop function
@@ -257,6 +285,7 @@ public class Movement : MonoBehaviour
     IEnumerator StunTimer(float timeForStun)
     {
         isStunned = true;
+        StunAnimation();
         //throwableObjectScript.enabled = true;
         rb.gravityScale = 0f;
 
@@ -266,6 +295,7 @@ public class Movement : MonoBehaviour
         rb.gravityScale = 1f;
         //throwableObjectScript.enabled = false;
         isStunned = false;
+        animControl.ChangeAnimation(Animations.idleHand);
     }
     IEnumerator StunBlicker(float timeForStun)
     {
@@ -283,6 +313,69 @@ public class Movement : MonoBehaviour
         }
 
     }
-
-
+    void MoveAnimation()
+    {
+        if (jumping) return;
+        if (dootykZeme)
+        {
+            if (OC.holding)
+            {
+                animControl.ChangeAnimation(Animations.walkNoHand);
+            }
+            else
+            {
+                animControl.ChangeAnimation(Animations.walkHand);
+            }
+        }
+    }
+    void StopAnimation()
+    {
+        if (jumping) return;
+        if (OC.holding)
+        {
+            animControl.ChangeAnimation(Animations.idleNoHand);
+        }
+        else
+        {
+            animControl.ChangeAnimation(Animations.idleHand);
+        }
+    }
+    void JumpAnimation()
+    {
+        if (isStunned) return;
+        if (OC.holding)
+        {
+            animControl.ChangeAnimation(Animations.jumpNoHand);
+        }
+        else
+        {
+            animControl.ChangeAnimation(Animations.jumpHand);
+        }
+    }
+    void TopJumpAnimation()
+    {
+        if (OC.holding)
+        {
+            animControl.ChangeAnimation(Animations.fallingNoHand);
+        }
+        else
+        {
+            animControl.ChangeAnimation(Animations.fallingHand);
+        }
+    }
+    void LandingAnimation()
+    {
+        if (OC.holding)
+        {
+            animControl.ChangeAnimation(Animations.landingNoHand);
+        }
+        else
+        {
+            animControl.ChangeAnimation(Animations.landingHand);
+        }
+    }
+    void StunAnimation()
+    {
+        animControl.ChangeAnimation(Animations.down);
+    }
 }

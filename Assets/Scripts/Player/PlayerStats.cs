@@ -7,6 +7,7 @@ public class PlayerStats
     public int id { get;private set; }
     public int kils { get; private set; }
     public int wins { get; private set; }
+    public bool alive { get; private set; }
     public PlayerStats(int pId)
     {
         this.id = pId;
@@ -20,5 +21,13 @@ public class PlayerStats
     public void GetKill()
     {
         kils += 1;
+    }
+    public void Spawn()
+    {
+        alive = true;
+    }
+    public void Killed()
+    {
+        alive = false;
     }
 }

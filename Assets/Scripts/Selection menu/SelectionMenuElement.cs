@@ -15,6 +15,11 @@ public class SelectionMenuElement : MonoBehaviour
     int index = 0;
     public bool active { get; private set; }
     public Image image;
+    public GameObject selection;
+    public TextMeshProUGUI characterName;
+    public Transform rightArrow;
+    public Transform leftArrow;
+    public float pressTime;
     private void Start()
     {
         active = false;
@@ -26,25 +31,30 @@ public class SelectionMenuElement : MonoBehaviour
         if (!active)
         {
             active = true;
-            readyText.SetText("Unready");
+            readyText.SetText("Press space / A to ready");
             text.enabled = false;
-            image.enabled = true;
+            selection.SetActive(true);
             image.sprite = types[0].picture;
+            characterName.text = types[0].name;
         }
     }
     public void ChangeRight()
     {
         if (active && !ready)
         {
+            StartCoroutine(Right());
             if(index < types.Length - 1)
             {
                 index += 1;
                 image.sprite = types[index].picture;
+                characterName.text = types[index].name;
+
             }
             else if(index + 1 > types.Length - 1)
             {
                 index = 0;
                 image.sprite = types[index].picture;
+                characterName.text = types[index].name;
             }
         }
     }
@@ -52,15 +62,18 @@ public class SelectionMenuElement : MonoBehaviour
     {
         if (active && !ready)
         {
+            StartCoroutine(Left());
             if (index -1 < 0)
             {
                 index = types.Length-1;
                 image.sprite = types[index].picture;
+                characterName.text = types[index].name;
             }
             else
             {
                 index -= 1;
                 image.sprite = types[index].picture;
+                characterName.text = types[index].name;
             }
         }
     }
@@ -68,7 +81,7 @@ public class SelectionMenuElement : MonoBehaviour
     {
         if (ready)
         {
-            readyText.SetText("Unready");
+            readyText.SetText("Press space / A to ready");
             ready = false;
         }
         else
@@ -84,4 +97,17 @@ public class SelectionMenuElement : MonoBehaviour
         selectionMan = selMan;
         types = selectionMan.playerTypes;
     }
+    IEnumerator Right()
+    {
+        rightArrow.localScale = new Vector3(0.5f, 0.5f, 1);
+        yield return new WaitForSeconds(pressTime);
+        rightArrow.localScale = new Vector3(1f, 1f, 1);
+    }
+    IEnumerator Left()
+    {
+        leftArrow.localScale = new Vector3(0.5f, 0.5f, 1);
+        yield return new WaitForSeconds(pressTime);
+        leftArrow.localScale = new Vector3(1f, 1f, 1);
+    }
+
 }

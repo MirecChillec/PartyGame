@@ -15,11 +15,13 @@ public class ObjectDetection : MonoBehaviour
     public LayerMask mask;
     //cas na reset na zobranie dalsieho objektu
     public float pickTimer;
+    public Character character;
     [SerializeField] private bool canPick;
     private void Start()
     {
-        canPick = true;
+        canPick = false;
         objekt = null;
+        StartCoroutine(StartWait());
     }
     private void FixedUpdate()
     {
@@ -44,7 +46,10 @@ public class ObjectDetection : MonoBehaviour
         {
             if (objekt != null)
             {
-                objekt.PickUp(this.transform);
+                objekt.PickUp(this.transform,character);
+                controler.holding = true;
+                controler.animControl.ChangeAnimation(Animations.idleNoHand);
+                controler.animControl.HandBool(true);
             }
         }
     }
@@ -52,11 +57,14 @@ public class ObjectDetection : MonoBehaviour
     {
         if (objekt != null)
         {
+            controler.holding = false;
             canPick = false;
             objekt.Throw(direction);
             //nulovanie objekt premennej inak by hrac vedel chytit hodeny objekt pocas toho ako leti
             objekt = null;
             StartCoroutine(PickTimer());
+            controler.animControl.ChangeAnimation(Animations.idleHand);
+            controler.animControl.HandBool(false);
         }
     }
     IEnumerator PickTimer()
@@ -74,5 +82,18 @@ public class ObjectDetection : MonoBehaviour
             objekt.ThrowDown();
         }
     }
-
+    IEnumerator StartWait()
+    {
+        objekt = null;
+        yield return new WaitForSeconds(0.1f);
+        objekt = null;
+        canPick = true;
+    }
+}
+public enum Character
+{
+    butcher,
+    detective,
+    nobleman,
+    ocultist
 }

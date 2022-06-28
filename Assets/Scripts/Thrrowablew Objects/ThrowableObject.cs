@@ -23,12 +23,16 @@ public class ThrowableObject : MonoBehaviour
     public bool player;
 
     public Transform spawnerPos;
+    public SpriteRenderer sr;
+    public Sprite[] sprites;
+    public Sprite baseSprite;
 
     private void Awake()
     {
         screenBounds = GameData.scrennBounds;
         rb = GetComponent<Rigidbody2D>();
-        throwArc = new Vector3(baseThrowForce / objectWeight, baseThrowForce / objectWeight, 0);
+        sr = GetComponent<SpriteRenderer>();
+        //throwArc = new Vector3(baseThrowForce / objectWeight, baseThrowForce / objectWeight, 0);
     }
     private void Update()
     {
@@ -51,6 +55,7 @@ public class ThrowableObject : MonoBehaviour
         owner = transform.parent.gameObject;
         rb.simulated = true;
         transform.parent = spawnerPos;
+        throwArc = new Vector3(baseThrowForce / objectWeight, baseThrowForce / objectWeight, 0);
         if (right)
         {
             rb.AddForce(throwArc);
@@ -59,13 +64,15 @@ public class ThrowableObject : MonoBehaviour
             rb.AddForce(new Vector3(-throwArc.x,throwArc.y,throwArc.z));
         }
         rb.gravityScale = baseGravityScale * objectWeight;
+        sr.sprite = baseSprite;
     }
-    public void PickUp(Transform player)
+    public void PickUp(Transform player,Character character)
     {
         transform.position = player.position;
         transform.position += Vector3.up * 0.2f;
         transform.parent = player;
         spawnPos.Release();
+        ChangeSprite(character);
         rb.simulated = false;
     }
     public void Init(ObjectSpawnPosition spawnPosition,ScreenBounds bounds,ObjectSpawner spawner)
@@ -86,6 +93,7 @@ public class ThrowableObject : MonoBehaviour
         transform.parent = spawnerPos;
         rb.AddForce(Vector3.down * 3f);
         rb.gravityScale = baseGravityScale * objectWeight * 3;
+        sr.sprite = baseSprite;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -103,5 +111,22 @@ public class ThrowableObject : MonoBehaviour
             }
         }
     }
-
+    void ChangeSprite(Character typ)
+    {
+        switch (typ)
+        {
+            case Character.butcher:
+                sr.sprite = sprites[0];
+                break;
+            case Character.detective:
+                sr.sprite = sprites[1];
+                break;
+            case Character.nobleman:
+                sr.sprite = sprites[2];
+                break;
+            case Character.ocultist:
+                sr.sprite = sprites[3];
+                break;
+        }
+    }
 }

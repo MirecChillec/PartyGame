@@ -9,6 +9,7 @@ public class PlayerSpawnPosition : MonoBehaviour
     public List<Transform> positions;
     public List<Transform> freePositions { get; private set; }
     public GameObject altar;
+    public AltarManger altarMan;
     int index;
     private void Awake()
     {
@@ -24,7 +25,6 @@ public class PlayerSpawnPosition : MonoBehaviour
     //asigning random position
     public Transform GetRandomPlayerPosition()
     {
-        print(freePositions.Count + " free");
         //checking for free positions
         if(freePositions.Count != 0)
         {
