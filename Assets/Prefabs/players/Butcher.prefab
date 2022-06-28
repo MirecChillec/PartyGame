@@ -130,6 +130,7 @@ GameObject:
   - component: {fileID: -5683583319358389384}
   - component: {fileID: 4731555514038877987}
   - component: {fileID: 8710139706722398037}
+  - component: {fileID: 1979446228565356922}
   m_Layer: 8
   m_Name: Butcher
   m_TagString: Player
@@ -261,10 +262,8 @@ MonoBehaviour:
     maxDepth: 0
     minNormalAngle: 0
     maxNormalAngle: 0
-  isStunned: 0
   stunCounter: 0
   baseStunTime: 0
-  altar: {fileID: 0}
   altarPullSpeed: 0
   animControl: {fileID: -5683583319358389384}
 --- !u!114 &6298515434478717212
@@ -318,6 +317,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   move: {fileID: 6298515434478717214}
   OC: {fileID: 6298515434478717215}
+  stun: {fileID: 1979446228565356922}
 --- !u!114 &-5683583319358389384
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -366,6 +366,20 @@ CapsuleCollider2D:
   m_Offset: {x: -0.63415265, y: -0.79269075}
   m_Size: {x: 4.1666236, y: 6.650388}
   m_Direction: 0
+--- !u!114 &1979446228565356922
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6298515434478717204}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 805825b2a280bc342952881524de4a8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isStunned: 0
+  altar: {fileID: 0}
 --- !u!1 &6298515435878700309
 GameObject:
   m_ObjectHideFlags: 0

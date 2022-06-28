@@ -6,4 +6,5 @@ public class PlayerControl : MonoBehaviour
 {
     public Movement move;
     public ObjectControl OC;
+    public PlayerStun stun;
 }

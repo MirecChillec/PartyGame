@@ -11,7 +11,7 @@ public class ThrowableObject : MonoBehaviour
     public int baseGravityScale;
 
     bool isThrown;
-    public Movement PM;
+    public PlayerStun PM;
     GameObject owner;
 
     Vector3 throwArc;
@@ -104,7 +104,7 @@ public class ThrowableObject : MonoBehaviour
         if (collision.gameObject.tag == "Player" && isThrown)
         {
             //Debug.Log("object is thrown and touching player");
-            PM = collision.GetComponent<Movement>();
+            PM = collision.GetComponent<PlayerStun>();
             if (owner != PM.gameObject)
             {
                 int id = owner.transform.parent.GetComponent<InputHandler>().playerId;
