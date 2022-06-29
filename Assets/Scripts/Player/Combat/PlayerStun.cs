@@ -135,14 +135,15 @@ public class PlayerStun : MonoBehaviour
         rb.simulated = true;
         rb.gravityScale = 1;
         downCol.enabled = true;
+        rb.velocity = Vector2.zero;
         transform.SetParent(inputParent);
         if (right)
         {
-            rb.AddForce(new Vector3(500, 500, 0));
+            rb.AddForce(new Vector3(2000, 500, 0));
         }
         else
         {
-            rb.AddForce(new Vector3(-20, -20, 0));
+            rb.AddForce(new Vector3(-2000, -500, 0));
         }
         StartCoroutine(GetUp());
     }
@@ -153,9 +154,10 @@ public class PlayerStun : MonoBehaviour
         this.gameObject.layer = 10;
         rb.simulated = true;
         rb.gravityScale = 1;
+        rb.velocity = Vector2.zero;
         col.enabled = true;
         transform.SetParent(inputParent);
-        rb.AddForce(Vector3.down * 10);
+        rb.AddForce(Vector3.down * 1000);
         StartCoroutine(GetUp());
     }
     private void OnCollisionEnter2D(Collision2D collision)

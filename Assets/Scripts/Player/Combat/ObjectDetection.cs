@@ -47,6 +47,11 @@ public class ObjectDetection : MonoBehaviour
                     }
                 }
             }
+            else
+            {
+                objekt = null;
+                stunedPlayer = null;
+            }
         }
     }
     public void Pick()
