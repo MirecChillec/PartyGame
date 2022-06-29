@@ -13,7 +13,9 @@ public class PlayerStun : MonoBehaviour
     Movement move;
     public GameObject altar;
     public Collider2D col;
-    bool thrown;
+    public Collider2D downCol;
+    public bool thrown { get; private set; }
+    public bool grounded { get; set; }
     public Transform inputParent { get; set; }
     private void Awake()
     {
@@ -46,31 +48,34 @@ public class PlayerStun : MonoBehaviour
             lastHitId = killerId;
             altarPullSpeed = 0.3f;
             baseStunTime += stunTime;
-            StartCoroutine(StunTimer(baseStunTime));
+            StartCoroutine(StunTimer());
         }
     }
-    IEnumerator StunTimer(float timeForStun)
+    IEnumerator StunTimer()
     {
-        this.gameObject.layer = 9;
-        isStunned = true;
-        move.StunAnimation();
-        //throwableObjectScript.enabled = true;
-        rb.gravityScale = 0f;
+        Stun();
 
-        StartCoroutine(StunBlicker(timeForStun));
-        yield return new WaitForSeconds(timeForStun);
+        StartCoroutine(StunBlicker());
+        yield return new WaitForSeconds(baseStunTime);
 
-        rb.gravityScale = 1f;
-        //throwableObjectScript.enabled = false;
-        isStunned = false;
-        move.animControl.ChangeAnimation(Animations.idleHand);
         if (!thrown)
         {
-            this.gameObject.layer = 8;
             Release();
         }
     }
-    IEnumerator StunBlicker(float timeForStun)
+    void Stun()
+    {
+        rb.gravityScale = 0f; 
+        move.isStunned = true;
+        move.StunAnimation();
+        move.enabled = false;
+        rb.velocity = Vector2.zero;
+        col.enabled = false;
+        downCol.enabled = true;
+        this.gameObject.layer = 9;
+        isStunned = true;    
+    }
+    IEnumerator StunBlicker()
     {
         Color color;
         for (int i = 0; i < 5; i++)
@@ -78,17 +83,18 @@ public class PlayerStun : MonoBehaviour
             color = sr.color;
             color.a = 0;
             sr.color = color;
-            yield return new WaitForSeconds(timeForStun / 10);
+            yield return new WaitForSeconds(baseStunTime / 10);
             color = sr.color;
             color.a = 1;
             sr.color = color;
-            yield return new WaitForSeconds(timeForStun / 10);
+            yield return new WaitForSeconds(baseStunTime / 10);
         }
     }
     public void PlayerSacrifice()
     {
         //finish player death 
         InputHandler handler = transform.parent.gameObject.GetComponent<InputHandler>();
+        StopAllCoroutines();
         handler.DestroyPlayer(lastHitId);
     }
     bool CheckAltarPosition()
@@ -98,29 +104,37 @@ public class PlayerStun : MonoBehaviour
     //throwing
     public void Release()
     {
+        print("release");
+        move.enabled = true;
+        this.gameObject.layer = 8;
+        //throwableObjectScript.enabled = false;
+        isStunned = false;
+        move.animControl.ChangeAnimation(Animations.idleHand);
+        downCol.enabled = false;
         rb.simulated = true;
         rb.gravityScale = 1;
         col.enabled = true;
+        move.isStunned = false;
+        thrown = false;
         transform.SetParent(inputParent);
-        move.enabled = true;
     }
     public void PickUp(Transform parent)
     {
+        if (!isStunned) return;
         rb.simulated = false;
         rb.gravityScale = 0;
-        rb.velocity = Vector2.zero;
-        move.enabled = false;
-        col.enabled = false;
+        //downCol.enabled = false;
         transform.SetParent(parent);
         transform.position = parent.position;
     }
     public void Throw(bool right)
     {
+        grounded = false;
         thrown = true;
         this.gameObject.layer = 10;
         rb.simulated = true;
         rb.gravityScale = 1;
-        col.enabled = true;
+        downCol.enabled = true;
         transform.SetParent(inputParent);
         if (right)
         {
@@ -128,11 +142,13 @@ public class PlayerStun : MonoBehaviour
         }
         else
         {
-            rb.AddForce(new Vector3(-500, -500, 0));
+            rb.AddForce(new Vector3(-20, -20, 0));
         }
+        StartCoroutine(GetUp());
     }
     public void ThrownDown()
     {
+        grounded = false;
         thrown = true;
         this.gameObject.layer = 10;
         rb.simulated = true;
@@ -140,6 +156,7 @@ public class PlayerStun : MonoBehaviour
         col.enabled = true;
         transform.SetParent(inputParent);
         rb.AddForce(Vector3.down * 10);
+        StartCoroutine(GetUp());
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -149,6 +166,17 @@ public class PlayerStun : MonoBehaviour
             {
                 PlayerSacrifice();
             }
+        }
+    }
+    IEnumerator GetUp()
+    {
+        while (thrown)
+        {
+            if (grounded)
+            {
+                Release();
+            }
+            yield return new WaitForSeconds(0.2f);
         }
     }
 }

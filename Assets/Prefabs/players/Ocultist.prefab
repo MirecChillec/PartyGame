@@ -130,6 +130,8 @@ GameObject:
   - component: {fileID: 5085155066427727386}
   - component: {fileID: 955025397659573679}
   - component: {fileID: 76423330670985681}
+  - component: {fileID: 7366142293833870993}
+  - component: {fileID: 5194212677967387876}
   m_Layer: 8
   m_Name: Ocultist
   m_TagString: Player
@@ -261,10 +263,8 @@ MonoBehaviour:
     maxDepth: 0
     minNormalAngle: 0
     maxNormalAngle: 0
-  isStunned: 0
   stunCounter: 0
   baseStunTime: 0
-  altar: {fileID: 0}
   altarPullSpeed: 0
   animControl: {fileID: 955025397659573679}
 --- !u!114 &6298515434478717212
@@ -284,7 +284,7 @@ MonoBehaviour:
   cols: []
   mask:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 640
   pickTimer: 0.4
   character: 3
   canPick: 1
@@ -318,6 +318,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   move: {fileID: 6298515434478717214}
   OC: {fileID: 6298515434478717215}
+  stun: {fileID: 7366142293833870993}
 --- !u!95 &5085155066427727386
 Animator:
   serializedVersion: 3
@@ -366,6 +367,39 @@ CapsuleCollider2D:
   m_Offset: {x: -0.5548835, y: -0.81911397}
   m_Size: {x: 3.7438545, y: 6.4918494}
   m_Direction: 0
+--- !u!114 &7366142293833870993
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6298515434478717204}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 805825b2a280bc342952881524de4a8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isStunned: 0
+  rb: {fileID: 6298515434478717209}
+  altar: {fileID: 0}
+  col: {fileID: 76423330670985681}
+  downCol: {fileID: 5194212677967387876}
+--- !u!70 &5194212677967387876
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6298515434478717204}
+  m_Enabled: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -2.6}
+  m_Size: {x: 9, y: 3}
+  m_Direction: 1
 --- !u!1 &6298515435878700309
 GameObject:
   m_ObjectHideFlags: 0
@@ -411,6 +445,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PM: {fileID: 6298515434478717214}
+  stun: {fileID: 7366142293833870993}
 --- !u!70 &1556751643246220620
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

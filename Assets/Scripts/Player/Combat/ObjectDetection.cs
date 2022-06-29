@@ -61,7 +61,6 @@ public class ObjectDetection : MonoBehaviour
                 controler.animControl.HandBool(true);
             }else if (stunedPlayer!= null)
             {
-                Debug.Log("got player");
                 controler.holding = true;
                 stunedPlayer.PickUp(holder);
                 controler.animControl.ChangeAnimation(Animations.idleNoHand);
