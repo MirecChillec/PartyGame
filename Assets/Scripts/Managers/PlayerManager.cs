@@ -4,15 +4,19 @@ using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
 {
-    InputHandler[] playerHandlers;
+    public InputHandler[] playerHandlers;
     //active players , number of players spawned in map
     public int activePlayers { get; internal set; }
     public Material[] playerMats;
     public GameControl gameMan;
     public float winPause;
     //player stas list
-    List<PlayerStats> playerStats;
+    public List<PlayerStats> playerStats;
     //used for adding to stats list only once
+
+    public IngameUI ingameUI;
+    //mirov script
+
     bool start = false;
     private void Awake()
     {
@@ -115,5 +119,6 @@ public class PlayerManager : MonoBehaviour
             Debug.Log(stat.id + " " + stat.kils + " " + stat.wins+" "+stat.alive);
         }
 
+        //ingameUI.Cross(deathID);
     }
 }
