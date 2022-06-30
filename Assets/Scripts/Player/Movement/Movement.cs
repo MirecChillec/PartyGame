@@ -14,7 +14,7 @@ public class Movement : MonoBehaviour
     public float fallMultiplier = 2.5f;
     public float lowerJumpMultiplier = 2f;
 
-    [SerializeField] private bool dootykZeme = false;
+    public bool dootykZeme { get; private set; }
     public GameObject GroundCheck;
 
     private bool movingRight = false;
@@ -26,7 +26,7 @@ public class Movement : MonoBehaviour
 
     public Collider2D playerCollider;
 
-    private bool jumped = false;
+    [SerializeField]private bool jumped;
     private bool dJumped = false;
     public GroundCheck gChecker;
     public ContactFilter2D filter;
@@ -42,7 +42,7 @@ public class Movement : MonoBehaviour
     public AnimationsControler animControl;
     ObjectControl OC;
 
-    bool jumping = false;
+    public bool jumping { get; private set; }
 
     ThrowableObject throwableObjectScript;
 
@@ -51,6 +51,9 @@ public class Movement : MonoBehaviour
         OC = GetComponent<ObjectControl>();
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
+        jumped = false;
+        jumping = false;
+        dootykZeme = false;
 
         facingRight = true;
 
@@ -70,16 +73,16 @@ public class Movement : MonoBehaviour
     {
         if (jumping && dootykZeme && !isStunned)
         {
-            LandingAnimation();
+            animControl.LandingAnimation();
         }
 
         if (dootykZeme && jumping)
         {
             jumping = false;
         }
-        if(jumping && rb.velocity.y <= 0.1 && !isStunned)
+        if (jumping && rb.velocity.y <= 0.1 && !isStunned)
         {
-            TopJumpAnimation();
+            animControl.TopJumpAnimation();
         }
         //checking for vertical velocity and multiplying it
         if (rb.velocity.y < 13)
@@ -112,7 +115,7 @@ public class Movement : MonoBehaviour
                 }
                 rb.velocity = newVelocity;
                 //transform.localScale = new Vector3(0.3f, 0.3f, 1);
-                MoveAnimation();
+                animControl.MoveAnimation();
             }
             else if (movingLeft)
             {
@@ -127,7 +130,7 @@ public class Movement : MonoBehaviour
                 }
                 rb.velocity = newVelocity;
                 //transform.localScale = new Vector3(-0.3f, 0.3f, 1);
-                MoveAnimation();
+                animControl.MoveAnimation();
             }
             else
             {
@@ -135,7 +138,7 @@ public class Movement : MonoBehaviour
                 newVelocity.x = 0;
                 rb.velocity = newVelocity;
             }
-        
+
             if (isFalling)
             {
                 rb.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.fixedDeltaTime;
@@ -155,7 +158,7 @@ public class Movement : MonoBehaviour
         rb.velocity = Vector2.zero;
         rb.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
         dootykZeme = false;
-        JumpAnimation();
+        animControl.JumpAnimation();
     }
 
     //move methods
@@ -175,7 +178,7 @@ public class Movement : MonoBehaviour
                 movingLeft = true;
                 movingRight = false;
                 facingRight = false;
-                this.transform.rotation = Quaternion.Euler(0,0,0);
+                this.transform.rotation = Quaternion.Euler(0, 0, 0);
             }
         }
     }
@@ -185,7 +188,7 @@ public class Movement : MonoBehaviour
         movingRight = false;
         if (!isStunned)
         {
-            StopAnimation();
+            animControl.StopAnimation();
         }
     }
     //jump call
@@ -231,67 +234,6 @@ public class Movement : MonoBehaviour
         playerCollider.enabled = false;
         yield return new WaitForSeconds(0.135f);
         playerCollider.enabled = true;
-    }
-    void MoveAnimation()
-    {
-        if (jumping) return;
-        if (dootykZeme)
-        {
-            if (OC.holding)
-            {
-                animControl.ChangeAnimation(Animations.walkNoHand);
-            }
-            else
-            {
-                animControl.ChangeAnimation(Animations.walkHand);
-            }
-        }
-    }
-    void StopAnimation()
-    {
-        if (jumping) return;
-        if (OC.holding)
-        {
-            animControl.ChangeAnimation(Animations.idleNoHand);
-        }
-        else
-        {
-            animControl.ChangeAnimation(Animations.idleHand);
-        }
-    }
-    void JumpAnimation()
-    {
-        if (isStunned) return;
-        if (OC.holding)
-        {
-            animControl.ChangeAnimation(Animations.jumpNoHand);
-        }
-        else
-        {
-            animControl.ChangeAnimation(Animations.jumpHand);
-        }
-    }
-    void TopJumpAnimation()
-    {
-        if (OC.holding)
-        {
-            animControl.ChangeAnimation(Animations.fallingNoHand);
-        }
-        else
-        {
-            animControl.ChangeAnimation(Animations.fallingHand);
-        }
-    }
-    void LandingAnimation()
-    {
-        if (OC.holding)
-        {
-            animControl.ChangeAnimation(Animations.landingNoHand);
-        }
-        else
-        {
-            animControl.ChangeAnimation(Animations.landingHand);
-        }
     }
     public void StunAnimation()
     {
