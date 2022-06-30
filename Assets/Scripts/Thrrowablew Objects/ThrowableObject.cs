@@ -113,6 +113,14 @@ public class ThrowableObject : MonoBehaviour
             }
         }
     }
+    public void Release()
+    {
+        owner = null;
+        rb.simulated = false;
+        transform.parent = spawnerPos;
+        sr.sprite = baseSprite;
+
+    }
     void ChangeSprite(Character typ)
     {
         switch (typ)

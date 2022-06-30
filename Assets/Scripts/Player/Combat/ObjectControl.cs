@@ -11,6 +11,7 @@ public class ObjectControl : MonoBehaviour
     public ObjectDetection detector;
     bool downKeybindPressed;
     public AnimationsControler animControl;
+    public bool stunned { get; set; }
     public bool holding { get; set; }
     private void Start()
     {
@@ -18,9 +19,11 @@ public class ObjectControl : MonoBehaviour
         holding = false;
         state = Throwable.idle;
         canPickUp = true;
+        stunned = false;
     }
     void PickUp()
     {
+        if (stunned) return;
         if (detector.Pick())
         {
             canPickUp = false;

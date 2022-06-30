@@ -19,6 +19,9 @@ public class PlayerStun : MonoBehaviour
     public Transform inputParent { get; set; }
     bool holding = false;
     bool blink;
+    public ObjectControl OC;
+    AnimationsControler anim;
+
     private void Awake()
     {
         blink = false;
@@ -26,6 +29,8 @@ public class PlayerStun : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
         move = GetComponent<Movement>();
+        OC = GetComponent<ObjectControl>();
+        anim = GetComponent<AnimationsControler>();
     }
     private void FixedUpdate()
     {
@@ -48,6 +53,8 @@ public class PlayerStun : MonoBehaviour
     {
         if (!isStunned)
         {
+            OC.stunned = true;
+            OC.detector.Release();
             blink = true;
             lastHitId = killerId;
             altarPullSpeed = 0.3f;
@@ -116,19 +123,37 @@ public class PlayerStun : MonoBehaviour
         {
             HoldingPlayerReset();
         }
+        anim.HandBool(false);
+        OC.stunned = false;
         blink = false;
         holding = false;
         move.enabled = true;
         this.gameObject.layer = 8;
         //throwableObjectScript.enabled = false;
         isStunned = false;
-        move.animControl.ChangeAnimation(Animations.idleHand);
+        anim.ChangeAnimation(Animations.idleHand);
         downCol.enabled = false;
         rb.simulated = true;
         rb.gravityScale = 1;
         col.enabled = true;
         move.isStunned = false;
         thrown = false;
+        transform.SetParent(inputParent);
+    }
+    public void StunRelease()
+    {
+        holding = false;
+        //throwableObjectScript.enabled = false;
+        rb.gravityScale = 0f;
+        move.isStunned = true;
+        move.StunAnimation();
+        move.enabled = false;
+        rb.velocity = Vector2.zero;
+        col.enabled = false;
+        downCol.enabled = true;
+        this.gameObject.layer = 9;
+        isStunned = true;
+        StartCoroutine(StunBlicker());
         transform.SetParent(inputParent);
     }
     public void PickUp(Transform parent)

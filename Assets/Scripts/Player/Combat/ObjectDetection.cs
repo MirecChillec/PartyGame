@@ -134,6 +134,19 @@ public class ObjectDetection : MonoBehaviour
     {
         stunedPlayer = null;
     }
+    public void Release()
+    {
+        controler.holding = false;
+        if(objekt != null)
+        {
+            objekt.Release();
+            objekt = null;
+        }else if(stunedPlayer != null)
+        {
+            stunedPlayer.StunRelease();
+            stunedPlayer = null;
+        }
+    }
 }
 public enum Character
 {
