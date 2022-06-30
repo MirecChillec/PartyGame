@@ -26,52 +26,55 @@ public class ObjectDetection : MonoBehaviour
         stunedPlayer = null;
         StartCoroutine(StartWait());
     }
-    private void FixedUpdate()
+    private bool CheckObject()
     {
         //ak moze zobrat objekt
-        if (canPick)
+        //detekcia objectov
+        cols = Physics2D.OverlapBoxAll(playerColider.bounds.center, playerColider.bounds.size, 0, mask);
+        if (cols.Length != 0)
         {
-            //detekcia objectov
-            cols = Physics2D.OverlapBoxAll(playerColider.bounds.center, playerColider.bounds.size, 0, mask);
-            if (cols.Length != 0)
+            if (controler.state == Throwable.idle)
             {
-                if (controler.state == Throwable.idle)
+                //ziskanie thowable skriptu na volanie funkcie na hadzanie
+                if (cols[0].gameObject.tag == "Throwable")
                 {
-                    //ziskanie thowable skriptu na volanie funkcie na hadzanie
-                    if (cols[0].gameObject.tag == "Throwable")
-                    {
-                        objekt = cols[0].gameObject.GetComponent<ThrowableObject>();
-                    }else if(cols[0].gameObject.tag == "Player")
-                    {
-                        stunedPlayer = cols[0].gameObject.GetComponent<PlayerStun>();
-                    }
+                    objekt = cols[0].gameObject.GetComponent<ThrowableObject>();
+                    return true;
+                }
+                else if (cols[0].gameObject.tag == "Player")
+                {
+                    stunedPlayer = cols[0].gameObject.GetComponent<PlayerStun>();
+                    return true;
                 }
             }
-            else
-            {
-                objekt = null;
-                stunedPlayer = null;
-            }
         }
+        return false;
     }
-    public void Pick()
+    public bool Pick()
     {
         if (canPick)
         {
-            if (objekt != null)
+            if (CheckObject())
             {
-                objekt.PickUp(holder,character);
-                controler.holding = true;
-                controler.animControl.ChangeAnimation(Animations.idleNoHand);
-                controler.animControl.HandBool(true);
-            }else if (stunedPlayer!= null)
-            {
-                controler.holding = true;
-                stunedPlayer.PickUp(holder);
-                controler.animControl.ChangeAnimation(Animations.idleNoHand);
-                controler.animControl.HandBool(true);
+                if (objekt != null)
+                {
+                    objekt.PickUp(holder, character);
+                    controler.holding = true;
+                    controler.animControl.ChangeAnimation(Animations.idleNoHand);
+                    controler.animControl.HandBool(true);
+                    return true;
+                }
+                else if (stunedPlayer != null)
+                {
+                    controler.holding = true;
+                    stunedPlayer.PickUp(holder);
+                    controler.animControl.ChangeAnimation(Animations.idleNoHand);
+                    controler.animControl.HandBool(true);
+                    return true;
+                }
             }
         }
+        return false;
     }
     public void Throw(bool direction)
     {
@@ -79,13 +82,14 @@ public class ObjectDetection : MonoBehaviour
         {
             controler.holding = false;
             canPick = false;
-            objekt.Throw(direction,this.gameObject);
+            objekt.Throw(direction, this.gameObject);
             //nulovanie objekt premennej inak by hrac vedel chytit hodeny objekt pocas toho ako leti
             objekt = null;
             StartCoroutine(PickTimer());
             controler.animControl.ChangeAnimation(Animations.idleHand);
             controler.animControl.HandBool(false);
-        }else if(stunedPlayer != null)
+        }
+        else if (stunedPlayer != null)
         {
             controler.holding = false;
             canPick = false;
@@ -112,7 +116,7 @@ public class ObjectDetection : MonoBehaviour
             objekt.ThrowDown();
             StartCoroutine(PickTimer());
         }
-        else if(stunedPlayer != null)
+        else if (stunedPlayer != null)
         {
             stunedPlayer.ThrownDown();
             StartCoroutine(PickTimer());

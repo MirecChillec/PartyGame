@@ -21,9 +21,11 @@ public class ObjectControl : MonoBehaviour
     }
     void PickUp()
     {
-        canPickUp = false;
-        state = Throwable.holding;
-        detector.Pick();
+        if (detector.Pick())
+        {
+            canPickUp = false;
+            state = Throwable.holding;
+        }
     }
     void Throw()
     {

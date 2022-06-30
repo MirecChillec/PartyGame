@@ -17,6 +17,7 @@ public class PlayerStun : MonoBehaviour
     public bool thrown { get; private set; }
     public bool grounded { get; set; }
     public Transform inputParent { get; set; }
+    bool holding = false;
     private void Awake()
     {
         thrown = false;
@@ -104,7 +105,16 @@ public class PlayerStun : MonoBehaviour
     //throwing
     public void Release()
     {
-        print("release");
+        if (holding)
+        {
+            GameObject holdingPlayer = transform.parent.transform.parent.gameObject;
+            AnimationsControler anim = holdingPlayer.GetComponent<AnimationsControler>();
+            anim.ChangeAnimation(Animations.idleHand);
+            anim.HandBool(false);
+            ObjectControl OC = holdingPlayer.GetComponent<ObjectControl>();
+            OC.holding = false;
+        }
+        holding = false;
         move.enabled = true;
         this.gameObject.layer = 8;
         //throwableObjectScript.enabled = false;
@@ -121,6 +131,7 @@ public class PlayerStun : MonoBehaviour
     public void PickUp(Transform parent)
     {
         if (!isStunned) return;
+        holding = true;
         rb.simulated = false;
         rb.gravityScale = 0;
         //downCol.enabled = false;
