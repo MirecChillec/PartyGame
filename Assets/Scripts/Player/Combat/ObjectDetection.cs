@@ -130,6 +130,10 @@ public class ObjectDetection : MonoBehaviour
         stunedPlayer = null;
         canPick = true;
     }
+    public void PlayerReset()
+    {
+        stunedPlayer = null;
+    }
 }
 public enum Character
 {

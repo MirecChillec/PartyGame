@@ -132,6 +132,7 @@ GameObject:
   - component: {fileID: 4736383664970016481}
   - component: {fileID: 8692783605340022677}
   - component: {fileID: 2158547086871833754}
+  - component: {fileID: -5238879546179921710}
   m_Layer: 8
   m_Name: Nobleman
   m_TagString: Player
@@ -247,7 +248,6 @@ MonoBehaviour:
   dootykZeme: 0
   GroundCheck: {fileID: 6298515435878700309}
   playerCollider: {fileID: 4736383664970016481}
-  screenBounds: {fileID: 0}
   gChecker: {fileID: 6298515435878700314}
   filter:
     useTriggers: 0
@@ -400,6 +400,19 @@ MonoBehaviour:
   altar: {fileID: 0}
   col: {fileID: 4736383664970016481}
   downCol: {fileID: 8692783605340022677}
+--- !u!114 &-5238879546179921710
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6298515434478717204}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fd862b4234d1584f84b1af3fca0354e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  screenBounds: {fileID: 0}
 --- !u!1 &6298515435878700309
 GameObject:
   m_ObjectHideFlags: 0

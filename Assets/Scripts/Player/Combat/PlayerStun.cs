@@ -18,8 +18,10 @@ public class PlayerStun : MonoBehaviour
     public bool grounded { get; set; }
     public Transform inputParent { get; set; }
     bool holding = false;
+    bool blink;
     private void Awake()
     {
+        blink = false;
         thrown = false;
         sr = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
@@ -46,6 +48,7 @@ public class PlayerStun : MonoBehaviour
     {
         if (!isStunned)
         {
+            blink = true;
             lastHitId = killerId;
             altarPullSpeed = 0.3f;
             baseStunTime += stunTime;
@@ -89,6 +92,10 @@ public class PlayerStun : MonoBehaviour
             color.a = 1;
             sr.color = color;
             yield return new WaitForSeconds(baseStunTime / 10);
+            if (!blink)
+            {
+                break;
+            }
         }
     }
     public void PlayerSacrifice()
@@ -107,13 +114,9 @@ public class PlayerStun : MonoBehaviour
     {
         if (holding)
         {
-            GameObject holdingPlayer = transform.parent.transform.parent.gameObject;
-            AnimationsControler anim = holdingPlayer.GetComponent<AnimationsControler>();
-            anim.ChangeAnimation(Animations.idleHand);
-            anim.HandBool(false);
-            ObjectControl OC = holdingPlayer.GetComponent<ObjectControl>();
-            OC.holding = false;
+            HoldingPlayerReset();
         }
+        blink = false;
         holding = false;
         move.enabled = true;
         this.gameObject.layer = 8;
@@ -140,6 +143,9 @@ public class PlayerStun : MonoBehaviour
     }
     public void Throw(bool right)
     {
+        HoldingPlayerReset();
+        blink = false;
+        holding = false;
         grounded = false;
         thrown = true;
         this.gameObject.layer = 10;
@@ -160,6 +166,9 @@ public class PlayerStun : MonoBehaviour
     }
     public void ThrownDown()
     {
+        HoldingPlayerReset();
+        blink = false;
+        holding = false;
         grounded = false;
         thrown = true;
         this.gameObject.layer = 10;
@@ -191,5 +200,15 @@ public class PlayerStun : MonoBehaviour
             }
             yield return new WaitForSeconds(0.2f);
         }
+    }
+    void HoldingPlayerReset()
+    {
+        GameObject holdingPlayer = transform.parent.transform.parent.gameObject;
+        AnimationsControler anim = holdingPlayer.GetComponent<AnimationsControler>();
+        anim.ChangeAnimation(Animations.idleHand);
+        anim.HandBool(false);
+        ObjectControl OC = holdingPlayer.GetComponent<ObjectControl>();
+        OC.holding = false;
+        OC.detector.PlayerReset();
     }
 }

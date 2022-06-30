@@ -26,8 +26,6 @@ public class Movement : MonoBehaviour
 
     public Collider2D playerCollider;
 
-    public ScreenBounds screenBounds;
-
     private bool jumped = false;
     private bool dJumped = false;
     public GroundCheck gChecker;
@@ -66,7 +64,6 @@ public class Movement : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
         facingRight = true;
-        screenBounds = GameData.scrennBounds;
     }
 
     void Update()
@@ -84,18 +81,6 @@ public class Movement : MonoBehaviour
         {
             TopJumpAnimation();
         }
-        //screen wrap script called here
-        Vector3 tempPosition = transform.localPosition;
-        if (screenBounds.AmIOutOfBounds(tempPosition))
-        {
-            Vector2 newPosition = screenBounds.CalculateWrappedPosition(tempPosition);
-            transform.position = newPosition;
-        }
-        else
-        {
-            transform.position = tempPosition;
-        }
-
         //checking for vertical velocity and multiplying it
         if (rb.velocity.y < 13)
         {

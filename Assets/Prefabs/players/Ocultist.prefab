@@ -132,6 +132,7 @@ GameObject:
   - component: {fileID: 76423330670985681}
   - component: {fileID: 7366142293833870993}
   - component: {fileID: 5194212677967387876}
+  - component: {fileID: 2410145903126398308}
   m_Layer: 8
   m_Name: Ocultist
   m_TagString: Player
@@ -247,7 +248,6 @@ MonoBehaviour:
   dootykZeme: 0
   GroundCheck: {fileID: 6298515435878700309}
   playerCollider: {fileID: 76423330670985681}
-  screenBounds: {fileID: 0}
   gChecker: {fileID: 6298515435878700314}
   filter:
     useTriggers: 0
@@ -400,6 +400,19 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: -2.6}
   m_Size: {x: 9, y: 3}
   m_Direction: 1
+--- !u!114 &2410145903126398308
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6298515434478717204}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fd862b4234d1584f84b1af3fca0354e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  screenBounds: {fileID: 0}
 --- !u!1 &6298515435878700309
 GameObject:
   m_ObjectHideFlags: 0
