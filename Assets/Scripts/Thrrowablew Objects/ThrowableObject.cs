@@ -29,6 +29,7 @@ public class ThrowableObject : MonoBehaviour
 
     public float stunTime;
 
+    public ObjectFaling faling;
     private void Awake()
     {
         screenBounds = GameData.scrennBounds;
@@ -70,6 +71,7 @@ public class ThrowableObject : MonoBehaviour
     }
     public void PickUp(Transform player,Character character)
     {
+        faling.Stop();
         transform.position = player.position;
         transform.position += Vector3.up * 0.2f;
         transform.parent = player;
@@ -115,11 +117,12 @@ public class ThrowableObject : MonoBehaviour
     }
     public void Release()
     {
+        transform.rotation = Quaternion.Euler(0, 0, 0);
         owner = null;
         rb.simulated = false;
         transform.parent = spawnerPos;
         sr.sprite = baseSprite;
-
+        faling.Fall();
     }
     void ChangeSprite(Character typ)
     {

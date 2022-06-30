@@ -6,17 +6,35 @@ public class ObjectFaling : MonoBehaviour
 {
     public Collider2D groundCol;
     Rigidbody2D rb;
+    Vector3 ofset;
+    GameObject parent;
+    bool faling = true;
     private void Awake()
     {
-        rb = GetComponent<Rigidbody2D>();
+        parent = transform.parent.gameObject;
+        ofset = parent.transform.position - transform.position; 
+        rb = transform.parent.gameObject.GetComponent<Rigidbody2D>();
+        rb.gravityScale = 1;
     }
-    public void Release()
+    private void FixedUpdate()
     {
+        if (faling)
+        {
+            parent.transform.position = transform.position + ofset;
+        }
+    }
+    public void Fall()
+    {
+        rb.velocity = Vector3.zero;
         groundCol.enabled = true;
         rb.gravityScale = 1;
+        faling = true;
+        rb.simulated = true;
     }
     public void Stop()
     {
+        faling = false;
+        rb.velocity = Vector3.zero;
         rb.gravityScale = 0;
         groundCol.enabled = false;
     }
@@ -24,8 +42,7 @@ public class ObjectFaling : MonoBehaviour
     {
         if(collision.gameObject.tag == "Ground")
         {
-            rb.gravityScale = 0;
-            groundCol.enabled = false;
+            Stop();
         }
     }
 }
