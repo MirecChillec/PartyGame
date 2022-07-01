@@ -16,6 +16,7 @@ public class GameControl : MonoBehaviour
     {
         if(map != null)
         {
+            //SEM PIS
             Destroy(map.gameObject);
         }
         map = Instantiate(maps[Random.Range(0,maps.Length)]);
