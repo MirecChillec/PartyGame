@@ -77,6 +77,9 @@ public class PlayerManager : MonoBehaviour
         gameMan.map.altarMan.Sacrifice();
         if (activePlayers <= 1)
         {
+            print("caling");
+            ingameUI.gameObject.SetActive(true);
+            ingameUI.EndGame();
             StartCoroutine(WinTimer());
         }
     }
@@ -90,7 +93,6 @@ public class PlayerManager : MonoBehaviour
     //win pause
     IEnumerator WinTimer()
     {
-        ingameUI.EndGame();
         yield return new WaitForSeconds(winPause);
         Despawn();
         gameMan.ChangeMap();

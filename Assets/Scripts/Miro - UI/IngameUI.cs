@@ -67,14 +67,12 @@ public class IngameUI : MonoBehaviour
         }
     }
 
-    public void Cross(int id)
-    {
-
-    }
-
     public void EndGame()
     {
+        print("won ");
         endGame.SetActive(true);
+        print(endGame.active + " active");
+        print(numberOfPlayers + "player num");
         for (int i = 0; i < numberOfPlayers; i++)
         {
             if (playerManager.playerStats[i].alive)

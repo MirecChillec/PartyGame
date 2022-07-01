@@ -296,7 +296,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 450, y: -122}
-  m_SizeDelta: {x: 400, y: 200}
+  m_SizeDelta: {x: 760, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6181929607323500784
 CanvasRenderer:
@@ -326,7 +326,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Some info
+  m_text: "Owner of the butchery on the main street. \nHe secretly processes and
+    sells the meat of the cult\u2019s sacrifices. \nFormer serial killer, he is a
+    sadistic old man. \r\n\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d52a3da6db66d7545addc3364b7c074c, type: 2}
   m_sharedMaterial: {fileID: 2654599546204205431, guid: d52a3da6db66d7545addc3364b7c074c, type: 2}
@@ -353,8 +355,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 40
-  m_fontSizeBase: 40
+  m_fontSize: 36
+  m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
