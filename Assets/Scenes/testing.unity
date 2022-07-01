@@ -364,6 +364,7 @@ MonoBehaviour:
   maps:
   - {fileID: 3655477795777862505, guid: c0bf8ce13ccf91b4989e09216ea2bb2c, type: 3}
   - {fileID: 1802307901841477101, guid: c51b2c54d08c07f44bc16dff7cbbfa03, type: 3}
+  - {fileID: 6677851490740679395, guid: 9605ec3e3a795494a9741fa73b185e4f, type: 3}
   players: {fileID: 1157862533}
 --- !u!1001 &386615547
 PrefabInstance:
