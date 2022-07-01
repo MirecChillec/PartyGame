@@ -28,6 +28,7 @@ public class SelectionMenuElement : MonoBehaviour
 
     public void Activate()
     {
+        if (GameData.sceneManager.loading) return;
         if (!active)
         {
             active = true;
