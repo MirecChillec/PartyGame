@@ -60,11 +60,11 @@ public class IngameUI : MonoBehaviour
 
     void Update()
     {
-        for (int i = 0; i < numberOfPlayers; i++)
-        {
-            wins[i].GetComponent<TextMeshProUGUI>().text = playerManager.playerStats[i].wins.ToString() + " wins!";
-            kills[i].GetComponent<TextMeshProUGUI>().text = playerManager.playerStats[i].kils.ToString();
-        }
+        //for (int i = 0; i < numberOfPlayers; i++)
+        //{
+        //    wins[i].GetComponent<TextMeshProUGUI>().text = playerManager.playerStats[i].wins.ToString() + " wins!";
+        //    kills[i].GetComponent<TextMeshProUGUI>().text = playerManager.playerStats[i].kils.ToString();
+        //}
     }
 
     public void Cross(int id)
