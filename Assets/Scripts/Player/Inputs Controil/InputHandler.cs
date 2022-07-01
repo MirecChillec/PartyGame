@@ -11,6 +11,7 @@ public class InputHandler : MonoBehaviour
     public PlayerControl InGamePlayer;
     PlayerManager playerMan;
     bool alive;
+    bool stoped = false;
     public int playerId { get; internal set; } 
     private void Awake()
     {
@@ -30,6 +31,7 @@ public class InputHandler : MonoBehaviour
     //Selecting UI Controls
     public void SelectingChange(InputAction.CallbackContext ctx)
     {
+        if (stoped) return;
         if (ctx.started)
         {
             if (!selection.active)
@@ -49,6 +51,7 @@ public class InputHandler : MonoBehaviour
     }
     public void CorfirmSlecrtion(InputAction.CallbackContext ctx)
     {
+        if (stoped) return;
         if (ctx.started)
         {
             playerPrefab = selection.Ready();
@@ -96,6 +99,8 @@ public class InputHandler : MonoBehaviour
     //Game controls
     public void Move(InputAction.CallbackContext ctx)
     {
+        if (stoped) return;
+
         if (CheckInGamePlayer() && ctx.performed)
         {
             InGamePlayer.move.OnMove(ctx.ReadValue<float>());
@@ -107,6 +112,8 @@ public class InputHandler : MonoBehaviour
     }
     public void Jump(InputAction.CallbackContext ctx)
     {
+        if (stoped) return;
+
         if (CheckInGamePlayer() && ctx.started)
         {
             InGamePlayer.move.OnJump();
@@ -114,6 +121,7 @@ public class InputHandler : MonoBehaviour
     }
     public void Drop(InputAction.CallbackContext ctx)
     {
+        if (stoped) return;
         if (CheckInGamePlayer() && ctx.performed)
         {
             InGamePlayer.OC.OnDown();
@@ -124,6 +132,7 @@ public class InputHandler : MonoBehaviour
     }
     public void Action(InputAction.CallbackContext ctx)
     {
+        if (stoped) return;
         if (CheckInGamePlayer() && ctx.started)
         {
             InGamePlayer.OC.OnAction();
@@ -134,5 +143,12 @@ public class InputHandler : MonoBehaviour
     {
         if (InGamePlayer == null) return false;
         return true;
+    }
+    public void Pause(InputAction.CallbackContext ctx)
+    {
+        if (ctx.started)
+        {
+           stoped = playerMan.PauseGame();
+        }
     }
 }

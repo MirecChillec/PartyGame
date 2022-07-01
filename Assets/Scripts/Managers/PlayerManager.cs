@@ -14,6 +14,8 @@ public class PlayerManager : MonoBehaviour
     List<PlayerStats> playerStats;
     //used for adding to stats list only once
     bool start = false;
+
+    public PauseMenu pauseMenu;
     private void Awake()
     {
         playerStats = new List<PlayerStats>();
@@ -115,5 +117,9 @@ public class PlayerManager : MonoBehaviour
             Debug.Log(stat.id + " " + stat.kils + " " + stat.wins+" "+stat.alive);
         }
 
+    }
+    public bool PauseGame()
+    {
+        return pauseMenu.Pause();
     }
 }

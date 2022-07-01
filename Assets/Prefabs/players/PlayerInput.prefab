@@ -153,6 +153,38 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 1d54e651-b5dc-413a-8fbe-e5a5bcca638e
     m_ActionName: UI/Ready[/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4120886074947569993}
+        m_TargetAssemblyTypeName: InputHandler, Assembly-CSharp
+        m_MethodName: Pause
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 3946c579-04a4-4520-a5e2-674bc1f7aa5e
+    m_ActionName: Game/Pause[/Keyboard/escape]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4120886074947569993}
+        m_TargetAssemblyTypeName: InputHandler, Assembly-CSharp
+        m_MethodName: Pause
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 2cf8fc7a-021e-4a03-b448-f2999229fe5f
+    m_ActionName: UI/Pause[/Keyboard/escape]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: UI
@@ -170,3 +202,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b22675b55dcc8c2469809dfa7addf7d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  InGamePlayer: {fileID: 0}
