@@ -6,6 +6,8 @@ public class GameControl : MonoBehaviour
 {
     public PlayerSpawnPosition[] maps;
     public PlayerManager players;
+
+    public GameObject endscreen;
     public PlayerSpawnPosition map { get; private set; }
     void Start()
     {
@@ -16,6 +18,7 @@ public class GameControl : MonoBehaviour
     {
         if(map != null)
         {
+            endscreen.SetActive(false);
             Destroy(map.gameObject);
         }
         map = Instantiate(maps[Random.Range(0,maps.Length)]);
