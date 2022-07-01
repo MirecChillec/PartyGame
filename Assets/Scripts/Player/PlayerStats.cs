@@ -8,11 +8,13 @@ public class PlayerStats
     public int kils { get; private set; }
     public int wins { get; private set; }
     public bool alive { get; private set; }
-    public PlayerStats(int pId)
+    public player typ;
+    public PlayerStats(int pId, player type)
     {
         this.id = pId;
         this.kils = 0;
         this.wins = 0;
+        this.typ = type;
     }
     public void Won()
     {
@@ -30,4 +32,10 @@ public class PlayerStats
     {
         alive = false;
     }
+}
+public enum player { 
+    butcher,
+    detective,
+    ocultist,
+    nobleman
 }

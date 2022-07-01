@@ -151,4 +151,18 @@ public class InputHandler : MonoBehaviour
            stoped = playerMan.PauseGame();
         }
     }
+    public player GetT()
+    {
+        switch (selection.selection.name) {
+            case "Butcher":
+                return player.butcher;
+            case "Detective":
+                return player.detective;
+            case "Nobleman":
+                return player.nobleman;
+            case "Ocultist":
+                return player.ocultist;
+        }
+        return player.butcher;
+    }
 }

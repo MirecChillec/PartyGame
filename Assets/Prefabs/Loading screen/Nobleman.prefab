@@ -126,7 +126,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2989e1c826a57742b025fb4d646de54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stayTime: 2
+  stayTime: 3.5
 --- !u!1 &6181929606218143916
 GameObject:
   m_ObjectHideFlags: 0
@@ -192,7 +192,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Butcher
+  m_text: Noblemam
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d52a3da6db66d7545addc3364b7c074c, type: 2}
   m_sharedMaterial: {fileID: 2654599546204205431, guid: d52a3da6db66d7545addc3364b7c074c, type: 2}

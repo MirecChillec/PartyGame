@@ -210,7 +210,7 @@ public class PlayerStun : MonoBehaviour
         rb.velocity = Vector2.zero;
         col.enabled = true;
         transform.SetParent(inputParent);
-        rb.AddForce(Vector3.down * 1000);
+        rb.AddForce(Vector3.down * 2000);
         StartCoroutine(GetUp());
     }
     private void OnCollisionEnter2D(Collision2D collision)

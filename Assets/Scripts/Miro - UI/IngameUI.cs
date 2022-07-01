@@ -69,7 +69,6 @@ public class IngameUI : MonoBehaviour
 
     public void EndGame()
     {
-        print("won ");
         endGame.SetActive(true);
         print(endGame.active + " active");
         print(numberOfPlayers + "player num");

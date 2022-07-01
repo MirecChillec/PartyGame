@@ -18,6 +18,8 @@ public class PlayerManager : MonoBehaviour
     //mirov script
 
     bool start = false;
+    public GameObject WinScreen;
+    public bool won = false;
 
     public PauseMenu pauseMenu;
     private void Awake()
@@ -39,7 +41,7 @@ public class PlayerManager : MonoBehaviour
             playerHandlers[i].SetId(activePlayers);
             if (!start)
             {
-                playerStats.Add(new PlayerStats(activePlayers));
+                playerStats.Add(new PlayerStats(activePlayers,playerHandlers[i].GetT()));
             }
         }
         foreach (PlayerStats stat in playerStats)
@@ -77,10 +79,29 @@ public class PlayerManager : MonoBehaviour
         gameMan.map.altarMan.Sacrifice();
         if (activePlayers <= 1)
         {
-            print("caling");
-            ingameUI.gameObject.SetActive(true);
-            ingameUI.EndGame();
-            StartCoroutine(WinTimer());
+            foreach (PlayerStats stat in playerStats)
+            {
+                if (stat.id == id)
+                {
+                    stat.Won();
+                }
+                //Debug.Log(stat.id + " "+ stat.kils +" "+ stat.wins);
+            }
+            if (CheckWin())
+            {
+                ingameUI.gameObject.SetActive(false);
+                won = true;
+                WinScreen.SetActive(true);
+                print("won");
+                WinScreen.gameObject.GetComponent<WonScreen>().ShowResults(playerStats);
+                return;
+            }
+            else
+            {
+                ingameUI.gameObject.SetActive(true);
+                ingameUI.EndGame();
+                StartCoroutine(WinTimer());
+            }
         }
     }
     public void Despawn()
@@ -100,14 +121,14 @@ public class PlayerManager : MonoBehaviour
     //stat manipulation
     public void WinGame(int id)
     {
-        foreach(PlayerStats stat in playerStats)
-        {
-            if(stat.id == id)
-            {
-                stat.Won();
-            }
-            //Debug.Log(stat.id + " "+ stat.kils +" "+ stat.wins);
-        }
+        //foreach(PlayerStats stat in playerStats)
+        //{
+        //    if(stat.id == id)
+        //    {
+        //        stat.Won();
+        //    }
+        //    //Debug.Log(stat.id + " "+ stat.kils +" "+ stat.wins);
+        //}
     }
     public void KilledPlayer(int killerId,int deathID)
     {
@@ -121,7 +142,6 @@ public class PlayerManager : MonoBehaviour
             {
                 stat.Killed();
             }
-            Debug.Log(stat.id + " " + stat.kils + " " + stat.wins+" "+stat.alive);
         }
 
         //ingameUI.Cross(deathID);
@@ -136,5 +156,16 @@ public class PlayerManager : MonoBehaviour
         {
             han.stoped = false;
         }
+    }
+    bool CheckWin()
+    {
+        foreach (PlayerStats stat in playerStats)
+        {
+            if (stat.wins >= 3)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 }

@@ -9,6 +9,7 @@ public class PauseMenu : MonoBehaviour
     public PlayerManager PM;
     public bool Pause()
     {
+        if (PM.won) return false;
         bool stoped = false;
         if (paused)
         {
@@ -26,6 +27,7 @@ public class PauseMenu : MonoBehaviour
     }
     public void Quit()
     {
+        Time.timeScale = 1;
         GameData.sceneManager.LoadScene("testing", "MainMenu");
     }
     public void Continue()
