@@ -11,7 +11,7 @@ public class InputHandler : MonoBehaviour
     public PlayerControl InGamePlayer;
     PlayerManager playerMan;
     bool alive;
-    bool stoped = false;
+    public bool stoped = false;
     public int playerId { get; internal set; } 
     private void Awake()
     {

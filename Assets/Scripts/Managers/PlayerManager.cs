@@ -122,4 +122,11 @@ public class PlayerManager : MonoBehaviour
     {
         return pauseMenu.Pause();
     }
+    public void UnPause()
+    {
+        foreach(InputHandler han in playerHandlers)
+        {
+            han.stoped = false;
+        }
+    }
 }

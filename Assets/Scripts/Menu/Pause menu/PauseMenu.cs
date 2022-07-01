@@ -6,6 +6,7 @@ public class PauseMenu : MonoBehaviour
 {
     public BaseScren screns;
     bool paused = false;
+    public PlayerManager PM;
     public bool Pause()
     {
         bool stoped = false;
@@ -22,5 +23,14 @@ public class PauseMenu : MonoBehaviour
         }
         paused = !paused;
         return stoped;
+    }
+    public void Quit()
+    {
+        GameData.sceneManager.LoadScene("testing", "MainMenu");
+    }
+    public void Continue()
+    {
+        Pause();
+        PM.UnPause();
     }
 }
