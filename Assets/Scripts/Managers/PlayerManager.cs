@@ -88,7 +88,7 @@ public class PlayerManager : MonoBehaviour
     //win pause
     IEnumerator WinTimer()
     {
-        //SEM PIS
+        ingameUI.EndGame();
         yield return new WaitForSeconds(winPause);
         Despawn();
         gameMan.ChangeMap();

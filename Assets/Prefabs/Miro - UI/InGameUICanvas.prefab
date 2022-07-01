@@ -472,9 +472,19 @@ MonoBehaviour:
   - {fileID: 8616219309839791455}
   - {fileID: 5676003665371584784}
   lines: []
-  numberOfPlayers: 0
-  endGame: {fileID: 0}
-  endGameText: {fileID: 0}
+  numberOfPlayers: 4
+  endGame: {fileID: 5676003664987125621}
+  endGameText: {fileID: 5676003664866805556}
+  names:
+  - Player 1
+  - Player 2
+  - Player 3
+  - Player 4
+  colors:
+  - {r: 0.23529413, g: 0.8941177, b: 0.23529413, a: 1}
+  - {r: 1, g: 0.20392159, b: 0.12941177, a: 1}
+  - {r: 0.12941177, g: 0.70980394, b: 1, a: 1}
+  - {r: 1, g: 0.83921576, b: 0.027450982, a: 1}
 --- !u!1 &5676003664866805556
 GameObject:
   m_ObjectHideFlags: 0

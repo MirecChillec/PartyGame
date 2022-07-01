@@ -15,6 +15,9 @@ public class IngameUI : MonoBehaviour
     public GameObject endGame;
     public GameObject endGameText;
 
+    public string[] names = { "Player 1", "Player 2", "Player 3", "Player 4" };
+    public Color[] colors = { new Color(60, 228, 60), new Color(255, 52, 33), new Color(33, 181, 255), new Color(255, 217, 7) };
+
     void Awake()
     {
         players[0].gameObject.SetActive(false);
@@ -59,7 +62,7 @@ public class IngameUI : MonoBehaviour
     {
         for (int i = 0; i < numberOfPlayers; i++)
         {
-            wins[i].GetComponent<TextMeshProUGUI>().text = playerManager.playerStats[i].wins.ToString();
+            wins[i].GetComponent<TextMeshProUGUI>().text = playerManager.playerStats[i].wins.ToString() + " wins!";
             kills[i].GetComponent<TextMeshProUGUI>().text = playerManager.playerStats[i].kils.ToString();
         }
     }
@@ -71,11 +74,13 @@ public class IngameUI : MonoBehaviour
 
     public void EndGame()
     {
+        endGame.SetActive(true);
         for (int i = 0; i < numberOfPlayers; i++)
         {
             if (playerManager.playerStats[i].alive)
             {
-
+                endGameText.GetComponent<TextMeshProUGUI>().text = names[i];
+                endGameText.GetComponent<TextMeshProUGUI>().color = colors[i]; 
             }
         }
     }
