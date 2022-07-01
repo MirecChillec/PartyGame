@@ -215,10 +215,6 @@ public class Movement : MonoBehaviour
         }
     }
     //drop function
-    public void OnDrop()
-    {
-        StartCoroutine(DropTimer());
-    }
     public void JumpRest()
     {
         jumped = false;
@@ -228,12 +224,6 @@ public class Movement : MonoBehaviour
     public void DisableJump()
     {
         dootykZeme = false;
-    }
-    IEnumerator DropTimer()
-    {
-        playerCollider.enabled = false;
-        yield return new WaitForSeconds(0.135f);
-        playerCollider.enabled = true;
     }
     public void StunAnimation()
     {

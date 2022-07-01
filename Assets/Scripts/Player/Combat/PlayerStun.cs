@@ -20,7 +20,11 @@ public class PlayerStun : MonoBehaviour
     bool holding = false;
     bool blink;
     public ObjectControl OC;
+    public float playerStunMax = 12f;
     AnimationsControler anim;
+    public float throwX;
+    public float throwY;
+    public float gravScal;
 
     private void Awake()
     {
@@ -59,6 +63,7 @@ public class PlayerStun : MonoBehaviour
             lastHitId = killerId;
             altarPullSpeed = 0.3f;
             baseStunTime += stunTime;
+            Mathf.Clamp(baseStunTime,0f,playerStunMax);
             StartCoroutine(StunTimer());
         }
     }
@@ -124,6 +129,7 @@ public class PlayerStun : MonoBehaviour
             HoldingPlayerReset();
         }
         anim.HandBool(false);
+        rb.gravityScale = 1;
         OC.stunned = false;
         blink = false;
         holding = false;
@@ -179,19 +185,21 @@ public class PlayerStun : MonoBehaviour
         downCol.enabled = true;
         rb.velocity = Vector2.zero;
         transform.SetParent(inputParent);
+        rb.gravityScale = gravScal;
         if (right)
         {
-            rb.AddForce(new Vector3(2000, 500, 0));
+            rb.AddForce(new Vector3(throwX, throwY, 0));
         }
         else
         {
-            rb.AddForce(new Vector3(-2000, -500, 0));
+            rb.AddForce(new Vector3(-throwX, throwY, 0));
         }
         StartCoroutine(GetUp());
     }
     public void ThrownDown()
     {
         HoldingPlayerReset();
+        rb.gravityScale = gravScal;
         blink = false;
         holding = false;
         grounded = false;

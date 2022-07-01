@@ -245,9 +245,9 @@ MonoBehaviour:
   movementSpeed: 30
   fallMultiplier: 30
   lowerJumpMultiplier: 17
-  dootykZeme: 0
   GroundCheck: {fileID: 6298515435878700309}
   playerCollider: {fileID: 4736383664970016481}
+  jumped: 0
   gChecker: {fileID: 6298515435878700314}
   filter:
     useTriggers: 0
@@ -332,6 +332,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 906724354}
+  move: {fileID: 0}
+  OC: {fileID: 0}
 --- !u!95 &906724354
 Animator:
   serializedVersion: 3
@@ -400,6 +402,11 @@ MonoBehaviour:
   altar: {fileID: 0}
   col: {fileID: 4736383664970016481}
   downCol: {fileID: 8692783605340022677}
+  OC: {fileID: 0}
+  playerStunMax: 12
+  throwX: 2000
+  throwY: 1000
+  gravScal: 6
 --- !u!114 &-5238879546179921710
 MonoBehaviour:
   m_ObjectHideFlags: 0

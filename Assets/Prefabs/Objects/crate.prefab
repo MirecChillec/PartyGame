@@ -125,8 +125,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectWeight: 3
-  baseThrowForce: 10000
-  baseGravityScale: 4
+  baseThrowForce: 8000
+  baseGravityScale: 5
   PM: {fileID: 0}
   player: 0
   spawnerPos: {fileID: 0}

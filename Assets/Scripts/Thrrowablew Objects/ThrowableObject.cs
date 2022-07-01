@@ -58,7 +58,7 @@ public class ThrowableObject : MonoBehaviour
         owner = parent;
         rb.simulated = true;
         transform.parent = spawnerPos;
-        throwArc = new Vector3(baseThrowForce / objectWeight, (baseThrowForce / objectWeight/2), 0);
+        throwArc = new Vector3(baseThrowForce / objectWeight, (baseThrowForce / objectWeight/5*3), 0);
         if (right)
         {
             rb.AddForce(throwArc);
@@ -89,14 +89,14 @@ public class ThrowableObject : MonoBehaviour
     {
         objectSpawner.DestroiedObject();
     }
-    public void ThrowDown()
+    public void ThrowDown(GameObject parent)
     {
         isThrown = true;
-        owner = transform.parent.gameObject;
+        owner = parent;
         rb.simulated = true;
         transform.parent = spawnerPos;
         rb.AddForce(Vector3.down * 3f);
-        rb.gravityScale = baseGravityScale * objectWeight * 3;
+        rb.gravityScale = baseGravityScale * objectWeight * 4;
         sr.sprite = baseSprite;
     }
 

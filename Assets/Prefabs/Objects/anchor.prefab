@@ -196,7 +196,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectWeight: 4
-  baseThrowForce: 10000
+  baseThrowForce: 9000
   baseGravityScale: 6
   PM: {fileID: 0}
   player: 0

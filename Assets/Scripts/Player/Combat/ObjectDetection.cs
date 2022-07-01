@@ -113,7 +113,7 @@ public class ObjectDetection : MonoBehaviour
     {
         if (objekt != null)
         {
-            objekt.ThrowDown();
+            objekt.ThrowDown(this.gameObject);
             StartCoroutine(PickTimer());
         }
         else if (stunedPlayer != null)
