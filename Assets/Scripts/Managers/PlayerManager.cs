@@ -50,6 +50,7 @@ public class PlayerManager : MonoBehaviour
             Debug.Log(stat.id + " " + stat.kils + " " + stat.wins + " " + stat.alive);
         }
         start = true;
+        ingameUI.gameObject.SetActive(true);
     }
     // geting numbers of players, all players even death
     public int GetNumberOfPlayers()
@@ -74,6 +75,7 @@ public class PlayerManager : MonoBehaviour
     //killing , despawning players
     public void PlayerDeath(int id,int killID)
     {
+        print("death");
         activePlayers -= 1;
         KilledPlayer(id,killID);
         gameMan.map.altarMan.Sacrifice();
@@ -85,14 +87,13 @@ public class PlayerManager : MonoBehaviour
                 {
                     stat.Won();
                 }
-                //Debug.Log(stat.id + " "+ stat.kils +" "+ stat.wins);
+                Debug.Log(stat.id + " "+ stat.kils +" "+ stat.wins);
             }
             if (CheckWin())
             {
                 ingameUI.gameObject.SetActive(false);
                 won = true;
                 WinScreen.SetActive(true);
-                print("won");
                 WinScreen.gameObject.GetComponent<WonScreen>().ShowResults(playerStats);
                 return;
             }

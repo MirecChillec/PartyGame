@@ -16,6 +16,8 @@ public class GameControl : MonoBehaviour
     }
     public void ChangeMap()
     {
+        endscreen.SetActive(true);
+        endscreen.GetComponent<IngameUI>().UIReset();
         if(map != null)
         {
             endscreen.SetActive(false);

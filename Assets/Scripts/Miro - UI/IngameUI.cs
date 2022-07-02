@@ -33,7 +33,6 @@ public class IngameUI : MonoBehaviour
                 players[1].gameObject.SetActive(true);
                 //players[0].anchoredPosition = new Vector2(480, -75);
                 //players[1].anchoredPosition = new Vector2(1440, -75);
-                Debug.Log("case 2");
                 break;
             case 3:
                 players[0].gameObject.SetActive(true);
@@ -70,8 +69,6 @@ public class IngameUI : MonoBehaviour
     public void EndGame()
     {
         endGame.SetActive(true);
-        print(endGame.active + " active");
-        print(numberOfPlayers + "player num");
         for (int i = 0; i < numberOfPlayers; i++)
         {
             if (playerManager.playerStats[i].alive)
@@ -80,5 +77,9 @@ public class IngameUI : MonoBehaviour
                 endGameText.GetComponent<TextMeshProUGUI>().color = colors[i]; 
             }
         }
+    }
+    public void UIReset()
+    {
+        endGame.SetActive(false);
     }
 }

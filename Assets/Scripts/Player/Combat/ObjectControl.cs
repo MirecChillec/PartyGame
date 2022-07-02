@@ -24,13 +24,11 @@ public class ObjectControl : MonoBehaviour
     void PickUp()
     {
         if (stunned) return;
-        print("pick ");
         if (detector.Pick())
         {
             holding = true;
             canPickUp = false;
             state = Throwable.holding;
-            print("pick succes");
         }
     }
     void Throw()
@@ -44,7 +42,6 @@ public class ObjectControl : MonoBehaviour
     {
         if (!movement.isStunned)
         {
-            print("action ");
             if (state == Throwable.idle && canPickUp)
             {
                 PickUp();

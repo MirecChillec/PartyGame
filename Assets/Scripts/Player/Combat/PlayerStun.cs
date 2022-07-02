@@ -25,6 +25,7 @@ public class PlayerStun : MonoBehaviour
     public float throwX;
     public float throwY;
     public float gravScal;
+    bool death = false;
 
     private void Awake()
     {
@@ -112,6 +113,8 @@ public class PlayerStun : MonoBehaviour
     }
     public void PlayerSacrifice()
     {
+        if (death) return;
+        death = true;
         //finish player death 
         InputHandler handler = transform.parent.gameObject.GetComponent<InputHandler>();
         StopAllCoroutines();

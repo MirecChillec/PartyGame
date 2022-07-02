@@ -32,7 +32,6 @@ public class ObjectDetection : MonoBehaviour
         //ak moze zobrat objekt
         //detekcia objectov
         cols = Physics2D.OverlapBoxAll(playerColider.bounds.center, playerColider.bounds.size, 0, mask);
-        print("Checking objects " + cols.Length);
         if (cols.Length != 0)
         {
             if (controler.state == Throwable.idle)
@@ -50,22 +49,12 @@ public class ObjectDetection : MonoBehaviour
                 }
             }
         }
-        else
-        {
-            if (!holding)
-            {
-                print("Reset");
-                stunedPlayer = null;
-                objekt = null;
-            }
-        }
         return false;
     }
     public bool Pick()
     {
         if (canPick)
         {
-            print("picking");
             if (CheckObject())
             {
                 if (objekt != null)

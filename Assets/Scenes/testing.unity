@@ -4081,6 +4081,10 @@ PrefabInstance:
       propertyPath: playerManager
       value: 
       objectReference: {fileID: 1157862533}
+    - target: {fileID: 6914747685286061304, guid: 4dcf49705852f684caf9f7ab34057056, type: 3}
+      propertyPath: m_SortingOrder
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 8033145675599680198, guid: 4dcf49705852f684caf9f7ab34057056, type: 3}
       propertyPath: m_Name
       value: InGameUICanvas
