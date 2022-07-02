@@ -151,19 +151,31 @@ public class PlayerStun : MonoBehaviour
     }
     public void StunRelease()
     {
+        //holding = false;
+        ////throwableObjectScript.enabled = false;
+        //rb.gravityScale = 0f;
+        //move.isStunned = true;
+        //move.StunAnimation();
+        //move.enabled = false;
+        //rb.velocity = Vector2.zero;
+        //col.enabled = false;
+        //downCol.enabled = true;
+        //this.gameObject.layer = 9;
+        //isStunned = true;
+        //StartCoroutine(StunBlicker());
+        //transform.SetParent(inputParent);
+        if (holding)
+        {
+            HoldingPlayerReset();
+        }
+        anim.HandBool(false);
         holding = false;
         //throwableObjectScript.enabled = false;
-        rb.gravityScale = 0f;
-        move.isStunned = true;
-        move.StunAnimation();
-        move.enabled = false;
-        rb.velocity = Vector2.zero;
-        col.enabled = false;
-        downCol.enabled = true;
-        this.gameObject.layer = 9;
-        isStunned = true;
-        StartCoroutine(StunBlicker());
+        rb.simulated = true;
+        rb.gravityScale = 1;
+        thrown = false;
         transform.SetParent(inputParent);
+
     }
     public void PickUp(Transform parent)
     {

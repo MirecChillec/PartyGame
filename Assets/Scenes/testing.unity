@@ -4081,6 +4081,30 @@ PrefabInstance:
       propertyPath: playerManager
       value: 
       objectReference: {fileID: 1157862533}
+    - target: {fileID: 5676003664780810250, guid: 4dcf49705852f684caf9f7ab34057056, type: 3}
+      propertyPath: colors.Array.data[2].b
+      value: 0.027450982
+      objectReference: {fileID: 0}
+    - target: {fileID: 5676003664780810250, guid: 4dcf49705852f684caf9f7ab34057056, type: 3}
+      propertyPath: colors.Array.data[2].g
+      value: 0.83921576
+      objectReference: {fileID: 0}
+    - target: {fileID: 5676003664780810250, guid: 4dcf49705852f684caf9f7ab34057056, type: 3}
+      propertyPath: colors.Array.data[2].r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5676003664780810250, guid: 4dcf49705852f684caf9f7ab34057056, type: 3}
+      propertyPath: colors.Array.data[3].b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5676003664780810250, guid: 4dcf49705852f684caf9f7ab34057056, type: 3}
+      propertyPath: colors.Array.data[3].g
+      value: 0.70980394
+      objectReference: {fileID: 0}
+    - target: {fileID: 5676003664780810250, guid: 4dcf49705852f684caf9f7ab34057056, type: 3}
+      propertyPath: colors.Array.data[3].r
+      value: 0.12941177
+      objectReference: {fileID: 0}
     - target: {fileID: 6914747685286061304, guid: 4dcf49705852f684caf9f7ab34057056, type: 3}
       propertyPath: m_SortingOrder
       value: 6
