@@ -11,19 +11,24 @@ public class WonScreen : MonoBehaviour
     public Sprite[] sprites;
     public Sprite[] winsprites;
     public TextMeshProUGUI text;
-    public void ShowResults(List<PlayerStats> statrs)
+    public TextMeshProUGUI score;
+    public void ShowResults(List<PlayerStats> stats)
     {
-        PlayerStats win = Biggest(statrs);
-        print(win);
-        WinnerSprite(win);
-        text.text = "Player" + win.id + " won";
-        statrs.Remove(win);
-        for(int i = 0;i < statrs.Count; i++)
+        string scoretext = "Score\n";
+        for (int i = 0; i < stats.Count; i++)
         {
-            losers[i].sprite = GetSprite(statrs[i]);
+            scoretext += "P" + (i+1) + " wins " + stats[i].wins + " kills " + stats[i].kils + "\n";
+        }
+        score.text = scoretext;
+        PlayerStats win = Biggest(stats);
+        winner.sprite = win.winpose;
+        text.text = "Player" + win.id + " won";
+        stats.Remove(win);
+        for(int i = 0;i < stats.Count; i++)
+        {
+            losers[i].sprite = stats[i].downpose;
             losers[i].gameObject.SetActive(true);
         }
-        print("end");
 
     }
     PlayerStats Biggest(List<PlayerStats> stats)
@@ -38,44 +43,6 @@ public class WonScreen : MonoBehaviour
             }
         }
         return x;
-    }
-    public void WinnerSprite(PlayerStats stat)
-    {
-        print(stat.typ);
-        switch (stat.typ)
-        {
-            case player.butcher:
-                winner.sprite = winsprites[0];
-                break;
-            case player.detective:
-                winner.sprite = winsprites[1];
-                break;
-            case player.nobleman:
-                winner.sprite = winsprites[2];
-                break;
-            case player.ocultist:
-                winner.sprite = winsprites[3];
-                break;
-        }
-    }
-    public Sprite GetSprite(PlayerStats stat)
-    {
-        switch (stat.typ)
-        {
-            case player.butcher:
-                return  sprites[0];
-                break;
-            case player.detective:
-                return sprites[1];
-                break;
-            case player.nobleman:
-                return sprites[2];
-                break;
-            case player.ocultist:
-                return sprites[3];
-                break;
-        }
-        return null;
     }
     public void Back()
     {

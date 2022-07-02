@@ -24,14 +24,18 @@ public class ObjectControl : MonoBehaviour
     void PickUp()
     {
         if (stunned) return;
+        print("pick ");
         if (detector.Pick())
         {
+            holding = true;
             canPickUp = false;
             state = Throwable.holding;
+            print("pick succes");
         }
     }
     void Throw()
     {
+        holding = false;
         canPickUp = true;
         state = Throwable.idle;
         detector.Throw(movement.facingRight);
@@ -40,6 +44,7 @@ public class ObjectControl : MonoBehaviour
     {
         if (!movement.isStunned)
         {
+            print("action ");
             if (state == Throwable.idle && canPickUp)
             {
                 PickUp();
@@ -60,6 +65,7 @@ public class ObjectControl : MonoBehaviour
     //only throw straight down / release object
     void ThrowDown()
     {
+        holding = false;
         canPickUp = true;
         state = Throwable.idle;
         detector.ThrowDown();

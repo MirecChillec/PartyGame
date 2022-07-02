@@ -15,3 +15,5 @@ MonoBehaviour:
   name: Ocultist
   playerPrefab: {fileID: 8100915949643691114, guid: 2fbe4a46c1aa9eb4894fff5b4dea427e, type: 3}
   picture: {fileID: 21300000, guid: 45b3f0bb9b54279449b8cbbea9ec2f21, type: 3}
+  DownPose: {fileID: 21300000, guid: 4c50ab8efd1611c46a15177a8e2cc057, type: 3}
+  WinPose: {fileID: 21300000, guid: 6b3375f3a7232e14499b2fe7c1ba4cf1, type: 3}

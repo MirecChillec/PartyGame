@@ -41,7 +41,7 @@ public class PlayerManager : MonoBehaviour
             playerHandlers[i].SetId(activePlayers);
             if (!start)
             {
-                playerStats.Add(new PlayerStats(activePlayers,playerHandlers[i].GetT()));
+                playerStats.Add(new PlayerStats(activePlayers,playerHandlers[i].GetT(), playerHandlers[i].selection.GetCurrentType().DownPose, playerHandlers[i].selection.GetCurrentType().WinPose));
             }
         }
         foreach (PlayerStats stat in playerStats)

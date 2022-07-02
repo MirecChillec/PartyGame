@@ -28,7 +28,6 @@ public class SelectionMenuElement : MonoBehaviour
 
     public void Activate()
     {
-        if (GameData.sceneManager.loading) return;
         if (!active)
         {
             active = true;
@@ -110,5 +109,8 @@ public class SelectionMenuElement : MonoBehaviour
         yield return new WaitForSeconds(pressTime);
         leftArrow.localScale = new Vector3(1f, 1f, 1);
     }
-
+    public PlayerTypes GetCurrentType()
+    {
+        return types[index];
+    }
 }

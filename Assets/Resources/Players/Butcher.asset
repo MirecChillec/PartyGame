@@ -15,3 +15,5 @@ MonoBehaviour:
   name: Butcher
   playerPrefab: {fileID: 4593666130232384873, guid: 0b9d9a219c321e845a11116e72080026, type: 3}
   picture: {fileID: 21300000, guid: 5ce9a6b2f59da174db5ccd39e8fe3722, type: 3}
+  DownPose: {fileID: 21300000, guid: 1e2c03ede255a7e49841873069747508, type: 3}
+  WinPose: {fileID: 21300000, guid: c03a9e88d363d2c45aeb052b5a2c9d76, type: 3}

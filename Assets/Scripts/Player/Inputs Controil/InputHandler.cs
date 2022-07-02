@@ -6,8 +6,8 @@ using UnityEngine.InputSystem;
 public class InputHandler : MonoBehaviour
 {
     PlayerInput inputMap;
-    SelectionMenuElement selection;
-    PlayerControl playerPrefab;
+    public SelectionMenuElement selection { get; private set; }
+    public PlayerControl playerPrefab { get; private set; }
     public PlayerControl InGamePlayer;
     PlayerManager playerMan;
     bool alive;

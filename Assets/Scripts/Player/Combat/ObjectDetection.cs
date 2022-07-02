@@ -19,6 +19,7 @@ public class ObjectDetection : MonoBehaviour
     [SerializeField] private bool canPick;
     public Transform holder;
     PlayerStun stunedPlayer;
+    bool holding = false;
     private void Start()
     {
         canPick = false;
@@ -31,6 +32,7 @@ public class ObjectDetection : MonoBehaviour
         //ak moze zobrat objekt
         //detekcia objectov
         cols = Physics2D.OverlapBoxAll(playerColider.bounds.center, playerColider.bounds.size, 0, mask);
+        print("Checking objects " + cols.Length);
         if (cols.Length != 0)
         {
             if (controler.state == Throwable.idle)
@@ -48,16 +50,27 @@ public class ObjectDetection : MonoBehaviour
                 }
             }
         }
+        else
+        {
+            if (!holding)
+            {
+                print("Reset");
+                stunedPlayer = null;
+                objekt = null;
+            }
+        }
         return false;
     }
     public bool Pick()
     {
         if (canPick)
         {
+            print("picking");
             if (CheckObject())
             {
                 if (objekt != null)
                 {
+                    holding = true;
                     objekt.PickUp(holder, character);
                     controler.holding = true;
                     controler.animControl.ChangeAnimation(Animations.idleNoHand);
@@ -66,6 +79,7 @@ public class ObjectDetection : MonoBehaviour
                 }
                 else if (stunedPlayer != null)
                 {
+                    holding = true;
                     controler.holding = true;
                     stunedPlayer.PickUp(holder);
                     controler.animControl.ChangeAnimation(Animations.idleNoHand);
@@ -80,46 +94,39 @@ public class ObjectDetection : MonoBehaviour
     {
         if (objekt != null)
         {
+            holding = false;
             controler.holding = false;
-            canPick = false;
+            canPick = true;
             objekt.Throw(direction, this.gameObject);
             //nulovanie objekt premennej inak by hrac vedel chytit hodeny objekt pocas toho ako leti
             objekt = null;
-            StartCoroutine(PickTimer());
             controler.animControl.ChangeAnimation(Animations.idleHand);
             controler.animControl.HandBool(false);
         }
         else if (stunedPlayer != null)
         {
+            holding = false;
             controler.holding = false;
-            canPick = false;
+            canPick = true;
             stunedPlayer.Throw(direction);
             stunedPlayer = null;
-            StartCoroutine(PickTimer());
             controler.animControl.ChangeAnimation(Animations.idleHand);
             controler.animControl.HandBool(false);
 
         }
     }
-    IEnumerator PickTimer()
-    {
-        //pauza po hode mozne vyuzit na nejaky debaf
-        //bez corontine bolo mozne chytit hodeny objekt pocas toho ako leti
-        canPick = false;
-        yield return new WaitForSeconds(pickTimer);
-        canPick = true;
-    }
     public void ThrowDown()
     {
         if (objekt != null)
         {
+            holding = false;
             objekt.ThrowDown(this.gameObject);
-            StartCoroutine(PickTimer());
+            
         }
         else if (stunedPlayer != null)
         {
+            holding = false;
             stunedPlayer.ThrownDown();
-            StartCoroutine(PickTimer());
         }
     }
     IEnumerator StartWait()
@@ -139,10 +146,12 @@ public class ObjectDetection : MonoBehaviour
         controler.holding = false;
         if(objekt != null)
         {
+            holding = false;
             objekt.Release();
             objekt = null;
         }else if(stunedPlayer != null)
         {
+            holding = false;
             stunedPlayer.StunRelease();
             stunedPlayer = null;
         }

@@ -9,12 +9,16 @@ public class PlayerStats
     public int wins { get; private set; }
     public bool alive { get; private set; }
     public player typ;
-    public PlayerStats(int pId, player type)
+    public Sprite downpose;
+    public Sprite winpose;
+    public PlayerStats(int pId, player type,Sprite downPose, Sprite win)
     {
         this.id = pId;
         this.kils = 0;
         this.wins = 0;
         this.typ = type;
+        this.downpose = downPose;
+        this.winpose = win;
     }
     public void Won()
     {
