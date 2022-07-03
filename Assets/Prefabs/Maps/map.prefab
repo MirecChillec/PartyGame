@@ -661,14 +661,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7daf19759cb81e45b8bf563ca32c5b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingObjects: 4
+  startingObjects: 5
   numOfObjects: 0
   objekt:
   - {fileID: -6932465054114602337, guid: 7b9919e5a9c0dfa46bfebd6b9d375265, type: 3}
   - {fileID: 4998915892394143960, guid: 6d9ed4b9346c6b249a203a7598193385, type: 3}
   - {fileID: 4558927995685756475, guid: c3e76903cb234e2428b0dd415e0dcb85, type: 3}
-  timeInterval: 1.5
-  maxObjects: 4
+  timeInterval: 1
+  maxObjects: 5
   parentOfPositions: {fileID: 3655477795591359397}
   bounds: {fileID: 0}
   objectParent: {fileID: 728150567040562563}

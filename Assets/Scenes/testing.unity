@@ -3994,6 +3994,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 227910142}
     m_Modifications:
+    - target: {fileID: 746636771323422331, guid: 4dcf49705852f684caf9f7ab34057056, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: f3718c466a8cbe340bd3405b56448285, type: 3}
     - target: {fileID: 749313776658072683, guid: 4dcf49705852f684caf9f7ab34057056, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -4110,10 +4114,22 @@ PrefabInstance:
       propertyPath: m_SortingOrder
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 7888623320469241086, guid: 4dcf49705852f684caf9f7ab34057056, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: f3718c466a8cbe340bd3405b56448285, type: 3}
     - target: {fileID: 8033145675599680198, guid: 4dcf49705852f684caf9f7ab34057056, type: 3}
       propertyPath: m_Name
       value: InGameUICanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 8712295076390088619, guid: 4dcf49705852f684caf9f7ab34057056, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: f3718c466a8cbe340bd3405b56448285, type: 3}
+    - target: {fileID: 9055209936861463520, guid: 4dcf49705852f684caf9f7ab34057056, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: f3718c466a8cbe340bd3405b56448285, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4dcf49705852f684caf9f7ab34057056, type: 3}
 --- !u!224 &1761236202 stripped
