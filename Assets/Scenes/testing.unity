@@ -2291,7 +2291,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1157862530
 Transform:
   m_ObjectHideFlags: 0
@@ -3535,6 +3535,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selection: {fileID: 1520779284}
   game: {fileID: 227910141}
+  players: {fileID: 1157862529}
 --- !u!1001 &1593975548
 PrefabInstance:
   m_ObjectHideFlags: 0

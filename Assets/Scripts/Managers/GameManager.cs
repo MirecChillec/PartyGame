@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour
 {
     public GameObject selection;
     public GameObject game;
+    public GameObject players;
     private void Start()
     {
         StartCoroutine(Waiting());
@@ -17,6 +18,7 @@ public class GameManager : MonoBehaviour
             yield return new WaitForSeconds(0.2f);
         }
         selection.SetActive(true);
+        players.SetActive(true);
     }
     public void StartGame()
     {
