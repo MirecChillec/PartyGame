@@ -32,6 +32,7 @@ public class PlayerManager : MonoBehaviour
     }
     public void SpawnPlayers(List<Transform> positions,GameObject altar)
     {
+        ingameUI.KillIconReset();
         activePlayers = 0;
         for (int i = 0; i < playerHandlers.Length; i++)
         {
@@ -51,6 +52,7 @@ public class PlayerManager : MonoBehaviour
         }
         start = true;
         ingameUI.gameObject.SetActive(true);
+        ingameUI.UpdateUI();
     }
     // geting numbers of players, all players even death
     public int GetNumberOfPlayers()
@@ -75,7 +77,6 @@ public class PlayerManager : MonoBehaviour
     //killing , despawning players
     public void PlayerDeath(int id,int killID)
     {
-        print("death");
         activePlayers -= 1;
         KilledPlayer(id,killID);
         gameMan.map.altarMan.Sacrifice();
@@ -104,6 +105,7 @@ public class PlayerManager : MonoBehaviour
                 StartCoroutine(WinTimer());
             }
         }
+        ingameUI.UpdateUI();
     }
     public void Despawn()
     {
@@ -144,8 +146,8 @@ public class PlayerManager : MonoBehaviour
                 stat.Killed();
             }
         }
-
-        //ingameUI.Cross(deathID);
+        ingameUI.ActivateKillIcon(deathID);
+        ingameUI.UpdateUI();
     }
     public bool PauseGame()
     {

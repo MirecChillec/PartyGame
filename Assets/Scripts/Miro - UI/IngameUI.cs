@@ -14,6 +14,7 @@ public class IngameUI : MonoBehaviour
     public int numberOfPlayers;
     public GameObject endGame;
     public GameObject endGameText;
+    public GameObject[] killIcon;
 
     public string[] names = { "Player 1", "Player 2", "Player 3", "Player 4" };
     public Color[] colors = { new Color(60, 228, 60), new Color(255, 52, 33), new Color(33, 181, 255), new Color(255, 217, 7) };
@@ -31,40 +32,23 @@ public class IngameUI : MonoBehaviour
             case 2:
                 players[0].gameObject.SetActive(true);
                 players[1].gameObject.SetActive(true);
-                //players[0].anchoredPosition = new Vector2(480, -75);
-                //players[1].anchoredPosition = new Vector2(1440, -75);
                 break;
             case 3:
                 players[0].gameObject.SetActive(true);
                 players[1].gameObject.SetActive(true);
                 players[2].gameObject.SetActive(true);
-                //players[0].anchoredPosition = new Vector2(354, -75);
-                //players[1].anchoredPosition = new Vector2(994, -75);
-                //players[2].anchoredPosition = new Vector2(1634, -75);
                 break;                      
             case 4:
                 players[0].gameObject.SetActive(true);
                 players[1].gameObject.SetActive(true);  
                 players[2].gameObject.SetActive(true);
                 players[3].gameObject.SetActive(true);
-               // players[0].anchoredPosition = new Vector2(480, -75);
-                //players[1].anchoredPosition = new Vector2(1440, -75);
-                //players[2].anchoredPosition = new Vector2(480, -75);
-                //players[3].anchoredPosition = new Vector2(1440, -75);
                 break;
             default:
                 break;
         }
     }
 
-    void Update()
-    {
-        for (int i = 0; i < numberOfPlayers; i++)
-        {
-            wins[i].GetComponent<TextMeshProUGUI>().text = playerManager.playerStats[i].wins.ToString();
-            kills[i].GetComponent<TextMeshProUGUI>().text = playerManager.playerStats[i].kils.ToString();
-        }
-    }
 
     public void EndGame()
     {
@@ -81,5 +65,24 @@ public class IngameUI : MonoBehaviour
     public void UIReset()
     {
         endGame.SetActive(false);
+    }
+    public void UpdateUI()
+    {
+        for (int i = 0; i < numberOfPlayers; i++)
+        {
+            wins[i].GetComponent<TextMeshProUGUI>().text = playerManager.playerStats[i].wins.ToString();
+            kills[i].GetComponent<TextMeshProUGUI>().text = playerManager.playerStats[i].kils.ToString();
+        }
+    }
+    public void KillIconReset()
+    {
+        for (int i = 0; i < numberOfPlayers; i++)
+        {
+            killIcon[i].SetActive(false);
+        }
+    }
+    public void ActivateKillIcon(int id)
+    {
+         killIcon[id-1].SetActive(true);
     }
 }

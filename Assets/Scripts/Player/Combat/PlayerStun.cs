@@ -235,7 +235,7 @@ public class PlayerStun : MonoBehaviour
             {
                 Release();
             }
-            yield return new WaitForSeconds(0.2f);
+            yield return new WaitForSeconds(0.05f);
         }
     }
     void HoldingPlayerReset()
