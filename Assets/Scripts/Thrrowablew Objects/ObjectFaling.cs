@@ -37,6 +37,7 @@ public class ObjectFaling : MonoBehaviour
         rb.velocity = Vector3.zero;
         rb.gravityScale = 0;
         groundCol.enabled = false;
+        parent.transform.rotation = Quaternion.Euler(0, 0, 0);
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {

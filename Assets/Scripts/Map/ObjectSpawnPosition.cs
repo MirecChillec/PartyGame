@@ -19,6 +19,7 @@ public class ObjectSpawnPosition : MonoBehaviour
         spawned.transform.SetParent(spawner.objectParent);
         spawned.transform.position = transform.position;
         spawned.Init(this,screenBounds,spawner);
+        spawned.transform.rotation = Quaternion.Euler(0, 0, 0);
     }
     public void Release()
     {

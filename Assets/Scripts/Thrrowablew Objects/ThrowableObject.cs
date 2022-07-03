@@ -30,6 +30,9 @@ public class ThrowableObject : MonoBehaviour
     public float stunTime;
 
     public ObjectFaling faling;
+    [Header("octopus only")]
+    public bool octopus;
+    public Animator anim;
     private void Awake()
     {
         screenBounds = GameData.scrennBounds;
@@ -67,6 +70,11 @@ public class ThrowableObject : MonoBehaviour
             rb.AddForce(new Vector3(-throwArc.x,throwArc.y,throwArc.z));
         }
         rb.gravityScale = baseGravityScale * objectWeight;
+        if (octopus)
+        {
+            anim.Play("Idle");
+            return;
+        }
         sr.sprite = baseSprite;
     }
     public void PickUp(Transform player,Character character)
@@ -76,8 +84,13 @@ public class ThrowableObject : MonoBehaviour
         transform.position += Vector3.up * 0.2f;
         transform.parent = player;
         spawnPos.Release();
-        ChangeSprite(character);
         rb.simulated = false;
+        if (octopus)
+        {
+            ChangeAnimations(character);
+            return;
+        }
+        ChangeSprite(character);
     }
     public void Init(ObjectSpawnPosition spawnPosition,ScreenBounds bounds,ObjectSpawner spawner)
     {
@@ -97,6 +110,11 @@ public class ThrowableObject : MonoBehaviour
         transform.parent = spawnerPos;
         rb.AddForce(Vector3.down * 3f);
         rb.gravityScale = baseGravityScale * objectWeight * 4;
+        if (octopus)
+        {
+            anim.Play("Idle");
+            return;
+        }
         sr.sprite = baseSprite;
     }
 
@@ -142,4 +160,24 @@ public class ThrowableObject : MonoBehaviour
                 break;
         }
     }
+    void ChangeAnimations(Character typ)
+    {
+        switch (typ)
+        {
+            case Character.butcher:
+                anim.Play("Butcher");
+                break;
+            case Character.detective:
+                anim.Play("Detective");
+                break;
+            case Character.nobleman:
+                anim.Play("Nobleman");
+                break;
+            case Character.ocultist:
+                anim.Play("Occultist");
+                break;
+
+        }
+    }
+
 }
