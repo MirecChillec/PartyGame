@@ -82,7 +82,6 @@ public class InputHandler : MonoBehaviour
         if (alive)
         {
             Destroy(InGamePlayer.gameObject);
-            playerMan.WinGame(this.playerId);
         }
     }
     //switching control maps

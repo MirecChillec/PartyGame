@@ -30,7 +30,7 @@ public class PlayerManager : MonoBehaviour
     {
         playerHandlers = GetComponentsInChildren<InputHandler>();
     }
-    public void SpawnPlayers(List<Transform> positions,GameObject altar)
+    public void SpawnPlayers(List<Transform> positions, GameObject altar)
     {
         ingameUI.KillIconReset();
         activePlayers = 0;
@@ -42,13 +42,12 @@ public class PlayerManager : MonoBehaviour
             playerHandlers[i].SetId(activePlayers);
             if (!start)
             {
-                playerStats.Add(new PlayerStats(activePlayers,playerHandlers[i].GetT(), playerHandlers[i].selection.GetCurrentType().DownPose, playerHandlers[i].selection.GetCurrentType().WinPose));
+                playerStats.Add(new PlayerStats(activePlayers, playerHandlers[i].GetT(), playerHandlers[i].selection.GetCurrentType().DownPose, playerHandlers[i].selection.GetCurrentType().WinPose));
             }
         }
         foreach (PlayerStats stat in playerStats)
         {
             stat.Spawn();
-            Debug.Log(stat.id + " " + stat.kils + " " + stat.wins + " " + stat.alive);
         }
         start = true;
         ingameUI.gameObject.SetActive(true);
@@ -62,7 +61,7 @@ public class PlayerManager : MonoBehaviour
     //switching controls schemes
     public void SwitchControlToGame()
     {
-        foreach(InputHandler handler in playerHandlers)
+        foreach (InputHandler handler in playerHandlers)
         {
             handler.SwitchControlsToGame();
         }
@@ -75,10 +74,10 @@ public class PlayerManager : MonoBehaviour
         }
     }
     //killing , despawning players
-    public void PlayerDeath(int id,int killID)
+    public void PlayerDeath(int id, int killID)
     {
         activePlayers -= 1;
-        KilledPlayer(id,killID);
+        KilledPlayer(id, killID);
         gameMan.map.altarMan.Sacrifice();
         if (activePlayers <= 1)
         {
@@ -88,28 +87,22 @@ public class PlayerManager : MonoBehaviour
                 {
                     stat.Won();
                 }
-                Debug.Log(stat.id + " "+ stat.kils +" "+ stat.wins);
             }
+
+            ingameUI.gameObject.SetActive(true);
+            ingameUI.EndGame();
             if (CheckWin())
             {
-                ingameUI.gameObject.SetActive(false);
-                won = true;
-                WinScreen.SetActive(true);
-                WinScreen.gameObject.GetComponent<WonScreen>().ShowResults(playerStats);
+                StartCoroutine(Win());
                 return;
             }
-            else
-            {
-                ingameUI.gameObject.SetActive(true);
-                ingameUI.EndGame();
-                StartCoroutine(WinTimer());
-            }
+            StartCoroutine(WinTimer());
         }
         ingameUI.UpdateUI();
     }
     public void Despawn()
     {
-        foreach(InputHandler x in playerHandlers)
+        foreach (InputHandler x in playerHandlers)
         {
             x.PlayerDespawn();
         }
@@ -122,18 +115,7 @@ public class PlayerManager : MonoBehaviour
         gameMan.ChangeMap();
     }
     //stat manipulation
-    public void WinGame(int id)
-    {
-        //foreach(PlayerStats stat in playerStats)
-        //{
-        //    if(stat.id == id)
-        //    {
-        //        stat.Won();
-        //    }
-        //    //Debug.Log(stat.id + " "+ stat.kils +" "+ stat.wins);
-        //}
-    }
-    public void KilledPlayer(int killerId,int deathID)
+    public void KilledPlayer(int killerId, int deathID)
     {
         foreach (PlayerStats stat in playerStats)
         {
@@ -141,7 +123,7 @@ public class PlayerManager : MonoBehaviour
             {
                 stat.GetKill();
             }
-            if(stat.id == deathID)
+            if (stat.id == deathID)
             {
                 stat.Killed();
             }
@@ -155,7 +137,7 @@ public class PlayerManager : MonoBehaviour
     }
     public void UnPause()
     {
-        foreach(InputHandler han in playerHandlers)
+        foreach (InputHandler han in playerHandlers)
         {
             han.stoped = false;
         }
@@ -170,5 +152,13 @@ public class PlayerManager : MonoBehaviour
             }
         }
         return false;
+    }
+    public IEnumerator Win()
+    {
+        yield return new WaitForSeconds(2.5f);
+        ingameUI.gameObject.SetActive(false);
+        won = true;
+        WinScreen.SetActive(true);
+        WinScreen.gameObject.GetComponent<WonScreen>().ShowResults(playerStats);
     }
 }
