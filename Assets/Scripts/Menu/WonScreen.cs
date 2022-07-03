@@ -17,12 +17,12 @@ public class WonScreen : MonoBehaviour
         string scoretext = "Score\n";
         foreach(PlayerStats x in stats)
         {
-            scoretext += "P" + x.id + " wins " + x.wins + " kills " + x.kils + "\n";
+            scoretext += "P" + x.id + "\n    wins " + x.wins + " kills " + x.kils + "\n";
         }
         score.text = scoretext;
         PlayerStats win = Biggest(stats);
         winner.sprite = win.winpose;
-        text.text = "Player" + win.id + " won";
+        text.text = "Player " + win.id + " won";
         stats.Remove(win);
         for(int i = 0;i < stats.Count; i++)
         {
@@ -37,7 +37,7 @@ public class WonScreen : MonoBehaviour
         PlayerStats x = null;
         for (int i =0; i< stats.Count;i++)
         {
-            Debug.Log("P" + stats[i].id + " wins " + stats[i].wins + " kills " + stats[i].kils + "\n");
+            Debug.Log("P" + stats[i].id + "\n wins " + stats[i].wins + " kills " + stats[i].kils + "\n");
             if (stats[i].wins > wins)
             {
                 wins = stats[i].wins;

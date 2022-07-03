@@ -32,7 +32,7 @@ public class SelectionMenuElement : MonoBehaviour
         {
             selectionMan.AddNewPlayer();
             active = true;
-            readyText.SetText("Press space / A to ready");
+            readyText.SetText("Press Space to ready");
             text.enabled = false;
             selection.SetActive(true);
             image.sprite = types[0].picture;
@@ -82,7 +82,7 @@ public class SelectionMenuElement : MonoBehaviour
     {
         if (ready)
         {
-            readyText.SetText("Press space / A to ready");
+            readyText.SetText("Press Space to ready");
             ready = false;
         }
         else
