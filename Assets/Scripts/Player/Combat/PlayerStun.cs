@@ -26,6 +26,7 @@ public class PlayerStun : MonoBehaviour
     public float throwY;
     public float gravScal;
     bool death = false;
+    public Animator arrowAnim;
 
     private void Awake()
     {
@@ -71,8 +72,9 @@ public class PlayerStun : MonoBehaviour
     IEnumerator StunTimer()
     {
         Stun();
+        arrowAnim.Play("Stun");
 
-        StartCoroutine(StunBlicker());
+        //StartCoroutine(StunBlicker());
         yield return new WaitForSeconds(baseStunTime);
 
         if (!thrown)
@@ -131,6 +133,7 @@ public class PlayerStun : MonoBehaviour
         {
             HoldingPlayerReset();
         }
+        arrowAnim.Play("Idle");
         anim.HandBool(false);
         rb.gravityScale = 1;
         OC.stunned = false;
@@ -138,7 +141,6 @@ public class PlayerStun : MonoBehaviour
         holding = false;
         move.enabled = true;
         this.gameObject.layer = 8;
-        //throwableObjectScript.enabled = false;
         isStunned = false;
         anim.ChangeAnimation(Animations.idleHand);
         downCol.enabled = false;
@@ -151,26 +153,13 @@ public class PlayerStun : MonoBehaviour
     }
     public void StunRelease()
     {
-        //holding = false;
-        ////throwableObjectScript.enabled = false;
-        //rb.gravityScale = 0f;
-        //move.isStunned = true;
-        //move.StunAnimation();
-        //move.enabled = false;
-        //rb.velocity = Vector2.zero;
-        //col.enabled = false;
-        //downCol.enabled = true;
-        //this.gameObject.layer = 9;
-        //isStunned = true;
-        //StartCoroutine(StunBlicker());
-        //transform.SetParent(inputParent);
         if (holding)
         {
             HoldingPlayerReset();
         }
+        arrowAnim.Play("Stun");
         anim.HandBool(false);
         holding = false;
-        //throwableObjectScript.enabled = false;
         rb.simulated = true;
         rb.gravityScale = 1;
         thrown = false;
@@ -180,10 +169,10 @@ public class PlayerStun : MonoBehaviour
     public void PickUp(Transform parent)
     {
         if (!isStunned) return;
+        arrowAnim.Play("Idle");
         holding = true;
         rb.simulated = false;
         rb.gravityScale = 0;
-        //downCol.enabled = false;
         transform.SetParent(parent);
         transform.position = parent.position;
     }

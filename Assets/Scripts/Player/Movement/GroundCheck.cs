@@ -15,6 +15,7 @@ public class GroundCheck : MonoBehaviour
             if (stun.thrown)
             {
                 stun.grounded = true;
+                stun.Release();
             }
 
         }
@@ -28,6 +29,7 @@ public class GroundCheck : MonoBehaviour
             if (stun.thrown)
             {
                 stun.grounded = true;
+                stun.Release();
             }
         }
     }
