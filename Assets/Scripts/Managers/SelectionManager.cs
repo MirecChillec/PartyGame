@@ -73,4 +73,9 @@ public class SelectionManager : MonoBehaviour
         gameManager.StartGame();
         UI.SetActive(true);
     }
+    public void AddNewPlayer()
+    {
+        StopAllCoroutines();
+        CheckPlayers();
+    }
 }

@@ -55,7 +55,7 @@
                 {
                     "name": "",
                     "id": "c7031ad0-67de-4e79-8ab8-8d4a76897a13",
-                    "path": "<Keyboard>/w",
+                    "path": "<Keyboard>/space",
                     "interactions": "",
                     "processors": "",
                     "groups": "keyboard",
@@ -76,11 +76,11 @@
                 },
                 {
                     "name": "",
-                    "id": "2f755507-c2a5-47e2-81e6-315dfedc797b",
-                    "path": "<Gamepad>/buttonWest",
+                    "id": "bc884777-ca3c-4d99-8bfe-0fc952711907",
+                    "path": "<Keyboard>/w",
                     "interactions": "",
                     "processors": "",
-                    "groups": "controler",
+                    "groups": "",
                     "action": "Jump",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -99,7 +99,7 @@
                 {
                     "name": "",
                     "id": "90488922-732e-4038-b403-b4fa7ec935b7",
-                    "path": "<Gamepad>/buttonNorth",
+                    "path": "<Gamepad>/dpad/down",
                     "interactions": "",
                     "processors": "",
                     "groups": "controler",
@@ -110,7 +110,7 @@
                 {
                     "name": "",
                     "id": "bcd6ecce-75da-42ee-9fe5-d809529c1522",
-                    "path": "<Gamepad>/buttonEast",
+                    "path": "<Gamepad>/leftStick/down",
                     "interactions": "",
                     "processors": "",
                     "groups": "controler",
@@ -121,7 +121,7 @@
                 {
                     "name": "",
                     "id": "325b1b1b-a307-4c2b-bba8-2afbb7db627a",
-                    "path": "<Keyboard>/space",
+                    "path": "<Keyboard>/e",
                     "interactions": "",
                     "processors": "",
                     "groups": "keyboard",
@@ -132,7 +132,7 @@
                 {
                     "name": "",
                     "id": "5858a0c1-4da1-45bb-bba3-4c27a2d1451d",
-                    "path": "<Gamepad>/rightTrigger",
+                    "path": "<Gamepad>/buttonWest",
                     "interactions": "",
                     "processors": "",
                     "groups": "controler",
@@ -142,11 +142,11 @@
                 },
                 {
                     "name": "",
-                    "id": "4ee10efc-d9e1-4605-a836-fcafc0236d2e",
-                    "path": "<Gamepad>/leftTrigger",
+                    "id": "1871195f-d8b8-40a8-a52c-53bf354418ad",
+                    "path": "<Keyboard>/x",
                     "interactions": "",
                     "processors": "",
-                    "groups": "controler",
+                    "groups": "",
                     "action": "Action",
                     "isComposite": false,
                     "isPartOfComposite": false

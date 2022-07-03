@@ -491,9 +491,9 @@ MonoBehaviour:
   downCol: {fileID: 5194212677967387876}
   OC: {fileID: 0}
   playerStunMax: 12
-  throwX: 2000
-  throwY: 1000
-  gravScal: 6
+  throwX: 2250
+  throwY: 1350
+  gravScal: 24
   arrowAnim: {fileID: 1572610341888320679}
 --- !u!70 &5194212677967387876
 CapsuleCollider2D:

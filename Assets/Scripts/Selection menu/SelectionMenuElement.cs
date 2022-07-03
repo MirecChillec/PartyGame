@@ -30,6 +30,7 @@ public class SelectionMenuElement : MonoBehaviour
     {
         if (!active)
         {
+            selectionMan.AddNewPlayer();
             active = true;
             readyText.SetText("Press space / A to ready");
             text.enabled = false;
@@ -99,13 +100,13 @@ public class SelectionMenuElement : MonoBehaviour
     }
     IEnumerator Right()
     {
-        rightArrow.localScale = new Vector3(0.5f, 0.5f, 1);
+        rightArrow.localScale = new Vector3(0.7f, 0.7f, 1);
         yield return new WaitForSeconds(pressTime);
         rightArrow.localScale = new Vector3(1f, 1f, 1);
     }
     IEnumerator Left()
     {
-        leftArrow.localScale = new Vector3(0.5f, 0.5f, 1);
+        leftArrow.localScale = new Vector3(0.7f, 0.7f, 1);
         yield return new WaitForSeconds(pressTime);
         leftArrow.localScale = new Vector3(1f, 1f, 1);
     }
