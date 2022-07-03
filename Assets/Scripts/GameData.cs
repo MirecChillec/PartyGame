@@ -8,3 +8,4 @@ public class GameData
     public static SceneManagment sceneManager;
     public static ScreenManager menuManager;
 }
+

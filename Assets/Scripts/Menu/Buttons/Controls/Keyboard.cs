@@ -1,21 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class Controls : BaseScren
+public class Keyboard : BaseButton
 {
     public GameObject keyboard;
     public GameObject controler;
-    public void Back()
+    public override void OnPointerUp(PointerEventData eventData)
     {
-        Keyboard();
-        GameData.menuManager.Hide<Controls>();
-        GameData.menuManager.Show<MainMenu>();
-    }
-    public void Keyboard()
-    {
+        base.OnPointerUp(eventData);
         keyboard.SetActive(true);
         controler.SetActive(false);
     }
-
 }
