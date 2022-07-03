@@ -326,9 +326,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Young corrupt man who diverts the attention of the police forces away
-    from the cult\u2019s activities. \nFalsifying evidence, sentencing innocent people,
-    there\u2019s nothing he won\u2019t do for the sake of Cthulhu and the cult. "
+  m_text: "Young corrupt man working for the cult. \nFalsifying evidence, sentencing
+    innocent people, there\u2019s nothing he won\u2019t do for the sake of his god
+    and the cult. "
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d52a3da6db66d7545addc3364b7c074c, type: 2}
   m_sharedMaterial: {fileID: 2654599546204205431, guid: d52a3da6db66d7545addc3364b7c074c, type: 2}
