@@ -5,6 +5,8 @@ using UnityEngine.InputSystem;
 
 public class ObjectControl : MonoBehaviour
 {
+    public AudioClip throwSound;
+    public AudioSource audio;
     public Throwable state { get; private set; }
     public bool canPickUp { get; set; }
     public Movement movement;
@@ -33,6 +35,8 @@ public class ObjectControl : MonoBehaviour
     }
     void Throw()
     {
+        audio.clip = throwSound;
+        audio.Play();
         holding = false;
         canPickUp = true;
         state = Throwable.idle;

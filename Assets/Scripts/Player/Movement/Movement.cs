@@ -7,6 +7,10 @@ using UnityEngine.InputSystem;
 
 public class Movement : MonoBehaviour
 {
+    public AudioSource audio;
+    public AudioClip walk;
+    public AudioClip jump;
+
     private Rigidbody2D rb;
     public float jumpPower = 3f;
     public float movementSpeed = 2f;
@@ -153,6 +157,8 @@ public class Movement : MonoBehaviour
     //jump method
     void Jump()
     {
+        audio.clip = jump;
+        audio.Play();
         if (rb == null) return;
         jumping = true;
         rb.velocity = Vector2.zero;
@@ -166,6 +172,8 @@ public class Movement : MonoBehaviour
     {
         if (!isStunned)
         {
+            audio.clip = walk;
+            audio.Play();
             if (direction > 0)
             {
                 movingLeft = false;

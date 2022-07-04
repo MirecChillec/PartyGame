@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerStun : MonoBehaviour
 {
+    public AudioSource audio;
+    public AudioClip stun;
     public bool isStunned = false;
     SpriteRenderer sr;
     float baseStunTime = 0;
@@ -59,6 +61,8 @@ public class PlayerStun : MonoBehaviour
     {
         if (!isStunned)
         {
+            audio.clip = stun;
+            audio.Play();
             OC.stunned = true;
             OC.detector.Release();
             blink = true;

@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class ObjectDetection : MonoBehaviour
 {
+    public AudioSource audio;
+    public AudioClip objectThrow;
+    public AudioClip pickup;
     public ObjectControl controler;
     //objekt na hadzanie
     private ThrowableObject objekt;
@@ -57,6 +60,8 @@ public class ObjectDetection : MonoBehaviour
         {
             if (CheckObject())
             {
+                audio.clip = pickup;
+                audio.Play();
                 if (objekt != null)
                 {
                     holding = true;
@@ -108,12 +113,16 @@ public class ObjectDetection : MonoBehaviour
     {
         if (objekt != null)
         {
+            audio.clip = objectThrow;
+            audio.Play();
             holding = false;
             objekt.ThrowDown(this.gameObject);
             
         }
         else if (stunedPlayer != null)
         {
+            audio.clip = objectThrow;
+            audio.Play();
             holding = false;
             stunedPlayer.ThrownDown();
         }

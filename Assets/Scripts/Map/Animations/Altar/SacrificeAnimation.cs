@@ -5,6 +5,7 @@ using UnityEngine;
 public class SacrificeAnimation : MonoBehaviour
 {
     Animator anim;
+    public AudioSource audio;
     int kills = 0;
     public bool playing { get; private set; }
     void Start()
@@ -14,6 +15,7 @@ public class SacrificeAnimation : MonoBehaviour
     }
     public void PlaySacrifice()
     {
+        audio.Play();
         kills += 1;
         if (playing) return;
         StartCoroutine(AnimationControl());
