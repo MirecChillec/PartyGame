@@ -9,4 +9,9 @@ public class MainMenu : BaseScren
     {
         GameData.sceneManager.LoadScene("testing","MainMenu");
     }
+    public void Settings()
+    {
+        GameData.menuManager.Hide<MainMenu>();
+        GameData.menuManager.Show<Settings>();
+    }
 }

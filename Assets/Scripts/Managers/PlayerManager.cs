@@ -79,6 +79,7 @@ public class PlayerManager : MonoBehaviour
         activePlayers -= 1;
         KilledPlayer(id, killID);
         gameMan.map.altarMan.Sacrifice();
+        ingameUI.UpdateUI();
         if (activePlayers <= 1)
         {
             foreach (PlayerStats stat in playerStats)
@@ -90,7 +91,6 @@ public class PlayerManager : MonoBehaviour
             }
 
             ingameUI.gameObject.SetActive(true);
-            ingameUI.EndGame();
             if (CheckWin())
             {
                 StartCoroutine(Win());
@@ -98,7 +98,6 @@ public class PlayerManager : MonoBehaviour
             }
             StartCoroutine(WinTimer());
         }
-        ingameUI.UpdateUI();
     }
     public void Despawn()
     {
@@ -110,6 +109,8 @@ public class PlayerManager : MonoBehaviour
     //win pause
     IEnumerator WinTimer()
     {
+        yield return new WaitForSeconds(1.5f);
+        ingameUI.EndGame();
         yield return new WaitForSeconds(winPause);
         Despawn();
         gameMan.ChangeMap();
@@ -155,7 +156,9 @@ public class PlayerManager : MonoBehaviour
     }
     public IEnumerator Win()
     {
-        yield return new WaitForSeconds(2.5f);
+        yield return new WaitForSeconds(1.5f);
+        ingameUI.EndGame();
+        yield return new WaitForSeconds(2f);
         ingameUI.gameObject.SetActive(false);
         won = true;
         WinScreen.SetActive(true);
