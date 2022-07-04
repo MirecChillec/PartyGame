@@ -9,6 +9,7 @@ public class Settings : BaseScren
     [SerializeField] AudioMixer mixer;
     public Slider master, sfx, music;
     public string masterP, sfxP, musicP;
+    public static float a= 1, b=1, c=1;
 
     public void Back()
     {
@@ -23,26 +24,26 @@ public class Settings : BaseScren
     }
     public override void Show()
     {
-        float a, b, c;
-        mixer.GetFloat("master", out a);
-        mixer.GetFloat("sfx", out b);
-        mixer.GetFloat("music", out c);
-        master.value = a+1;
-        sfx.value = b+1;
-        music.value = c+1;
+        master.value = a;
+        sfx.value = b;
+        music.value = c;
         base.Show();
     }
     public void MainAudio(float value)
     {
         mixer.SetFloat("master", Mathf.Log10(value) * 20);
+        a = value;
     }
     public void SFXAudio(float value)
     {
         mixer.SetFloat("sfx", Mathf.Log10(value) * 20);
+        b = value;
+
     }
     public void MusicAudio(float value)
     {
         mixer.SetFloat("music", Mathf.Log10(value) * 20);
+        c = value;
     }
 }
 
