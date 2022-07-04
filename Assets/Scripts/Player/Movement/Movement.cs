@@ -174,6 +174,7 @@ public class Movement : MonoBehaviour
         {
             audio.clip = walk;
             audio.Play();
+            audio.loop = true;
             if (direction > 0)
             {
                 movingLeft = false;

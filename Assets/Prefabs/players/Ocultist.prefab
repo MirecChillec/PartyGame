@@ -346,8 +346,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audio: {fileID: -3995182032528385177}
-  walk: {fileID: 8300000, guid: 5eb54b3f71ae36741a2426c671fcd1d4, type: 3}
-  jump: {fileID: 8300000, guid: 5eb54b3f71ae36741a2426c671fcd1d4, type: 3}
+  walk: {fileID: 8300000, guid: 099e581a9107b2449813b94d57ecb4f2, type: 3}
+  jump: {fileID: 8300000, guid: 35af9e26dd617804c99b80e185248d05, type: 3}
   jumpPower: 90
   movementSpeed: 40
   fallMultiplier: 30
@@ -547,7 +547,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: -4060327231414280207, guid: 72eb43ae677a81745b3a645524cf42cd, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.008
   m_Pitch: 1
   Loop: 0
   Mute: 0
