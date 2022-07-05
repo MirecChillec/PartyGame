@@ -225,11 +225,29 @@ public class PlayerStun : MonoBehaviour
     {
         if (thrown)
         {
-            if(collision.gameObject.tag == "Altar")
+            if (collision.gameObject.tag == "Altar")
             {
                 PlayerSacrifice();
             }
+        }else if (CheckAltar() && isStunned)
+        {
+            PlayerSacrifice();
         }
+    }
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if (CheckAltar() && isStunned)
+        {
+            PlayerSacrifice();
+        }
+    }
+    bool CheckAltar()
+    {
+        if (Physics2D.OverlapCapsule(downCol.bounds.center, downCol.bounds.size, CapsuleDirection2D.Horizontal, 0f,11))
+        {
+            return true;
+        }
+        return false;
     }
     IEnumerator GetUp()
     {
