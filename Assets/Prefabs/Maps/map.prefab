@@ -1475,7 +1475,7 @@ GameObject:
   - component: {fileID: 1548693375815577595}
   - component: {fileID: 6739514801307970237}
   - component: {fileID: 9181252841372481521}
-  m_Layer: 3
+  m_Layer: 13
   m_Name: border
   m_TagString: Ground
   m_Icon: {fileID: 0}

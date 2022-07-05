@@ -11,7 +11,7 @@ public class ObjectControl : MonoBehaviour
     public bool canPickUp { get; set; }
     public Movement movement;
     public ObjectDetection detector;
-    bool downKeybindPressed;
+    public bool downKeybindPressed { get; private set; }
     public AnimationsControler animControl;
     public bool stunned { get; set; }
     public bool holding { get; set; }

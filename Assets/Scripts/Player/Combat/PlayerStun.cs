@@ -246,7 +246,7 @@ public class PlayerStun : MonoBehaviour
     {
         if (Physics2D.OverlapCapsule(downCol.bounds.center, downCol.bounds.size, CapsuleDirection2D.Horizontal, 0f,altarMask))
         {
-            print("altar");
+            PlayerSacrifice();
             return true;
         }
         return false;

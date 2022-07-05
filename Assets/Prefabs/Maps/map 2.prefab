@@ -2300,7 +2300,7 @@ GameObject:
   - component: {fileID: 4523822563963582847}
   - component: {fileID: 8520346285507361849}
   - component: {fileID: 6112391968585916789}
-  m_Layer: 3
+  m_Layer: 13
   m_Name: border
   m_TagString: Ground
   m_Icon: {fileID: 0}

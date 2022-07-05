@@ -30,8 +30,8 @@ public class Movement : MonoBehaviour
 
     public Collider2D playerCollider;
 
-    [SerializeField]private bool jumped;
-    private bool dJumped = false;
+    [SerializeField] public bool jumped { get; private set; }
+    public bool dJumped { get; private set; }
     public GroundCheck gChecker;
     public ContactFilter2D filter;
     private SpriteRenderer sr;
@@ -45,6 +45,7 @@ public class Movement : MonoBehaviour
     int lastHitId;
     public AnimationsControler animControl;
     ObjectControl OC;
+    public PlazerDrop drop;
 
     public bool jumping { get; private set; }
 
@@ -56,6 +57,7 @@ public class Movement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
         jumped = false;
+        dJumped = false;
         jumping = false;
         dootykZeme = false;
 
@@ -205,21 +207,24 @@ public class Movement : MonoBehaviour
     {
         if (!isStunned)
         {
-            if (dootykZeme && !jumped && !dJumped)
+            if (dootykZeme && !jumped && !dJumped && !OC.downKeybindPressed)
             {
                 Jump();
                 jumped = true;
             }
-            else if (!dootykZeme && jumped && !dJumped)
+            else if (!dootykZeme && jumped && !dJumped && !OC.downKeybindPressed)
             {
                 Jump();
                 dJumped = true;
             }
-            else if (!dootykZeme && !jumped && !dJumped)
+            else if (!dootykZeme && !jumped && !dJumped && !OC.downKeybindPressed)
             {
                 Jump();
                 jumped = true;
                 dJumped = true;
+            }else if(dootykZeme && OC.downKeybindPressed)
+            {
+                drop.Drop();
             }
         }
     }

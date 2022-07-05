@@ -1264,7 +1264,7 @@ GameObject:
   - component: {fileID: 8892554652076148337}
   - component: {fileID: 3715806408482030391}
   - component: {fileID: 1260163386022207099}
-  m_Layer: 3
+  m_Layer: 13
   m_Name: border
   m_TagString: Ground
   m_Icon: {fileID: 0}
