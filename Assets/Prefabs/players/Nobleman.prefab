@@ -522,6 +522,9 @@ MonoBehaviour:
   throwY: 1350
   gravScal: 24
   arrowAnim: {fileID: 2570225096107863333}
+  altarMask:
+    serializedVersion: 2
+    m_Bits: 2048
 --- !u!114 &-5238879546179921710
 MonoBehaviour:
   m_ObjectHideFlags: 0

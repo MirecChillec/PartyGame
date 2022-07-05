@@ -29,6 +29,7 @@ public class PlayerStun : MonoBehaviour
     public float gravScal;
     bool death = false;
     public Animator arrowAnim;
+    public LayerMask altarMask;
 
     private void Awake()
     {
@@ -238,13 +239,14 @@ public class PlayerStun : MonoBehaviour
     {
         if (CheckAltar() && isStunned)
         {
-            PlayerSacrifice();
+            //PlayerSacrifice();
         }
     }
     bool CheckAltar()
     {
-        if (Physics2D.OverlapCapsule(downCol.bounds.center, downCol.bounds.size, CapsuleDirection2D.Horizontal, 0f,11))
+        if (Physics2D.OverlapCapsule(downCol.bounds.center, downCol.bounds.size, CapsuleDirection2D.Horizontal, 0f,altarMask))
         {
+            print("altar");
             return true;
         }
         return false;

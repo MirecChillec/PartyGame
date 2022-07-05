@@ -506,6 +506,9 @@ MonoBehaviour:
   throwY: 1350
   gravScal: 24
   arrowAnim: {fileID: 6920520444395513553}
+  altarMask:
+    serializedVersion: 2
+    m_Bits: 2048
 --- !u!70 &8363671663260984147
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
