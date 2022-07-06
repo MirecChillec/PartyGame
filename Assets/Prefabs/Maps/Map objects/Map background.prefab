@@ -233,6 +233,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audio: {fileID: 8864321896374553908}
+  altar: {fileID: 7604523022791802141}
 --- !u!82 &8864321896374553908
 AudioSource:
   m_ObjectHideFlags: 0
@@ -740,6 +741,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buleMan: {fileID: 2395383688567139959}
   sacrifice: {fileID: 1451531208535550567}
+  sacrificing: 0
 --- !u!1 &4163008253344908734
 GameObject:
   m_ObjectHideFlags: 0

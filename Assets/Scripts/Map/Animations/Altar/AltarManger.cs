@@ -6,7 +6,7 @@ public class AltarManger : MonoBehaviour
 {
     public BubleManager buleMan;
     public SacrificeAnimation sacrifice;
-    bool sacrificing = false;
+    public bool sacrificing = false;
 
     private void Update()
     {

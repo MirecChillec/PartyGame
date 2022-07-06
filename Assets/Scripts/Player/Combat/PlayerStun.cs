@@ -244,7 +244,7 @@ public class PlayerStun : MonoBehaviour
     }
     bool CheckAltar()
     {
-        if (Physics2D.OverlapCapsule(downCol.bounds.center, downCol.bounds.size, CapsuleDirection2D.Horizontal, 0f,altarMask))
+        if (Physics2D.OverlapCapsule(downCol.bounds.center, downCol.bounds.size * 1.2f, CapsuleDirection2D.Horizontal, 0f,altarMask))
         {
             PlayerSacrifice();
             return true;

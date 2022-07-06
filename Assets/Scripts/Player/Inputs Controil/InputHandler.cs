@@ -72,6 +72,7 @@ public class InputHandler : MonoBehaviour
     //Despawning players
     public void DestroyPlayer(int id)
     {
+        if (!alive) return;
         if (InGamePlayer == null) return;
         Destroy(InGamePlayer.gameObject);
         alive = false;
